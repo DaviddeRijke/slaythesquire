@@ -1,8 +1,8 @@
 # Ignore Everything
-/*
+/Unity/*
 
 # Except for these:
 !/.gitignore
-!/Assets/
-!/ProjectSettings/
+!/Unity/Assets/
+!/Unity/ProjectSettings/
 !/
