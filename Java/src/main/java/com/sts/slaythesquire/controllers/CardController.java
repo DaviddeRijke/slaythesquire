@@ -3,13 +3,14 @@ package com.sts.slaythesquire.controllers;
 import com.sts.slaythesquire.models.Card;
 import com.sts.slaythesquire.repos.CardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 
 @Controller
-@RequestMapping(path= "/api/cards")
+@RequestMapping(path= "/cards")
 public class CardController {
     private final CardRepository cardRepository;
 
@@ -24,13 +25,18 @@ public class CardController {
         return cardRepository.findAll();
     }
 
-    @DeleteMapping(path="/removeCard")
-    public @ResponseBody boolean removeProduct(@RequestBody final Card card){
+    @GetMapping(path="/get")
+    public @ResponseBody Card getCard(@NonNull int id){
+        return cardRepository.findById(id);
+    }
+
+    @DeleteMapping(path="/remove")
+    public @ResponseBody boolean removeCard(@RequestBody final Card card){
         cardRepository.delete(card);
         return !cardRepository.existsByName(card.getName());
     }
 
-    @PostMapping(path="/addCard")
+    @PostMapping(path="/add")
     public @ResponseBody boolean addCard(@RequestBody final Card card) {
         if (card == null) throw new IllegalArgumentException("The card is not allowed to be null.");
         cardRepository.save(card);
