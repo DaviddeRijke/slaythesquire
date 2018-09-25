@@ -22,4 +22,18 @@ public class Api : ScriptableObject {
         IDictionary<string, object> json = Json.JsonParser.FromJson(responseFromServer);
         return json;
     }
+
+    public List<IDictionary<string, object>> GetAllCards()
+    {
+        WebRequest request = WebRequest.Create(apiUrl + "/cards");
+        request.Credentials = CredentialCache.DefaultCredentials;
+        WebResponse response = request.GetResponse();
+        Stream dataStream = response.GetResponseStream();
+        StreamReader reader = new StreamReader(dataStream);
+        string responseFromServer = reader.ReadToEnd();
+        reader.Close();
+        response.Close();
+        List<IDictionary<string, object>> json = Json.JsonParser.Deserialize<List<IDictionary<string, object>>>(responseFromServer);
+        return json;
+    }
 }
