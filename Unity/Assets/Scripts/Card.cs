@@ -5,7 +5,7 @@ using UnityEngine;
 public class Card : MonoBehaviour {
 
     public int id;
-    public string name;
+    public string title;
     public string description;
     public string picturePath;
     public int cost;
