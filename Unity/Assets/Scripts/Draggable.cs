@@ -44,9 +44,14 @@ public class Draggable : MonoBehaviour {
             if (dropZone != null)
             {
                 // Card is played
+                GetComponentInParent<Hand>().RemoveCard(gameObject);
                 dropZone.DropCard(GetComponent<Card>());
                 Debug.Log("Card is played!");
             }
+        }
+        else
+        {
+            GetComponentInParent<Hand>().FitCards();
         }
 
         GetComponent<BoxCollider>().enabled = true;

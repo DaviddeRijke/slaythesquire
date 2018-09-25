@@ -897,6 +897,7 @@ MonoBehaviour:
   descriptionObject: {fileID: 1879384503206432}
   pictureObject: {fileID: 1991089004689050}
   costObject: {fileID: 1434093150118302}
+  api: {fileID: 11400000, guid: 22a726a473859974488b584e9fce696a, type: 2}
   id: 0
   title: 
   description: 
