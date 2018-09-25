@@ -28,9 +28,13 @@ public class Card : MonoBehaviour {
         this.costObject.GetComponent<TMPro.TextMeshPro>().text = this.cost.ToString();
     }
 
-    void Activate()
+    public void Activate()
     {
-        //todo: make card do something when played
+        foreach(Effect effect in effects)
+        {
+            effect.Activate();
+        }
+        // TODO: make card do something when played
     }
 
     IEnumerator GetRequest(string uri)
