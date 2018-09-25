@@ -1,10 +1,8 @@
-﻿using System;
+﻿using Json;
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
-using System.Net;
-using UnityEditor;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class Card : MonoBehaviour {
 
@@ -21,6 +19,9 @@ public class Card : MonoBehaviour {
     public List<Effect> effects;
 
 	void Start () {
+        //todo: useable url
+        StartCoroutine(GetRequest(""));
+
         this.titleObject.GetComponent<TMPro.TextMeshPro>().text = this.title;
         this.descriptionObject.GetComponent<TMPro.TextMeshPro>().text = this.description;
         this.pictureObject.GetComponent<Renderer>().material = this.picture;
@@ -30,5 +31,23 @@ public class Card : MonoBehaviour {
     void Activate()
     {
         //todo: make card do something when played
+    }
+
+    IEnumerator GetRequest(string uri)
+    {
+        UnityWebRequest uwr = UnityWebRequest.Get(uri);
+        yield return uwr.SendWebRequest();
+
+        if (uwr.isNetworkError)
+        {
+            Debug.Log("Error While Sending: " + uwr.error);
+        }
+        else
+        {
+            var values = JsonParser.FromJson(uwr.downloadHandler.text);
+            //todo: use values to fill fields
+            //use name to find path for picture
+            Debug.Log(values.ToString());
+        }
     }
 }
