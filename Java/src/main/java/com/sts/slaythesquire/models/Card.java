@@ -7,22 +7,23 @@ import java.util.Collection;
 public class Card {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
+    private String description;
+    private int cost;
 
     @ManyToMany(cascade=CascadeType.ALL)
-    @JoinTable(name="card_tag", joinColumns = @JoinColumn(name="card_id"), inverseJoinColumns = @JoinColumn(name="tag_id"))
+    @JoinTable(name="card_tag", joinColumns = @JoinColumn(name="card_id"))
     private Collection<Tag> tags;
 
     @ManyToMany(cascade=CascadeType.ALL)
-    @JoinTable(name="card_tag", joinColumns = @JoinColumn(name="card_id"), inverseJoinColumns = @JoinColumn(name="effect_id"))
+    @JoinTable(name="card_effect", joinColumns = @JoinColumn(name="card_id"))
     private Collection<Effect> effects;
+
+    @ManyToOne(cascade = CascadeType.ALL)
     private EndTurnAction endTurnAction;
 
-    public void setId(final int id){
-        this.id = id;
-    }
     public int getId(){
         return id;
     }
@@ -31,6 +32,12 @@ public class Card {
     public String getName(){
         return name;
     }
+
+    public void setDescription(final String description){this.description = description;}
+    public String getDescription(){ return description; }
+
+    public void setCost(final int cost){this.cost = cost;}
+    public int getCost(){ return cost;}
 
     public void setTags(final Collection<Tag> tags){ this.tags = tags; }
     public Collection<Tag> getTags(){return tags;}
