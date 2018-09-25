@@ -1,22 +1,34 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Net;
+using UnityEditor;
 using UnityEngine;
 
 public class Card : MonoBehaviour {
 
+    public GameObject titleObject;
+    public GameObject descriptionObject;
+    public GameObject pictureObject;
+    public GameObject costObject;
+
     public int id;
     public string title;
     public string description;
-    public string picturePath;
+    public Material picture;
     public int cost;
-
+    public List<Effect> effects;
 
 	void Start () {
-		//todo: api call to get card info
-        //todo: put card info on card
-	}
+        this.titleObject.GetComponent<TMPro.TextMeshPro>().text = this.title;
+        this.descriptionObject.GetComponent<TMPro.TextMeshPro>().text = this.description;
+        this.pictureObject.GetComponent<Renderer>().material = this.picture;
+        this.costObject.GetComponent<TMPro.TextMeshPro>().text = this.cost.ToString();
+    }
 
-	void FixedUpdate () {
-		
-	}
+    void Activate()
+    {
+        //todo: make card do something when played
+    }
 }
