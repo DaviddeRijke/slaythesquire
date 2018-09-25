@@ -1,53 +1,54 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
-public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
-{
-    public Transform parentReturn = null;
-    public GameObject placeholder;
-    private Vector3 targetPos;
+[RequireComponent(typeof(Card))]
+public class Draggable : MonoBehaviour {
 
-    public void Update()
+    private Transform card;
+    private Vector3 dragOffset;
+    private Plane plane;
+
+    void OnMouseDown()
     {
-        if (targetPos != Vector3.zero)
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit))
         {
-            transform.position = Vector3.Lerp(transform.position, targetPos, 0.3f);
+            card = hit.transform;
+            plane.SetNormalAndPosition(Camera.main.transform.forward, card.position);
+            float dist;
+            plane.Raycast(ray, out dist);
+            dragOffset = card.position - ray.GetPoint(dist);
         }
     }
 
-    public void OnBeginDrag(PointerEventData eventData)
+    void OnMouseDrag()
     {
-        placeholder = new GameObject();
-        placeholder.transform.SetParent(transform.parent);
-        placeholder.transform.SetSiblingIndex(transform.GetSiblingIndex());
-
-        GetComponent<CanvasGroup>().blocksRaycasts = false;
-        parentReturn = transform.parent;
-        transform.SetParent(transform.parent.parent);
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        float dist;
+        plane.Raycast(ray, out dist);
+        Vector3 v3Pos = ray.GetPoint(dist);
+        card.position = v3Pos + dragOffset;
     }
 
-    public void OnDrag(PointerEventData eventData)
+    void OnMouseUp()
     {
-        targetPos = eventData.position;
-    }
+        GetComponent<BoxCollider>().enabled = false;
 
-    public void OnEndDrag(PointerEventData eventData)
-    {
-        GetComponent<CanvasGroup>().blocksRaycasts = true;
-        targetPos = Vector3.zero;
-        transform.SetParent(parentReturn);
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit))
+        {
+            DropZone dropZone = hit.transform.GetComponent<DropZone>();
+            if (dropZone != null)
+            {
+                // Card is played
+                dropZone.DropCard(GetComponent<Card>());
+                Debug.Log("Card is played!");
+            }
+        }
 
-        if (placeholder.transform.parent == parentReturn)
-        {
-            transform.SetSiblingIndex(placeholder.transform.GetSiblingIndex());
-        }
-        if (placeholder != null)
-        {
-            Destroy(placeholder);
-        }
+        GetComponent<BoxCollider>().enabled = true;
     }
 }
