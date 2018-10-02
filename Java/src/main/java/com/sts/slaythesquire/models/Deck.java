@@ -11,6 +11,9 @@ public class Deck {
     private int id;
     private String name;
 
+    @ManyToOne
+    private Player player;
+
     @ManyToMany(cascade=CascadeType.ALL)
     @JoinTable(name="deck_card", joinColumns = @JoinColumn(name="deck_id"))
     public Collection<Card> cards;
@@ -23,4 +26,7 @@ public class Deck {
     public String getName(){
         return name;
     }
+
+    public void setPlayer(Player player){this.player = player;}
+    public Player getPlayer(){return player;}
 }
