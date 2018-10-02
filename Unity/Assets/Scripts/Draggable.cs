@@ -5,12 +5,21 @@ using UnityEngine;
 [RequireComponent(typeof(Card))]
 public class Draggable : MonoBehaviour {
 
+    private Hand hand;
     private Transform card;
     private Vector3 dragOffset;
     private Plane plane;
 
+    void Start()
+    {
+        hand = GetComponentInParent<Hand>();
+    }
+
     void OnMouseDown()
     {
+        if (!GameManager._instance.CanPlay)
+            return;
+
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit))
@@ -25,6 +34,9 @@ public class Draggable : MonoBehaviour {
 
     void OnMouseDrag()
     {
+        if (!GameManager._instance.CanPlay)
+            return;
+
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         float dist;
         plane.Raycast(ray, out dist);
@@ -34,6 +46,9 @@ public class Draggable : MonoBehaviour {
 
     void OnMouseUp()
     {
+        if (!GameManager._instance.CanPlay)
+            return;
+
         GetComponent<BoxCollider>().enabled = false;
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -44,14 +59,14 @@ public class Draggable : MonoBehaviour {
             if (dropZone != null)
             {
                 // Card is played
-                GetComponentInParent<Hand>().RemoveCard(gameObject);
+                //hand.RemoveCard(gameObject); Enable this again later
                 dropZone.DropCard(GetComponent<Card>());
                 Debug.Log("Card is played!");
             }
         }
         else
         {
-            GetComponentInParent<Hand>().FitCards();
+            hand.FitCards();
         }
 
         GetComponent<BoxCollider>().enabled = true;

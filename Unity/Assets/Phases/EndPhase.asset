@@ -11,3 +11,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89414c1b958bf9147908bd0818dbeca6, type: 3}
   m_Name: EndPhase
   m_EditorClassIdentifier: 
+  forceExit: 0

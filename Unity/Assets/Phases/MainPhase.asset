@@ -11,3 +11,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3ff2cc267b4a1b4abae8a95d9e32aff, type: 3}
   m_Name: MainPhase
   m_EditorClassIdentifier: 
+  forceExit: 0

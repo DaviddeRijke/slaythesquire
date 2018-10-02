@@ -21,7 +21,7 @@ public class DrawPhase : Phase
     {
         if (isInit)
         {
-
+            isInit = false;
         }
     }
 
@@ -30,8 +30,11 @@ public class DrawPhase : Phase
         if (!isInit)
         {
             isInit = true;
+
+            GameManager._instance.DrawCards();
+
             // TODO: Call Effect.BeforeTurn()
-            // TODO: Draw a Card
+            // TODO: Draw Card(s)
             // TODO: Call Effect.OnDrawCard()
         }
     }
