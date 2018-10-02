@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour {
 
     public static GameManager _instance;
     private Turn turnManager;
-    public Hand hand;
+    public CardHolder hand;
     public bool CanPlay;
 
     public Text PhaseText;
