@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Card : MonoBehaviour {
 
@@ -14,7 +15,7 @@ public class Card : MonoBehaviour {
     public int id;
     public string title;
     public string description;
-    public Material picture;
+    public Sprite picture;
     public int cost;
     public List<Effect> effects;
 
@@ -29,23 +30,23 @@ public class Card : MonoBehaviour {
 	}
 
     void Start () {
-        IDictionary<string, object> json = api.GetCardById(this.id);
-        this.title = json["name"].ToString();
-		try
-		{
-			this.description = json["description"].ToString();
-		}
-        catch(Exception)
-		{
-			this.description = "";
-		}
-        this.picture = (Material)AssetDatabase.LoadAssetAtPath("Assets/Materials/CardPictures/" + this.title + ".mat", typeof(Material));
-        this.cost = Convert.ToInt32(json["cost"]);
+        //      IDictionary<string, object> json = api.GetCardById(this.id);
+        //      this.title = json["name"].ToString();
+        //try
+        //{
+        //	this.description = json["description"].ToString();
+        //}
+        //      catch(Exception)
+        //{
+        //	this.description = "";
+        //}
+        //      this.picture = (Material)AssetDatabase.LoadAssetAtPath("Assets/Materials/CardPictures/" + this.title + ".mat", typeof(Material));
+        //      this.cost = Convert.ToInt32(json["cost"]);
 
-        this.titleObject.GetComponent<TMPro.TextMeshPro>().text = this.title;
-        this.descriptionObject.GetComponent<TMPro.TextMeshPro>().text = this.description;
-        this.pictureObject.GetComponent<Renderer>().material = this.picture;
-        this.costObject.GetComponent<TMPro.TextMeshPro>().text = this.cost.ToString();
+        //      this.titleObject.GetComponent<TMPro.TextMeshPro>().text = this.title;
+        //      this.descriptionObject.GetComponent<TMPro.TextMeshPro>().text = this.description;
+        //      this.pictureObject.GetComponent<Renderer>().material = this.picture;
+        //      this.costObject.GetComponent<TMPro.TextMeshPro>().text = this.cost.ToString();
     }
 
     public void Activate()
