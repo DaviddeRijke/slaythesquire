@@ -21,6 +21,7 @@ public class EndPhase : Phase
     {
         if (isInit)
         {
+            isInit = false;
 
         }
     }

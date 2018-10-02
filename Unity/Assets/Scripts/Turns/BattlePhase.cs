@@ -21,6 +21,7 @@ public class BattlePhase : Phase
     {
         if (isInit)
         {
+            isInit = false;
             // TODO: Call Effect.AfterBattle()
         }
     }

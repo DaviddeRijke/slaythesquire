@@ -21,7 +21,7 @@ public class DrawPhase : Phase
     {
         if (isInit)
         {
-
+            isInit = false;
         }
     }
 
