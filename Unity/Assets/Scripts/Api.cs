@@ -8,7 +8,7 @@ using UnityEngine.Networking;
 
 [CreateAssetMenu(fileName = "Api", menuName = "Api")]
 public class Api : ScriptableObject {
-    public string apiUrl = "http://192.168.30.103:8080/api";
+    public string apiUrl = "http://localhost:8080/api";
 
     public IDictionary<string, object> GetCardById(int id)
     {
@@ -24,7 +24,7 @@ public class Api : ScriptableObject {
         return json;
     }
 
-    public List<IDictionary<string, object>> GetAllCards()
+	public List<IDictionary<string, object>> GetAllCards()
     {
         WebRequest request = WebRequest.Create(apiUrl + "/cards");
         request.Credentials = CredentialCache.DefaultCredentials;
