@@ -6,7 +6,7 @@ public class Turn : MonoBehaviour {
 
     public Phase[] phases;
     public int index = 0;
-    public int turnCount = 0;
+    public int turnCount = 1;
 
     void Start()
     {
@@ -39,4 +39,8 @@ public class Turn : MonoBehaviour {
         return completed;
     }
 
+    public void ForcePhaseExit()
+    {
+        phases[index].forceExit = true;
+    }
 }
