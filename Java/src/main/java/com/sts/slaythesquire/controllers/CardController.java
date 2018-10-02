@@ -13,7 +13,9 @@ import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Controller
 @RequestMapping(path= "/api/cards")
@@ -51,9 +53,19 @@ public class CardController {
     @PostMapping(path="/add")
     public @ResponseBody boolean addCard(@RequestBody final Card card) {
         if (card == null) throw new IllegalArgumentException("The card is not allowed to be null.");
+
+        List<Tag> existingTagsList = new ArrayList<>();
         for(Tag tag : card.getTags()){
-            if(!tagRepository.existsById(tag.getId())) tagRepository.save(tag);
+            if(tagRepository.existsByName(tag.getName())){
+                tag = tagRepository.findByName(tag.getName());
+            }
+            else {
+                tagRepository.save(tag);
+            }
+            existingTagsList.add(tag);
         }
+        card.setTags(existingTagsList);
+
         for(Effect effect : card.getEffects()){
             if(!effectRepository.existsById(effect.getId())) effectRepository.save(effect);
         }

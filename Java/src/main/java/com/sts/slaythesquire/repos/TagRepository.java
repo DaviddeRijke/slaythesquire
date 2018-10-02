@@ -9,4 +9,5 @@ import java.util.Collection;
 public interface TagRepository extends CrudRepository<Tag, Integer> {
     boolean existsByName(String name);
     Collection<Tag> findAll();
+    Tag findByName(String name);
 }
