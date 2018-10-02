@@ -1,8 +1,7 @@
-﻿using Json;
-using System.Collections;
+﻿using System;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
-using UnityEngine.Networking;
 
 public class Card : MonoBehaviour {
 
@@ -10,6 +9,7 @@ public class Card : MonoBehaviour {
     public GameObject descriptionObject;
     public GameObject pictureObject;
     public GameObject costObject;
+    public Api api;
 
     public int id;
     public string title;
@@ -18,9 +18,13 @@ public class Card : MonoBehaviour {
     public int cost;
     public List<Effect> effects;
 
-	void Start () {
-        //todo: useable url
-        StartCoroutine(GetRequest(""));
+    void Start () {
+        IDictionary<string, object> json = api.GetCardById(this.id);
+        this.title = json["name"].ToString();
+        this.description = json["description"].ToString();
+        this.picture = (Material)AssetDatabase.LoadAssetAtPath("Assets/Materials/CardPictures/" + this.title + ".mat", typeof(Material));
+        this.cost = Convert.ToInt32(json["cost"]);
+        //todo: add effects from database
 
         this.titleObject.GetComponent<TMPro.TextMeshPro>().text = this.title;
         this.descriptionObject.GetComponent<TMPro.TextMeshPro>().text = this.description;
@@ -33,25 +37,6 @@ public class Card : MonoBehaviour {
         foreach(Effect effect in effects)
         {
             effect.Activate();
-        }
-        // TODO: make card do something when played
-    }
-
-    IEnumerator GetRequest(string uri)
-    {
-        UnityWebRequest uwr = UnityWebRequest.Get(uri);
-        yield return uwr.SendWebRequest();
-
-        if (uwr.isNetworkError)
-        {
-            Debug.Log("Error While Sending: " + uwr.error);
-        }
-        else
-        {
-            var values = JsonParser.FromJson(uwr.downloadHandler.text);
-            //todo: use values to fill fields
-            //use name to find path for picture
-            Debug.Log(values.ToString());
         }
     }
 }
