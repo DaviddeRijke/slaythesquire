@@ -1,17 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.UI;
 
-public class CardView2D : MonoBehaviour {
+public class CardView3D : MonoBehaviour {
 
     public Card card;
-	public TMPro.TextMeshProUGUI cost;
+    public TMPro.TextMeshProUGUI cost;
     public TMPro.TextMeshProUGUI title;
     public TMPro.TextMeshProUGUI description;
-    public Image picture;
-    
+    public Material picture;
+
+    // Use this for initialization
+    void Start () {
+		
+	}
+	
 	// Update is called once per frame
 	void Update () {
 		
@@ -23,6 +26,6 @@ public class CardView2D : MonoBehaviour {
         this.cost.SetText(card.cost.ToString());
         this.title.SetText(card.title);
         this.description.SetText(card.description);
-        this.picture.sprite = card.picture;
+        this.picture.mainTexture = Resources.Load<Texture>("CardPictures/CardPlaceholder");
     }
 }
