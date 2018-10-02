@@ -25,6 +25,7 @@ public class Draggable : MonoBehaviour {
         if (Physics.Raycast(ray, out hit))
         {
             card = hit.transform;
+            card.rotation = new Quaternion(0f, 0f, 0f, 0f);
             plane.SetNormalAndPosition(Camera.main.transform.forward, card.position);
             float dist;
             plane.Raycast(ray, out dist);
@@ -59,15 +60,12 @@ public class Draggable : MonoBehaviour {
             if (dropZone != null)
             {
                 // Card is played
-                //hand.RemoveCard(gameObject); Enable this again later
+                // TODO: hand.RemoveCard(gameObject); Enable this again later
                 dropZone.DropCard(GetComponent<Card>());
                 Debug.Log("Card is played!");
             }
         }
-        else
-        {
-            hand.FitCards();
-        }
+        hand.FitCards();
 
         GetComponent<BoxCollider>().enabled = true;
     }
