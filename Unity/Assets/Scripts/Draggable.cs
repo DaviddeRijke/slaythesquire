@@ -5,9 +5,15 @@ using UnityEngine;
 [RequireComponent(typeof(Card))]
 public class Draggable : MonoBehaviour {
 
+    private Hand hand;
     private Transform card;
     private Vector3 dragOffset;
     private Plane plane;
+
+    void Start()
+    {
+        hand = GetComponentInParent<Hand>();
+    }
 
     void OnMouseDown()
     {
@@ -53,14 +59,14 @@ public class Draggable : MonoBehaviour {
             if (dropZone != null)
             {
                 // Card is played
-                GetComponentInParent<Hand>().RemoveCard(gameObject);
+                //hand.RemoveCard(gameObject); Enable this again later
                 dropZone.DropCard(GetComponent<Card>());
                 Debug.Log("Card is played!");
             }
         }
         else
         {
-            GetComponentInParent<Hand>().FitCards();
+            hand.FitCards();
         }
 
         GetComponent<BoxCollider>().enabled = true;

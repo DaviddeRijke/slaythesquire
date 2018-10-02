@@ -18,12 +18,13 @@ public class Card : MonoBehaviour {
     public int cost;
     public List<Effect> effects;
 
-    void Start () {
-        IDictionary<string, object> json = api.GetCardById(this.id);
-        this.title = json["name"].ToString();
-        this.description = json["description"].ToString();
-        this.picture = (Material)AssetDatabase.LoadAssetAtPath("Assets/Materials/CardPictures/" + this.title + ".mat", typeof(Material));
-        this.cost = Convert.ToInt32(json["cost"]);
+    void Start()
+    {
+        //IDictionary<string, object> json = api.GetCardById(this.id);
+        //this.title = json["name"].ToString();
+        //this.description = json["description"].ToString();
+        //this.picture = (Material)AssetDatabase.LoadAssetAtPath("Assets/Materials/CardPictures/" + this.title + ".mat", typeof(Material));
+        //this.cost = Convert.ToInt32(json["cost"]);
         //todo: add effects from database
 
         this.titleObject.GetComponent<TMPro.TextMeshPro>().text = this.title;

@@ -16,6 +16,6 @@ public class DropZone : MonoBehaviour {
     {
         card.Activate();
         // TODO: Add to a list where later effects can be activated from
-        Destroy(card.gameObject);
+        card.gameObject.SetActive(false);
     }
 }
