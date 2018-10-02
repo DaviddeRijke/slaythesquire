@@ -31,7 +31,14 @@ public class Card : MonoBehaviour {
     void Start () {
         IDictionary<string, object> json = api.GetCardById(this.id);
         this.title = json["name"].ToString();
-        this.description = json["description"].ToString();
+		try
+		{
+			this.description = json["description"].ToString();
+		}
+        catch(Exception)
+		{
+			this.description = "";
+		}
         this.picture = (Material)AssetDatabase.LoadAssetAtPath("Assets/Materials/CardPictures/" + this.title + ".mat", typeof(Material));
         this.cost = Convert.ToInt32(json["cost"]);
 

@@ -6,11 +6,6 @@ public class CardGenerator : MonoBehaviour {
 	public Api api;
 	public GameObject card;
 
-	private void Start()
-	{
-		GetAllCards();
-	}
-
 	List<GameObject> GetAllCards()
 	{
 		List<GameObject> cards = new List<GameObject>();
