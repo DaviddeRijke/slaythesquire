@@ -11,3 +11,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89ec0dbcfb46fe14d97cb129f5cec3eb, type: 3}
   m_Name: DrawPhase
   m_EditorClassIdentifier: 
+  forceExit: 0

@@ -21,7 +21,8 @@ public class MainPhase : Phase
     {
         if (isInit)
         {
-
+            isInit = false;
+            GameManager._instance.CanPlay = false;
         }
     }
 
@@ -30,6 +31,7 @@ public class MainPhase : Phase
         if (!isInit)
         {
             isInit = true;
+            GameManager._instance.CanPlay = true;
             // TODO: Call Effect.OnStartTurn()
         }
     }
