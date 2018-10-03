@@ -5,14 +5,14 @@ using UnityEngine;
 [RequireComponent(typeof(Card))]
 public class Draggable : MonoBehaviour {
 
-    private Hand hand;
+    private CardHolder holder;
     private Transform card;
     private Vector3 dragOffset;
     private Plane plane;
 
     void Start()
     {
-        hand = GetComponentInParent<Hand>();
+        holder = GetComponentInParent<CardHolder>();
     }
 
     void OnMouseDown()
@@ -65,7 +65,7 @@ public class Draggable : MonoBehaviour {
                 Debug.Log("Card is played!");
             }
         }
-        hand.FitCards();
+        holder.FitCards();
 
         GetComponent<BoxCollider>().enabled = true;
     }
