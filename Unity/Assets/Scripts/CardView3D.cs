@@ -5,10 +5,16 @@ using UnityEngine;
 public class CardView3D : MonoBehaviour {
 
     public Card card;
-    public TMPro.TextMeshProUGUI cost;
-    public TMPro.TextMeshProUGUI title;
-    public TMPro.TextMeshProUGUI description;
-    public Material picture;
+    
+    public TMPro.TextMeshPro cost;
+    public TMPro.TextMeshPro title;
+    public TMPro.TextMeshPro description;
+    public MeshRenderer picture;
+
+    private void Awake()
+    {
+        
+    }
 
     // Use this for initialization
     void Start () {
@@ -26,6 +32,6 @@ public class CardView3D : MonoBehaviour {
         this.cost.SetText(card.cost.ToString());
         this.title.SetText(card.title);
         this.description.SetText(card.description);
-        this.picture.mainTexture = Resources.Load<Texture>("CardPictures/CardPlaceholder");
+        this.picture.material.mainTexture = card.picture.texture; //Resources.Load<Texture>("CardPictures/" + card.picture.name);
     }
 }

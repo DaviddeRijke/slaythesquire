@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 public class Card : MonoBehaviour {
-    public Api api;
+    //public Api api;
 
     public int id;
     public string title;
