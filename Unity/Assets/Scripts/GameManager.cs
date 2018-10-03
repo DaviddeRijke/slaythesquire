@@ -11,12 +11,22 @@ public class GameManager : MonoBehaviour {
     public bool CanPlay;
 
     public Text PhaseText;
-    
+
+    public Card CardToLoad;
+
 	void Awake () {
         _instance = this;
         CanPlay = false;
         turnManager = GetComponent<Turn>();
 	}
+
+    void Start()
+    {
+        foreach (Transform card in hand.transform)
+        {
+            card.gameObject.GetComponent<CardView3D>().initCard(CardToLoad);
+        }
+    }
 	
 	void Update () {
         turnManager.Execute();

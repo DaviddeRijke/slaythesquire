@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Card))]
+[RequireComponent(typeof(CardView3D))]
 public class Draggable : MonoBehaviour {
 
     private CardHolder holder;
@@ -60,9 +60,7 @@ public class Draggable : MonoBehaviour {
             if (dropZone != null)
             {
                 // Card is played
-                // TODO: hand.RemoveCard(gameObject); Enable this again later
-                dropZone.DropCard(GetComponent<Card>());
-                Debug.Log("Card is played!");
+                dropZone.DropCard(GetComponent<CardView3D>());
             }
         }
         holder.FitCards();

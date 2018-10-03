@@ -7,15 +7,25 @@ using UnityEngine;
 
 public class DropZone : MonoBehaviour {
 
-    public void DropCard(Card card)
+    public void DropCard(CardView3D cardView)
     {
-        PlayCard(card);
+        PlayCard(cardView);
     }
 
-    void PlayCard(Card card)
+    void PlayCard(CardView3D cardView)
     {
-        card.Activate();
-        // TODO: Add to a list where later effects can be activated from
-        card.gameObject.SetActive(false);
+        Card card = cardView.card;
+        if (card != null)
+        {
+            card.Activate();
+            // TODO: Add to a list where later effects can be activated from
+            cardView.gameObject.SetActive(false);
+            Debug.Log("Card is played!");
+        }
+        else
+        {
+            Debug.Log("No card attached!");
+        }
+        
     }
 }
