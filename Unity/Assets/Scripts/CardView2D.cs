@@ -21,8 +21,7 @@ public class CardView2D : MonoBehaviour {
     {
         this.card = c;
         this.cost.SetText(card.cost.ToString());
-        this.title.SetText(card.title);
+        this.title.SetText(card.name);
         this.description.SetText(card.description);
-        this.picture.sprite = card.picture;
     }
 }

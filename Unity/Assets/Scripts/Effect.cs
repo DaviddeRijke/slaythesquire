@@ -1,8 +1,13 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Effect : ScriptableObject {
+[Serializable]
+public abstract class Effect : ScriptableObject
+{
+    public int id;
+    public string name;
 
     // Called on phases
     public virtual void BeforeTurn() { }
@@ -23,7 +28,7 @@ public abstract class Effect : ScriptableObject {
     public virtual void OnDiscarded() { }
     public virtual void OnDrawCard() { }
     public virtual void OnDamageDealt() { }
-    public virtual void OnDamageRecieved() { }
+    public virtual void OnDamageReceived() { }
     public virtual void OnHealed() { }
 
 }

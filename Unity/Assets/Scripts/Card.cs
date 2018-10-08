@@ -1,39 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using Api;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Card : MonoBehaviour {
+[Serializable]
+public class Card {
     //public Api api;
 
     public int id;
-    public string title;
+    public string name;
     public string description;
-    public Sprite picture;
     public int cost;
-    public List<Effect> effects;
-
-    void Start () {
-        //IDictionary<string, object> json = api.GetCardById(this.id);
-        //this.title = json["name"].ToString();
-        //try
-        //{
-        //    this.description = json["description"].ToString();
-        //}
-        //catch (Exception)
-        //{
-        //    this.description = "";
-        //}
-        //this.picture = (Material)AssetDatabase.LoadAssetAtPath("Assets/Materials/CardPictures/" + this.title + ".mat", typeof(Material));
-        //this.cost = Convert.ToInt32(json["cost"]);
-
-        //this.titleObject.GetComponent<TMPro.TextMeshPro>().text = this.title;
-        //this.descriptionObject.GetComponent<TMPro.TextMeshPro>().text = this.description;
-        //this.pictureObject.GetComponent<Renderer>().material = this.picture;
-        //this.costObject.GetComponent<TMPro.TextMeshPro>().text = this.cost.ToString();
-    }
-
+    public Tag[] tags;
+    public Effect[] effects;
+    public EndTurnAction endTurnAction;
+    
     public void Activate()
     {
         foreach(Effect effect in effects)
@@ -41,4 +24,10 @@ public class Card : MonoBehaviour {
             effect.Activate();
         }
     }
+    
+    
+    //test
+
+
+
 }
