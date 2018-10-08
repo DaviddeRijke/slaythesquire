@@ -1,43 +1,55 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class RestController : MonoBehaviour
+namespace Api
 {
-    public const string api = "http://localhost:8080/api";
-
-    public void GetCard(int id)
+    public class RestController : MonoBehaviour
     {
-        StartCoroutine(Get<Card>("/cards/get?id=" + id));
-    }
+        public const string Api = "http://localhost:8080/api";
 
-    IEnumerator Get<T>(string url)
-    {
-        using (UnityWebRequest www = UnityWebRequest.Get(api + url))
+        public static RestController Instance { get; private set; }
+
+        void Awake()
         {
-            yield return www.Send();
-            if (www.isNetworkError || www.isHttpError)
+            if(Instance == null) Destroy(Instance);
+            Instance = this;
+        }
+
+        public void Get<T>(string url, ILoadable loadable)
+        {
+            StartCoroutine(GetRequest<T>(url, loadable));
+        }
+
+        IEnumerator GetRequest<T>(string url, ILoadable loadable)
+        {
+            using (UnityWebRequest www = UnityWebRequest.Get(Api + url))
             {
-                Debug.Log(www.error);
-            }
-            else
-            {
-                if (www.isDone)
+                yield return www.Send();
+                if (www.isNetworkError || www.isHttpError)
                 {
-                    string jsonResult =
-                        Encoding.UTF8.GetString(www.downloadHandler.data);
-                    Debug.Log(jsonResult);
-                    T[] entities =
-                        JsonHelper.getJsonArray<T>(jsonResult);
+                    Debug.Log(www.error);
+                }
+                else
+                {
+                    if (www.isDone)
+                    {
+                        string jsonResult =
+                            Encoding.UTF8.GetString(www.downloadHandler.data);
+                        Debug.Log(jsonResult);
+                        T[] entities =
+                            JsonHelper.getJsonArray<T>(jsonResult);
+                        Debug.Log(entities);
+                        loadable.SetData(entities);
+                    }          
                 }
             }
         }
-    }
 
-    void Update()
-    {
+        void Update()
+        {
 
+        }
     }
 }

@@ -1,27 +1,26 @@
 ﻿using System.Collections.Generic;
+using Turns;
 using UnityEngine;
 
-public class CardGenerator : MonoBehaviour {
+public class CardGenerator : MonoBehaviour
+{
 
-	public Api api;
-	public GameObject card;
-
-	List<GameObject> GetAllCards()
-	{
-		List<GameObject> cards = new List<GameObject>();
-		foreach (int id in api.GetAllCardIds())
-		{
-			card.GetComponent<Card>().id = id;
-			GameObject newCard = Instantiate(card);
-			cards.Add(newCard);
-		}
-		return cards;
-	}
-
-	GameObject GetCardById(int id)
-	{
-		card.GetComponent<Card>().id = id;
-		GameObject newCard = Instantiate(card);
-		return newCard;
-	}
+    public CardContainer CardContainer;
+    public GameObject Card2DPrefab;
+    public Transform Container;
+    void OnEnable()
+    {
+        if (CardContainer.Cards == null) return;
+        foreach (Transform child in Container)
+        {
+            Destroy(child.gameObject);
+        }
+        foreach (Card card in CardContainer.Cards)
+        {
+            var obj = Instantiate(Card2DPrefab);
+            obj.transform.SetParent(Container, false);
+            var view2d = obj.GetComponent<CardView2D>();
+            view2d.initCard(card);
+        }
+    }
 }

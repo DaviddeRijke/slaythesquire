@@ -30,8 +30,7 @@ public class CardView3D : MonoBehaviour {
     {
         this.card = c;
         this.cost.SetText(card.cost.ToString());
-        this.title.SetText(card.title);
+        this.title.SetText(card.name);
         this.description.SetText(card.description);
-        this.picture.material.mainTexture = card.picture.texture; //Resources.Load<Texture>("CardPictures/" + card.picture.name);
     }
 }
