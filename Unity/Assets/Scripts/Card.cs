@@ -16,6 +16,9 @@ public class Card {
     public Tag[] tags;
     public Effect[] effects;
     public EndTurnAction endTurnAction;
+
+    public UnityEvent OnEnable;
+    public UnityEvent OnDisable;
     
     public void Activate()
     {
@@ -24,8 +27,18 @@ public class Card {
             effect.Activate();
         }
     }
-    
-    
+
+    public void Enable()
+    {
+        OnEnable.Invoke();
+    }
+
+    public void Disable()
+    {
+        OnDisable.Invoke();
+    }
+
+
     //test
 
 

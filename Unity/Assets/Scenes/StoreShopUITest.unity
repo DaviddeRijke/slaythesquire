@@ -686,7 +686,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 134979513}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1783135594}
+        m_MethodName: MockTag2
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &134979513
@@ -2349,7 +2360,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.0000015883649}
+  m_AnchoredPosition: {x: 0, y: 0.000014755621}
   m_SizeDelta: {x: 0, y: 25}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &859220939
@@ -3469,7 +3480,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1319790044}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1783135594}
+        m_MethodName: MockTag1
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1319790044
@@ -4877,6 +4899,7 @@ GameObject:
   - component: {fileID: 1783135590}
   - component: {fileID: 1783135593}
   - component: {fileID: 1783135592}
+  - component: {fileID: 1783135594}
   m_Layer: 0
   m_Name: Dao
   m_TagString: Untagged
@@ -4916,11 +4939,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 1783135589}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8bc87fb23e444ebba7ea7ed4865935e, type: 3}
+  m_Script: {fileID: 11500000, guid: c86c22033a884977aeb3459dafbfea84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CardContainer: {fileID: 11400000, guid: 348510dd2bc4ba14bbead7e302aa23c4, type: 2}
+  Container: {fileID: 11400000, guid: 5533cb64e4d4d0e4fb429a58ef8ada48, type: 2}
 --- !u!114 &1783135593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1783135589}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52c7efe8aed3dbc4fac678450c1b196d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CardContainer: {fileID: 11400000, guid: 5533cb64e4d4d0e4fb429a58ef8ada48, type: 2}
+  Card2DPrefab: {fileID: 1634251533451022, guid: 47c2978877111d84ebaef1ff8b411d89,
+    type: 2}
+  Container: {fileID: 859220938}
+--- !u!114 &1783135594
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4928,13 +4966,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1783135589}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52c7efe8aed3dbc4fac678450c1b196d, type: 3}
+  m_Script: {fileID: 11500000, guid: 78e342dda7c045da95f65de46fdce325, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CardContainer: {fileID: 11400000, guid: 348510dd2bc4ba14bbead7e302aa23c4, type: 2}
-  Card2DPrefab: {fileID: 1634251533451022, guid: 47c2978877111d84ebaef1ff8b411d89,
-    type: 2}
-  Container: {fileID: 859220938}
+  CardViews: []
+  filtered: []
 --- !u!1 &1791944031
 GameObject:
   m_ObjectHideFlags: 0
@@ -5338,7 +5374,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1839481337}
   m_Direction: 2
   m_Value: 0
-  m_Size: 1
+  m_Size: 0.99999994
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -5703,7 +5739,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2047435193}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1783135594}
+        m_MethodName: MockTag12
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &2047435193
@@ -6054,12 +6101,12 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1783135589}
-        m_MethodName: 
+      - m_Target: {fileID: 1783135592}
+        m_MethodName: GetAllCards
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 

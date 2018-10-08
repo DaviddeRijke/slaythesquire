@@ -42,6 +42,12 @@ namespace Api
                             JsonHelper.getJsonArray<T>(jsonResult);
                         Debug.Log(entities);
                         loadable.SetData(entities);
+                        foreach (var entity in entities)
+                        {
+                            var card = entity as Card;
+                            if (card.tags.Length == 0) break;
+                            Debug.Log(card.tags[0].name + ", " + card.tags[0].id);
+                        }
                     }          
                 }
             }
