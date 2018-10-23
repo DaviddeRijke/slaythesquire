@@ -13,6 +13,9 @@ public class Player {
     private int id;
     private String username;
 
+    @Transient
+    private Match match;
+
     public int getId(){
         return id;
     }
@@ -33,4 +36,11 @@ public class Player {
         decks.add(deck);
     }
 
+    public Match getMatch() {
+        return match;
+    }
+
+    public void setMatch(Match match) {
+        this.match = match;
+    }
 }
