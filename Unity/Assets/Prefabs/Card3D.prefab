@@ -616,7 +616,7 @@ MonoBehaviour:
   m_firstVisibleCharacter: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 9.959675, y: 2.5448565, z: 9.931194, w: 2.3540998}
+  m_margin: {x: 9.959675, y: 2.5448565, z: 9.9162245, w: 2.3540998}
   m_textInfo:
     textComponent: {fileID: 0}
     characterCount: 2
@@ -624,7 +624,7 @@ MonoBehaviour:
     spaceCount: 0
     wordCount: 1
     linkCount: 0
-    lineCount: 2
+    lineCount: 1
     pageCount: 1
     materialCount: 1
   m_havePropertiesChanged: 0
@@ -885,7 +885,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d167f58a97b380c4fa3f081dfe469a85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  card: {fileID: 0}
+  card:
+    id: 0
+    name: 
+    description: 
+    cost: 0
+    tags: []
+    effects: []
+    OnEnable:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+    OnDisable:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
   cost: {fileID: 114210682761395674}
   title: {fileID: 114283181094431788}
   description: {fileID: 114344076046865576}
@@ -937,7 +953,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.439, y: 0.776}
+  m_AnchoredPosition: {x: -0.45, y: 0.776}
   m_SizeDelta: {x: 20, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224478024079100218
