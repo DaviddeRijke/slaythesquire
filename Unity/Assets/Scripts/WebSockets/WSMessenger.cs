@@ -1,38 +1,52 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Threading;
 using System.Net;
 using System.Net.Sockets;
 using UnityEngine;
+using System;
 
 public class WSMessenger : MonoBehaviour {
 
     public string ServerIp = "127.0.0.1";
-    public int Port = 4343;
+    public int ServerPort = 4343;
     public IPEndPoint serverAddress;
+
+    Socket clientSocket;
+
+    public Thread listenerThread;
     
     void Start () {
-        serverAddress = new IPEndPoint(IPAddress.Parse(ServerIp), Port);
-    }
-	
-	public void SendString (string toSend) {
-        //TODO: DOE IETS MET JSON
+        serverAddress = new IPEndPoint(IPAddress.Parse(ServerIp), ServerPort);
 
-        Socket clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+        clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
         clientSocket.Connect(serverAddress);
+        SendString("CONNECT");
 
-        // Sending
-        int toSendLen = System.Text.Encoding.ASCII.GetByteCount(toSend);
+        Thread t = new Thread(new ThreadStart(listenSocket));
+        t.Start();
+    }
+
+    private void ConnectToServer()
+    {
+        listenerThread = new Thread(new ThreadStart(listenSocket));
+        listenerThread.IsBackground = true;
+        listenerThread.Start();
+    }
+	public void SendString(string toSend)
+    {
         byte[] toSendBytes = System.Text.Encoding.ASCII.GetBytes(toSend);
-        clientSocket.Send(toSendBytes);
+        clientSocket.Send(toSendBytes);        
+    }
 
-        // Receiving
-        byte[] rcvBytes = new byte[clientSocket.ReceiveBufferSize];
-        clientSocket.Receive(rcvBytes);
+    public void listenSocket()
+    {
+        while (true)
+        {
+            byte[] rcvBytes = new byte[clientSocket.ReceiveBufferSize];
+            clientSocket.Receive(rcvBytes);
 
-        string rcv = System.Text.Encoding.ASCII.GetString(rcvBytes);
+            string message = System.Text.Encoding.ASCII.GetString(rcvBytes);
 
-        Debug.Log("Client received: " + rcv);
-
-        clientSocket.Close();
+            Debug.Log(message);
+        }
     }
 }
