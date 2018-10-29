@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour {
     public static GameManager _instance;
     private Turn turnManager;
     public CardHolder hand;
-    public bool CanPlay;
+    public bool CanPlay = false;
 
     public Text PhaseText;
 
@@ -16,7 +16,6 @@ public class GameManager : MonoBehaviour {
 
 	void Awake () {
         _instance = this;
-        CanPlay = false;
         turnManager = GetComponent<Turn>();
 	}
 
