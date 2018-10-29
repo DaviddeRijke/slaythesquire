@@ -1,27 +1,36 @@
 ﻿using System.Collections.Generic;
+using DefaultNamespace;
 using UnityEngine;
+using UnityEngine.Events;
 
-public class CardGenerator : MonoBehaviour {
+public class CardGenerator : MonoBehaviour
+{
 
-	public Api api;
-	public GameObject card;
+    public CardContainer CardContainer;
+    public GameObject Card2DPrefab;
+    public Transform Container;
+    public static readonly CardListEvent OnCardsGenerated = new CardListEvent();
+    
+    void OnEnable()
+    {
+     GenerateCards();  
+    }
 
-	List<GameObject> GetAllCards()
-	{
-		List<GameObject> cards = new List<GameObject>();
-		foreach (int id in api.GetAllCardIds())
-		{
-			card.GetComponent<Card>().id = id;
-			GameObject newCard = Instantiate(card);
-			cards.Add(newCard);
-		}
-		return cards;
-	}
-
-	GameObject GetCardById(int id)
-	{
-		card.GetComponent<Card>().id = id;
-		GameObject newCard = Instantiate(card);
-		return newCard;
-	}
+    void GenerateCards()
+    { if (CardContainer.Cards == null) return;
+        var cardViews = new List<CardView2D>();
+        foreach (Transform child in Container)
+        {
+            Destroy(child.gameObject);
+        }
+        foreach (Card card in CardContainer.Cards)
+        {
+            var obj = Instantiate(Card2DPrefab);
+            obj.transform.SetParent(Container, false);
+            var view2d = obj.GetComponent<CardView2D>();
+            view2d.initCard(card);
+            cardViews.Add(view2d);
+        }
+        OnCardsGenerated.Invoke(cardViews);
+    }
 }

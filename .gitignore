@@ -1,1 +1,6 @@
 # IGNORE NOTHING SUKA BLYAT
+
+#EXCEPT THESE
+Java/nbactions.xml
+Java/src/main/resources/application.properties
+Java/target/classes/application.properties

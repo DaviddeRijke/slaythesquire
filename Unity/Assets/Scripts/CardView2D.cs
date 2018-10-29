@@ -20,9 +20,20 @@ public class CardView2D : MonoBehaviour {
     public void initCard(Card c)
     {
         this.card = c;
+	    card.OnEnable.AddListener(Enable);
+	    card.OnDisable.AddListener(Disable);
         this.cost.SetText(card.cost.ToString());
-        this.title.SetText(card.title);
+        this.title.SetText(card.name);
         this.description.SetText(card.description);
-        this.picture.sprite = card.picture;
     }
+
+	public void Enable()
+	{
+		gameObject.SetActive(true);
+	}
+
+	public void Disable()
+	{
+		gameObject.SetActive(false);
+	}
 }
