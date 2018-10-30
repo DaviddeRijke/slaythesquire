@@ -5,16 +5,10 @@ using UnityEngine;
 
 [Serializable]
 public class Player {
-	int id;
-	string username;
-	int currency;
-	int eloScore;
-
-	public int Id { get; set; }
-
-	public string Username { get; set; }
-
-	public int Currency { get; set; }
-
-	public int EloScore { get; set; }
+	public int id;
+	public string username;
+	public string match; //placeholder
+	public string[] decks; //placeholder
+	public int currency;
+	//public int elo; //placeholder
 }

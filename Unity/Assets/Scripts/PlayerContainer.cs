@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Container", menuName = "CardContainer")]
+[CreateAssetMenu(fileName = "Container", menuName = "PlayerContainer")]
 public class PlayerContainer : ScriptableObject, ILoadable
 {
-	public List<Player> Players;
+	public List<Player> players;
 
 	public void SetData<T>(T[] entities)
 	{
@@ -16,7 +16,7 @@ public class PlayerContainer : ScriptableObject, ILoadable
 			return;
 		}
 
-		Players = (entities as Player[]).ToList();
+		players = (entities as Player[]).ToList();
 
 	}
 }

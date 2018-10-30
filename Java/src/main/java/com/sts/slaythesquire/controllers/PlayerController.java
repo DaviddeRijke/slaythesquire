@@ -10,6 +10,7 @@ import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 @Controller
@@ -30,10 +31,11 @@ public class PlayerController {
 
     @RequestMapping(path= "/{userId}", method = RequestMethod.GET)
     public @ResponseBody
-    Player player(@PathVariable(value = "userId") int id){
-        Player player = playerRepository.findById(id).orElse(null);
-        if (player == null) throw new NullPointerException("The player is not allowed to be null.");
-        return player;
+    Collection<Player> player(@PathVariable(value = "userId") int id){
+        Collection<Player> players = new ArrayList<>();
+        ((ArrayList<Player>) players).add(playerRepository.findById(id).orElse(null));
+        if (((ArrayList<Player>) players).get(0) == null) throw new NullPointerException("The player is not allowed to be null.");
+        return players;
     }
 
     @PostMapping(path= "/add")
