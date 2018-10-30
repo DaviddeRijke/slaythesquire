@@ -293,6 +293,7 @@ GameObject:
   m_Component:
   - component: {fileID: 547234296}
   - component: {fileID: 547234295}
+  - component: {fileID: 547234297}
   m_Layer: 0
   m_Name: WebSocketTest
   m_TagString: Untagged
@@ -306,13 +307,13 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 547234294}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 177228b7f2e8ad64d92b059c168462b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ServerIp: 127.0.0.1
-  Port: 4343
+  ServerPort: 4343
 --- !u!4 &547234296
 Transform:
   m_ObjectHideFlags: 0
@@ -326,6 +327,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &547234297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 547234294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e681028869156f040b8551839021f972, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1267414044
 GameObject:
   m_ObjectHideFlags: 0
@@ -633,8 +645,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 547234295}
-        m_MethodName: SendString
+      - m_Target: {fileID: 547234297}
+        m_MethodName: sendMessage
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
