@@ -31,7 +31,7 @@ public class PlayerController {
 
     @RequestMapping(path= "/{userId}", method = RequestMethod.GET)
     public @ResponseBody
-    Collection<Player> player(@RequestParam int id){
+    Collection<Player> player(@PathVariable(value = "userId") int id){
         Collection<Player> players = new ArrayList<>();
         ((ArrayList<Player>) players).add(playerRepository.findById(id).orElse(null));
         if (((ArrayList<Player>) players).get(0) == null) throw new NullPointerException("The player is not allowed to be null.");

@@ -17,13 +17,9 @@ public class PlayerLoader : MonoBehaviour {
 		RestController.Instance.Get<Player>("/players/" + id, Container);
 	}
 
-	public void ChangeCurrency(int playerId, int amount)
-	{
-		RestController.Instance.Put("/players/" + playerId + "/changecurrency/", 3);
-	}
-
 	public void ChangeCurrency(int amount)
 	{
-		RestController.Instance.Put("/players/changecurrency?id=" + Container.players[0].id + "&amount=" + amount);
+		Container.players[0].currency += amount;
+		RestController.Instance.Put("/players/" + Container.players[0].id + "/changecurrency/", amount);
 	}
 }
