@@ -20,10 +20,18 @@ public class PlayerController {
         this.playerRepository = playerRepository;
     }
 
-    @GetMapping(path= "")
+    @GetMapping(path= "/all")
     public @ResponseBody
     Collection<Player> getPlayers(){
         return playerRepository.findAll();
+    }
+
+    @GetMapping(path= "")
+    public @ResponseBody
+    Player player(@RequestParam int id){
+        Player player = playerRepository.findById(id).orElse(null);
+        if (player == null) throw new NullPointerException("The player is not allowed to be null.");
+        return player;
     }
 
     @PostMapping(path= "/add")
@@ -32,5 +40,18 @@ public class PlayerController {
         /// TODO: 2-10-2018 add constraints
         playerRepository.save(player);
         return playerRepository.existsById(player.getId());
+    }
+
+    @PatchMapping(path= "/changecurrency")
+    public @ResponseBody
+    boolean changeCurrency(@RequestParam int id, int amount){
+        Player player = playerRepository.findById(id).orElse(null);
+        if(player == null){
+            System.out.println("Player not found");
+            return false;
+        }
+        player.changeCurrency(amount);
+        playerRepository.save(player);
+        return true;
     }
 }
