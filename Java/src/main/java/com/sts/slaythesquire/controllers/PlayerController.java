@@ -4,7 +4,9 @@ import com.sts.slaythesquire.models.Player;
 import com.sts.slaythesquire.repos.CardRepository;
 import com.sts.slaythesquire.repos.DeckRepository;
 import com.sts.slaythesquire.repos.PlayerRepository;
+import com.sts.slaythesquire.utils.serializers.IntegerWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,9 +28,9 @@ public class PlayerController {
         return playerRepository.findAll();
     }
 
-    @GetMapping(path= "")
+    @RequestMapping(path= "/{userId}", method = RequestMethod.GET)
     public @ResponseBody
-    Player player(@RequestParam int id){
+    Player player(@PathVariable(value = "userId") int id){
         Player player = playerRepository.findById(id).orElse(null);
         if (player == null) throw new NullPointerException("The player is not allowed to be null.");
         return player;
@@ -42,15 +44,19 @@ public class PlayerController {
         return playerRepository.existsById(player.getId());
     }
 
-    @PatchMapping(path= "/changecurrency")
+    @RequestMapping(path= "/{userId}/changecurrency", method = RequestMethod.PUT)
     public @ResponseBody
-    boolean changeCurrency(@RequestParam int id, int amount){
-        Player player = playerRepository.findById(id).orElse(null);
+    boolean changeCurrency(
+            @PathVariable(value = "userId") int user,
+            @RequestBody IntegerWrapper amount){
+        System.out.println(amount);
+        System.out.println(amount.getValue());
+        Player player = playerRepository.findById(user).orElse(null);
         if(player == null){
             System.out.println("Player not found");
             return false;
         }
-        player.changeCurrency(amount);
+        player.changeCurrency(amount.getValue());
         playerRepository.save(player);
         return true;
     }

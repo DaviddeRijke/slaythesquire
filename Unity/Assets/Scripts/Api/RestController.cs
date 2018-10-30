@@ -22,6 +22,35 @@ namespace Api
             StartCoroutine(GetRequest<T>(url, loadable));
         }
 
+        public void Put(string url, int data)
+        {
+            Debug.Log(data);
+            StartCoroutine(PutRequest(url, JsonUtility.ToJson(new IntegerWrapper(data))));
+        }
+
+        IEnumerator PutRequest(string url, string data)
+        {         
+            Debug.Log(Api + url + data);         
+            using (UnityWebRequest www = UnityWebRequest.Put(Api + url, data))
+            {
+                www.SetRequestHeader("Content-Type", "application/json");             
+                yield return www.SendWebRequest();
+                if (www.isNetworkError || www.isHttpError)
+                {
+                    Debug.Log(www.error);
+                }
+                else
+                {
+                    if (www.isDone)
+                    {
+                        string jsonResult =
+                            Encoding.UTF8.GetString(www.downloadHandler.data);
+                        Debug.Log(jsonResult);                      
+                    }
+                }
+            }
+        }
+
         IEnumerator GetRequest<T>(string url, ILoadable loadable)
         {
             using (UnityWebRequest www = UnityWebRequest.Get(Api + url))
@@ -42,12 +71,6 @@ namespace Api
                             JsonHelper.getJsonArray<T>(jsonResult);
                         Debug.Log(entities);
                         loadable.SetData(entities);
-                        foreach (var entity in entities)
-                        {
-                            var card = entity as Card;
-                            if (card.tags.Length == 0) break;
-                            Debug.Log(card.tags[0].name + ", " + card.tags[0].id);
-                        }
                     }          
                 }
             }
@@ -56,6 +79,16 @@ namespace Api
         void Update()
         {
 
+        }
+    }
+[System.Serializable]
+    internal class IntegerWrapper
+{
+    public int value;
+
+    public IntegerWrapper(int value)
+        {
+            this.value = value;
         }
     }
 }

@@ -8,7 +8,7 @@ public class Player {
 	int id;
 	string username;
 	int currency;
-	int elo;
+	int eloScore;
 
 	public int Id { get; set; }
 
@@ -16,5 +16,5 @@ public class Player {
 
 	public int Currency { get; set; }
 
-	public int Elo { get; set; }
+	public int EloScore { get; set; }
 }
