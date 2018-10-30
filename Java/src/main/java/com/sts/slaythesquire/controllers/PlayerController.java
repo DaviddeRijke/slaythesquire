@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 @Controller
@@ -28,10 +29,11 @@ public class PlayerController {
 
     @GetMapping(path= "")
     public @ResponseBody
-    Player player(@RequestParam int id){
-        Player player = playerRepository.findById(id).orElse(null);
-        if (player == null) throw new NullPointerException("The player is not allowed to be null.");
-        return player;
+    Collection<Player> player(@RequestParam int id){
+        Collection<Player> players = new ArrayList<>();
+        ((ArrayList<Player>) players).add(playerRepository.findById(id).orElse(null));
+        if (((ArrayList<Player>) players).get(0) == null) throw new NullPointerException("The player is not allowed to be null.");
+        return players;
     }
 
     @PostMapping(path= "/add")
