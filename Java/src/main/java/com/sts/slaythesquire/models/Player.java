@@ -13,6 +13,9 @@ public class Player {
     private int id;
     private String username;
 
+    @Transient
+    private Match match;
+
     public int getId(){
         return id;
     }
@@ -38,4 +41,11 @@ public class Player {
     public int getCurrency() { return currency; }
     public void changeCurrency(int amount) { this.currency += amount; }
 
+    public Match getMatch() {
+        return match;
+    }
+
+    public void setMatch(Match match) {
+        this.match = match;
+    }
 }
