@@ -22,26 +22,34 @@ namespace Api
             StartCoroutine(GetRequest<T>(url, loadable));
         }
 
-		public void Put(string url)
-		{
-			byte[] body = null;
-			using (UnityWebRequest www = UnityWebRequest.Put(Api + url, body))
-			{
-				www.Send();
-				if (www.isNetworkError || www.isHttpError)
-				{
-					Debug.Log(www.error);
-				}
-				else
-				{
-					if (www.isDone)
-					{
-						Debug.Log(body);
-						Debug.Log(www.responseCode);
-					}
-				}
-			}
-		}
+        public void Put(string url, int data)
+        {
+            Debug.Log(data);
+            StartCoroutine(PutRequest(url, JsonUtility.ToJson(new IntegerWrapper(data))));
+        }
+
+        IEnumerator PutRequest(string url, string data)
+        {         
+            Debug.Log(Api + url + data);         
+            using (UnityWebRequest www = UnityWebRequest.Put(Api + url, data))
+            {
+                www.SetRequestHeader("Content-Type", "application/json");             
+                yield return www.SendWebRequest();
+                if (www.isNetworkError || www.isHttpError)
+                {
+                    Debug.Log(www.error);
+                }
+                else
+                {
+                    if (www.isDone)
+                    {
+                        string jsonResult =
+                            Encoding.UTF8.GetString(www.downloadHandler.data);
+                        Debug.Log(jsonResult);                      
+                    }
+                }
+            }
+        }
 
         IEnumerator GetRequest<T>(string url, ILoadable loadable)
         {
@@ -71,6 +79,16 @@ namespace Api
         void Update()
         {
 
+        }
+    }
+[System.Serializable]
+    internal class IntegerWrapper
+{
+    public int value;
+
+    public IntegerWrapper(int value)
+        {
+            this.value = value;
         }
     }
 }
