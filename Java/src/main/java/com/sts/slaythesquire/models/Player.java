@@ -33,4 +33,9 @@ public class Player {
         decks.add(deck);
     }
 
+    private int currency;
+
+    public int getCurrency() { return currency; }
+    public void changeCurrency(int amount) { this.currency += amount; }
+
 }
