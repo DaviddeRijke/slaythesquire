@@ -22,6 +22,27 @@ namespace Api
             StartCoroutine(GetRequest<T>(url, loadable));
         }
 
+		public void Put(string url)
+		{
+			byte[] body = null;
+			using (UnityWebRequest www = UnityWebRequest.Put(Api + url, body))
+			{
+				www.Send();
+				if (www.isNetworkError || www.isHttpError)
+				{
+					Debug.Log(www.error);
+				}
+				else
+				{
+					if (www.isDone)
+					{
+						Debug.Log(body);
+						Debug.Log(www.responseCode);
+					}
+				}
+			}
+		}
+
         IEnumerator GetRequest<T>(string url, ILoadable loadable)
         {
             using (UnityWebRequest www = UnityWebRequest.Get(Api + url))
