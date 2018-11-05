@@ -49,6 +49,7 @@ public class Player {
     }
 
     private int currency;
+    private int eloScore;
 
     public int getCurrency() { return currency; }
     public void changeCurrency(int amount) { this.currency += amount; }

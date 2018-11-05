@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Text;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Networking;
 
 namespace Api
@@ -8,6 +9,7 @@ namespace Api
     public class RestController : MonoBehaviour
     {
         public const string Api = "http://localhost:8080/api";
+		public UnityEvent started;
 
         public static RestController Instance { get; private set; }
 
@@ -15,11 +17,41 @@ namespace Api
         {
             if(Instance == null) Destroy(Instance);
             Instance = this;
+			started.Invoke();
         }
 
         public void Get<T>(string url, ILoadable loadable)
         {
             StartCoroutine(GetRequest<T>(url, loadable));
+        }
+
+        public void Put(string url, int data)
+        {
+            //Debug.Log(data);
+            StartCoroutine(PutRequest(url, JsonUtility.ToJson(new IntegerWrapper(data))));
+        }
+
+        IEnumerator PutRequest(string url, string data)
+        {         
+            //Debug.Log(Api + url + data);         
+            using (UnityWebRequest www = UnityWebRequest.Put(Api + url, data))
+            {
+                www.SetRequestHeader("Content-Type", "application/json");             
+                yield return www.SendWebRequest();
+                if (www.isNetworkError || www.isHttpError)
+                {
+                    Debug.Log(www.error);
+                }
+                else
+                {
+                    if (www.isDone)
+                    {
+                        string jsonResult =
+                            Encoding.UTF8.GetString(www.downloadHandler.data);
+                        //Debug.Log(jsonResult);                      
+                    }
+                }
+            }
         }
 
         IEnumerator GetRequest<T>(string url, ILoadable loadable)
@@ -37,25 +69,25 @@ namespace Api
                     {
                         string jsonResult =
                             Encoding.UTF8.GetString(www.downloadHandler.data);
-                        Debug.Log(jsonResult);
+                        //Debug.Log(jsonResult);
                         T[] entities =
                             JsonHelper.getJsonArray<T>(jsonResult);
-                        Debug.Log(entities);
+                        //Debug.Log(entities);
                         loadable.SetData(entities);
-                        foreach (var entity in entities)
-                        {
-                            var card = entity as Card;
-                            if (card.tags.Length == 0) break;
-                            Debug.Log(card.tags[0].name + ", " + card.tags[0].id);
-                        }
                     }          
                 }
             }
         }
+    }
 
-        void Update()
+[System.Serializable]
+    internal class IntegerWrapper
+{
+    public int value;
+
+    public IntegerWrapper(int value)
         {
-
+            this.value = value;
         }
     }
 }
