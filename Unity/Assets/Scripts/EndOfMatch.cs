@@ -15,7 +15,7 @@ public class EndOfMatch : MonoBehaviour {
 
     public void EndMatch()
     {
-        bool win = System.Convert.ToBoolean(Random.Range(0, 1));
+        bool win = System.Convert.ToBoolean(Random.Range(0, 2));
 
         ToggleUI(win);
     }
