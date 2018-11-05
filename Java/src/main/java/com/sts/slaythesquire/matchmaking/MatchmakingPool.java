@@ -2,6 +2,8 @@ package com.sts.slaythesquire.matchmaking;
 
 import com.sts.slaythesquire.models.Match;
 import com.sts.slaythesquire.models.Player;
+import com.sts.slaythesquire.sockets.MessageHandler;
+import com.sts.slaythesquire.sockets.Packet;
 import com.sts.slaythesquire.utils.threading.ReadWriteMonitor;
 
 import java.util.*;
@@ -66,6 +68,9 @@ public class MatchmakingPool {
         unmatchedPlayers.add(player);
 
         playerMonitor.exitWriter();
+
+        System.out.println("Added player to pool: " + player.getUsername());
+        MessageHandler.sendPacket(new Packet(player.getSocket(), "OKMATCHMAKING"));
     }
 
     public void removeMatch(Match match) throws InterruptedException {
@@ -77,11 +82,10 @@ public class MatchmakingPool {
     }
 
     public List<Player> getUnmatchedPlayers() throws InterruptedException {
-        List<Player> r = new ArrayList<>();
 
         playerMonitor.enterReader();
 
-        Collections.copy(r, unmatchedPlayers);
+        List<Player> r = new LinkedList<>(unmatchedPlayers);
 
         playerMonitor.exitReader();
 

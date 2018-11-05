@@ -14,26 +14,33 @@ public class WSMessenger : MonoBehaviour {
     Socket clientSocket;
     Thread listenerThread;
 
-    public Transform testCube;
     public bool keepAlive = true;
     private bool terminateConnection = false;
 
+    public bool IsConnected = false;
+
+    public MatchmakingManager Matchmaking;
+
     void Start () {
-        serverAddress = new IPEndPoint(IPAddress.Parse(ServerIp), ServerPort);
-        
-        ConnectToServer();
     }
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
-            SendPacket(new Packet("TESTMOVE"));
+            //SendPacket(new Packet("TESTMOVE"));
 
         if (terminateConnection)
         {
             DisconnectFromServer(true);
             terminateConnection = false;
         }
+    }
+
+    public void Connect()
+    {
+        serverAddress = new IPEndPoint(IPAddress.Parse(ServerIp), ServerPort);
+
+        ConnectToServer();
     }
 
     private void DisconnectFromServer(bool connected)
@@ -70,6 +77,7 @@ public class WSMessenger : MonoBehaviour {
 
 	public void SendPacket(Packet packet)
     {
+        Debug.Log("Sending message: " + packet.Message);
         byte[] toSendBytes = System.Text.Encoding.ASCII.GetBytes(packet.Message);
         try
         {
@@ -104,11 +112,24 @@ public class WSMessenger : MonoBehaviour {
             float moveAmount = float.Parse(packet.Args[0]);
             DoOnMainThread.ExecuteOnMainThread.Enqueue(() => { StartCoroutine(MoveCube(moveAmount)); });
         }
+        else if (packet.Function.Equals("OKCONNECT"))
+        {
+            IsConnected = true;
+        }
+        else if (packet.Function.Equals("OKMATCHMAKING"))
+        {
+            DoOnMainThread.ExecuteOnMainThread.Enqueue(() => { ConfirmMatchmaking(); });
+        }
+    }
+
+    private void ConfirmMatchmaking()
+    {
+        Matchmaking.JoinedPool = true;
     }
 
     private IEnumerator MoveCube(float amount)
     {
-        testCube.Translate(new Vector3(amount, 0, 0));
+        //testCube.Translate(new Vector3(amount, 0, 0));
         yield return null;
     }
 

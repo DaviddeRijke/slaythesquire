@@ -1,6 +1,10 @@
 package com.sts.slaythesquire.sockets;
 
 
+import com.sts.slaythesquire.models.Player;
+import com.sts.slaythesquire.repos.PlayerRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.Socket;
@@ -11,7 +15,12 @@ public class MessageHandler {
 
     private ClientManager clientManager;
 
-    public MessageHandler() {
+    private static int dirtyIdHack = 1;
+
+    private PlayerRepository playerRepository;
+
+    public MessageHandler(PlayerRepository playerRepository) {
+        this.playerRepository = playerRepository;
         clientManager = new ClientManager();
     }
 
@@ -29,10 +38,57 @@ public class MessageHandler {
         else if (packet.getFunction().equals("TESTMOVE")) {
             testMove(packet);
         }
+        else if (packet.getFunction().equals("STARTMATCHMAKING")){
+
+
+            System.out.println("handling: " + packet.getMessage());
+            joinMatchmaking(packet);
+
+        }
         else {
             Packet p = new Packet(packet.getClient(), "ERROR/No valid function");
             sendPacket(p);
         }
+    }
+
+    private void joinMatchmaking(Packet packet){
+        int id = -1;
+
+        try{
+            id = Integer.parseInt(packet.getArgs()[0].trim());
+
+        }catch(NumberFormatException e){
+            e.printStackTrace();
+        }
+
+
+        /*
+        id = dirtyIdHack;
+        dirtyIdHack++;
+        if (dirtyIdHack > 2){
+            dirtyIdHack = 1;
+        }*/
+
+
+        if(id == -1){
+            System.out.println("id is wrong");
+            return;
+        }
+
+        System.out.println("retrieving player");
+        Player p = playerRepository.findById(id).orElse(null);
+
+        if (p == null){
+            System.out.println("player not found");
+            return;
+        }
+
+        p.setSocket(packet.getClient());
+
+        System.out.println("adding " + p.getUsername() + " to matchmaking pool.");
+        clientManager.addPlayerToMatchmaking(p);
+
+
     }
 
     public void disconnect(Socket socket) {
@@ -47,11 +103,11 @@ public class MessageHandler {
     private void connect(Packet packet) {
         clientManager.addClient(packet.getClient());
 
-        Packet response = new Packet(packet.getClient(), "INFO/Connected");
+        Packet response = new Packet(packet.getClient(), "OkConnect/Connected");
         sendPacket(response);
     }
 
-    private void sendPacket(Packet packet) {
+    public static void sendPacket(Packet packet) {
         try {
             Socket clientSocket = packet.getClient();
             OutputStream os = clientSocket.getOutputStream();

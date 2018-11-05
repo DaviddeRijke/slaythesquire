@@ -1,5 +1,7 @@
 package com.sts.slaythesquire.sockets;
 
+import com.sts.slaythesquire.models.Player;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.Socket;
@@ -8,6 +10,8 @@ public class ClientHandler implements Runnable {
 
     private final Socket client;
     private final MessageHandler messageHandler;
+
+    private Player player;
 
     public ClientHandler(Socket s, MessageHandler mh) {
         client = s;

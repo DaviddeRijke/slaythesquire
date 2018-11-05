@@ -1,5 +1,7 @@
 package com.sts.slaythesquire.sockets;
 
+import com.sts.slaythesquire.repos.PlayerRepository;
+
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -11,12 +13,17 @@ public class SocketListener implements Runnable {
 
     private boolean running = true;
 
+    public SocketListener(ServerSocket serverSocket, MessageHandler handler) {
+        this.serverSocket = serverSocket;
+        this.handler = handler;
+    }
+
     public void run() {
         try {
-            serverSocket = new ServerSocket(4343, 10);
+            //serverSocket = new ServerSocket(4343, 10);
             System.out.println("Server running on: " + serverSocket.getLocalSocketAddress());
 
-            handler = new MessageHandler();
+            //handler = new MessageHandler();
 
             while (running) {
                 listenSocket();

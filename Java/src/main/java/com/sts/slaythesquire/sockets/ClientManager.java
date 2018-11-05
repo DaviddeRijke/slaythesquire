@@ -1,5 +1,9 @@
 package com.sts.slaythesquire.sockets;
 
+import com.sts.slaythesquire.matchmaking.MatchmakingPool;
+import com.sts.slaythesquire.matchmaking.matchmakers.RandomMatchmaker;
+import com.sts.slaythesquire.models.Player;
+
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +15,8 @@ public class ClientManager {
     private List<Socket> clients = new ArrayList<>();
     private List<Socket> connectedSockets = new ArrayList<>();
 
+    private MatchmakingPool matchmakingPool;
+
     public List<Socket> getClients() {
         return clients;
     }
@@ -20,6 +26,7 @@ public class ClientManager {
 
     public ClientManager() {
         //startHeartbeatTimerTask(2000);
+        matchmakingPool = new MatchmakingPool(new RandomMatchmaker(), 10000, 20000);
     }
 
     public boolean addClient(Socket client) {
@@ -48,6 +55,22 @@ public class ClientManager {
 
         connectedSockets.add(client);
         return true;
+    }
+
+    public void addPlayerToMatchmaking(Player player){
+        try {
+            matchmakingPool.addPlayerToPool(player);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void removePlayerFromMatchmaking(Player player){
+        try {
+            matchmakingPool.removePlayerFromPool(player);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     private void startHeartbeatTimerTask(int interval) {

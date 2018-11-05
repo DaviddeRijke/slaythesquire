@@ -15,6 +15,10 @@ import java.util.Collection;
 public class PlayerController {
     private final PlayerRepository playerRepository;
 
+    public PlayerRepository getPlayerRepository() {
+        return playerRepository;
+    }
+
     @Autowired
     public PlayerController(final PlayerRepository playerRepository){
         this.playerRepository = playerRepository;
