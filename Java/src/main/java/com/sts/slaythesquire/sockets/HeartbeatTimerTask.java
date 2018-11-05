@@ -18,7 +18,7 @@ public class HeartbeatTimerTask extends TimerTask {
         List<Socket> socketsToRemove = new ArrayList<>();
 
         List<Socket> sockets = manager.getSockets();
-        List<Socket> connectedSockets = manager.getConnectedSocketsSockets();
+        List<Socket> connectedSockets = manager.getConnectedSockets();
         for (Socket s : sockets) {
             if (connectedSockets.contains(s))
                 socketsToRemove.add(s);
@@ -27,5 +27,7 @@ public class HeartbeatTimerTask extends TimerTask {
         for (Socket s : socketsToRemove) {
             manager.removeClient(s);
         }
+
+        manager.getConnectedSockets().clear();
     }
 }

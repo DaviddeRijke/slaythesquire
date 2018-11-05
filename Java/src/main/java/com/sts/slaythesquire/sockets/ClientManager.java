@@ -14,7 +14,7 @@ public class ClientManager {
     public List<Socket> getSockets() {
         return sockets;
     }
-    public List<Socket> getConnectedSocketsSockets() {
+    public List<Socket> getConnectedSockets() {
         return connectedSockets;
     }
 
