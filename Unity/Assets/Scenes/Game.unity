@@ -11943,6 +11943,8 @@ GameObject:
   - component: {fileID: 1446281297}
   - component: {fileID: 1446281296}
   - component: {fileID: 1446281298}
+  - component: {fileID: 1446281302}
+  - component: {fileID: 1446281301}
   - component: {fileID: 1446281299}
   - component: {fileID: 1446281300}
   m_Layer: 0
@@ -12025,6 +12027,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06e9660a7b93ca646aa7a347fb5230b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 11400000, guid: d512cbc4040a0784e8c0bccf679831dd, type: 2}
   objectsToHide:
   - {fileID: 1068547986}
   - {fileID: 1295544708}
@@ -12036,6 +12039,27 @@ MonoBehaviour:
   scoreResult: {fileID: 1817928817}
   goldAddition: {fileID: 2034427981}
   goldResult: {fileID: 248904542}
+  goldChanged:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1446281301}
+        m_MethodName: ChangeCurrency
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: EndOfMatch+ValueChanged, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  ratingChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: EndOfMatch+ValueChanged, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!114 &1446281300
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12047,6 +12071,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 458b71ede8fb1594aa3353f761319756, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1446281301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1446281295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b2dc1df4e20dc643abcde10ab8e44da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Container: {fileID: 11400000, guid: d512cbc4040a0784e8c0bccf679831dd, type: 2}
+--- !u!114 &1446281302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1446281295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1e05e0dd55ff5c489cae7f0b32ac9af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  started:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!4 &1451043907 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 0933f6a03cb7a9949b12517e3254da12,

@@ -1,10 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class EndOfMatch : MonoBehaviour {
-    public GameObject[] objectsToHide;
+	public PlayerContainer player;
+
+	public GameObject[] objectsToHide;
     public GameObject[] objectsToShow;
     public GameObject winText;
     public GameObject loseText;
@@ -13,7 +16,10 @@ public class EndOfMatch : MonoBehaviour {
     public Text goldAddition;
     public Text goldResult;
 
-    public void EndMatch()
+	public ValueChanged goldChanged;
+	public ValueChanged ratingChanged;
+
+	public void EndMatch()
     {
         bool win = System.Convert.ToBoolean(Random.Range(0, 2));
 
@@ -32,13 +38,38 @@ public class EndOfMatch : MonoBehaviour {
             obj.SetActive(true);
         }
 
+		int newGold = 10;
+
         if (state)
         {
             winText.SetActive(true);
+			newGold += 15;
         }
         else
         {
             loseText.SetActive(true);
         }
+
+		SetGold(newGold);
+		//SetRating( <<<APICALL NAAR NIEUWE RATING>>> );
     }
+
+	public void SetGold(int additionalAmount)
+	{
+		goldAddition.text = "+ " + additionalAmount;
+		goldResult.text = "= " + (player.players[0].currency + additionalAmount);
+
+		goldChanged.Invoke(additionalAmount);
+	}
+
+	public void SetRating(int additionalRating)
+	{
+		//scoreAddition.text = "+ " + additionalAmount;
+		//scoreResult.text = "= " + (player.players[0] + additionalAmount);
+
+		//ratingChanged.Invoke(additionalAmount);
+	}
+
+	[System.Serializable]
+	public class ValueChanged : UnityEvent<int> { }
 }
