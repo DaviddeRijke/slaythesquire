@@ -65,7 +65,7 @@ public class WSMessenger : MonoBehaviour {
         listenerThread.IsBackground = true;
         listenerThread.Start();
 
-        StartCoroutine(Heartbeat());
+        //StartCoroutine(Heartbeat());
     }
 
 	public void SendPacket(Packet packet)

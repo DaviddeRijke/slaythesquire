@@ -8,35 +8,35 @@ import java.util.TimerTask;
 
 public class ClientManager {
 
-    private List<Socket> sockets = new ArrayList<Socket>();
-    private List<Socket> connectedSockets = new ArrayList<Socket>();
+    private List<Socket> clients = new ArrayList<>();
+    private List<Socket> connectedSockets = new ArrayList<>();
 
-    public List<Socket> getSockets() {
-        return sockets;
+    public List<Socket> getClients() {
+        return clients;
     }
     public List<Socket> getConnectedSockets() {
         return connectedSockets;
     }
 
     public ClientManager() {
-        startHeartbeatTimerTask(2000);
+        //startHeartbeatTimerTask(2000);
     }
 
     public boolean addClient(Socket client) {
-        if (sockets.contains(client)) {
+        if (clients.contains(client)) {
             return false;
         }
 
-        sockets.add(client);
+        clients.add(client);
         return true;
     }
 
     public boolean removeClient(Socket client) {
-        if (!sockets.contains(client)) {
+        if (!clients.contains(client)) {
             return false;
         }
 
-        sockets.remove(client);
+        clients.remove(client);
         connectedSockets.remove(client);
         return true;
     }

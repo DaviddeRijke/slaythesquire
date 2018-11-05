@@ -1,12 +1,9 @@
 package com.sts.slaythesquire.sockets;
 
-import com.sts.slaythesquire.utils.threading.ReadWriteMonitor;
 
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -19,6 +16,7 @@ public class MessageHandler {
     }
 
     public void handleMessage(Packet packet) {
+
         if (packet.getFunction().equals("HEARTBEAT")) {
             clientManager.keepAlive(packet.getClient());
         }

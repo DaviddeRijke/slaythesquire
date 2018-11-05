@@ -31,11 +31,11 @@ public class Packet {
     }
 
     public String getMessage() {
-        String message = function;
+        StringBuilder message = new StringBuilder(function);
         if (args != null)
             for (String arg : args) {
-                message += "/" + arg;
+                message.append("/").append(arg);
             }
-        return message;
+        return message.toString();
     }
 }

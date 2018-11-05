@@ -9,9 +9,10 @@ public class SocketListener implements Runnable {
     private ServerSocket serverSocket;
     private MessageHandler handler;
 
+    private boolean running = true;
+
     public void run() {
         try {
-            boolean running = true;
             serverSocket = new ServerSocket(4343, 10);
             System.out.println("Server running on: " + serverSocket.getLocalSocketAddress());
 
@@ -27,12 +28,17 @@ public class SocketListener implements Runnable {
         }
     }
 
+    public void shutdown(){
+        running = false;
+    }
+
     private void listenSocket() throws IOException {
         // Wait for client
         Socket client = serverSocket.accept();
         String clientIp = client.getInetAddress().getHostAddress();
         System.out.println("Connection from: " + clientIp);
 
+        //TODO: control on what thread this runs, don't use .run().... :'(
         Runnable clientHandler = new ClientHandler(client, handler);
         clientHandler.run();
     }

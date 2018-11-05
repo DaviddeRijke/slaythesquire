@@ -6,8 +6,8 @@ import java.net.Socket;
 
 public class ClientHandler implements Runnable {
 
-    final Socket client;
-    final MessageHandler messageHandler;
+    private final Socket client;
+    private final MessageHandler messageHandler;
 
     public ClientHandler(Socket s, MessageHandler mh) {
         client = s;
@@ -25,7 +25,6 @@ public class ClientHandler implements Runnable {
                 final String message = new String(receivedBytes);
 
 //                System.out.println("Server received: " + message);
-
                 messageHandler.handleMessage(new Packet(client, message));
             }
         } catch (IOException e) {
