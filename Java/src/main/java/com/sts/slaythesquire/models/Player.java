@@ -53,6 +53,8 @@ public class Player {
 
     public int getCurrency() { return currency; }
     public void changeCurrency(int amount) { this.currency += amount; }
+    public int getEloScore() {return eloScore;}
+    public void changeEloScore(int amount){this.eloScore += amount;}
 
     public Match getMatch() {
         return match;
@@ -61,4 +63,6 @@ public class Player {
     public void setMatch(Match match) {
         this.match = match;
     }
+
+    public Player(){}
 }

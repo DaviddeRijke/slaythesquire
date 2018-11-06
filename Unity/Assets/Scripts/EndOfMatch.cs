@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Api;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -21,12 +22,25 @@ public class EndOfMatch : MonoBehaviour {
 
 	public void EndMatch()
     {
-        bool win = System.Convert.ToBoolean(Random.Range(0, 2));
-
+        bool win = System.Convert.ToBoolean(Random.Range(0, 2)); 
+	    RestController.Instance.Post("/match/add", new MatchResult());
         ToggleUI(win);
     }
 
-    private void ToggleUI(bool state)
+	[System.Serializable]
+	private struct MatchResult
+	{
+		public Player winner;
+		public Player loser;
+
+		public MatchResult(Player w, Player l)
+		{
+			winner = w;
+			loser = l;
+		}
+	}
+
+	private void ToggleUI(bool state)
     {
         foreach (GameObject obj in objectsToHide)
         {
@@ -51,6 +65,7 @@ public class EndOfMatch : MonoBehaviour {
         }
 
 		SetGold(newGold);
+	    SetRating(state ? 25 : -25);
 		//SetRating( <<<APICALL NAAR NIEUWE RATING>>> );
     }
 
@@ -62,12 +77,12 @@ public class EndOfMatch : MonoBehaviour {
 		goldChanged.Invoke(additionalAmount);
 	}
 
-	public void SetRating(int additionalRating)
+	public void SetRating(int additionalAmount)
 	{
-		//scoreAddition.text = "+ " + additionalAmount;
-		//scoreResult.text = "= " + (player.players[0] + additionalAmount);
+		scoreAddition.text = "+ " + additionalAmount;
+		scoreResult.text = "= " + (player.players[0].eloScore + additionalAmount);
 
-		//ratingChanged.Invoke(additionalAmount);
+		ratingChanged.Invoke(additionalAmount);
 	}
 
 	[System.Serializable]
