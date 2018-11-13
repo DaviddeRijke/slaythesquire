@@ -7,8 +7,6 @@ using UnityEngine.Events;
 
 [Serializable]
 public class Card {
-    //public Api api;
-
     public int id;
     public string name;
     public string description;
@@ -19,12 +17,12 @@ public class Card {
 
     public UnityEvent OnEnable;
     public UnityEvent OnDisable;
-    
-    public void Activate()
+
+    public void Activate(Knight self, Knight opponent)
     {
         foreach(Effect effect in effects)
         {
-            effect.Activate();
+            effect.Activate(self, opponent);
         }
     }
 
@@ -37,10 +35,4 @@ public class Card {
     {
         OnDisable.Invoke();
     }
-
-
-    //test
-
-
-
 }

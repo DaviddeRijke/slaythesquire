@@ -4,17 +4,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public abstract class Effect : ScriptableObject
+public class Effect : ScriptableObject
 {
-    public int id;
-    public string name;
-
     // Called on phases
     public virtual void BeforeTurn() { }
     public virtual void OnStartTurn() { }
 
     public virtual void BeforeActivate() { }
-    public virtual void Activate() { } // Called when Card played
+    public virtual void Activate(Knight self, Knight opponent) { } // Called when Card played
     public virtual void AfterActivate() { }
 
     public virtual void BeforeBattle() { }

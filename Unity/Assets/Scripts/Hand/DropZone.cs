@@ -9,6 +9,12 @@ public class DropZone : MonoBehaviour
 {
     public CardEvent OnDrop = new CardEvent();
     
+
+public class DropZone : MonoBehaviour {
+
+	public Knight self;
+	public Knight opponent;
+
     public void DropCard(CardView3D cardView)
     {
         OnDrop.Invoke(cardView.card);
