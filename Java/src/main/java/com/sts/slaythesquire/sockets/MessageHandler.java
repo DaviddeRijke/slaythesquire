@@ -8,8 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.Socket;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 
 public class MessageHandler {
 
@@ -19,12 +18,34 @@ public class MessageHandler {
 
     private PlayerRepository playerRepository;
 
+    Map<String, List<DelegateAction>> topics;
+
     public MessageHandler(PlayerRepository playerRepository) {
         this.playerRepository = playerRepository;
         clientManager = new ClientManager();
+
+        topics = new LinkedHashMap<>();
+
+        subscibe("CONNECT", packet -> {
+            System.out.println(packet.getFunction());
+        });
+
+    }
+
+    public void subscibe(String topic, DelegateAction action){
+        if (!topics.containsKey(topic)){
+            topics.put(topic, new LinkedList<>());
+        }
+        topics.get(topic).add(action);
     }
 
     public void handleMessage(Packet packet) {
+
+        if (topics.containsKey(packet.getFunction())){
+            for (DelegateAction action : topics.get(packet.getFunction())){
+                action.invoke(packet);
+            }
+        }
 
         if (packet.getFunction().equals("HEARTBEAT")) {
             clientManager.keepAlive(packet.getClient());
@@ -132,4 +153,11 @@ public class MessageHandler {
 
         timer.schedule(timerTask,0, 200);
     }
+
+    private interface DelegateAction{
+
+        void invoke(Packet packet);
+
+    }
+
 }
