@@ -7,6 +7,9 @@ using UnityEngine;
 
 public class DropZone : MonoBehaviour {
 
+	public Knight self;
+	public Knight opponent;
+
     public void DropCard(CardView3D cardView)
     {
         PlayCard(cardView);
@@ -17,7 +20,7 @@ public class DropZone : MonoBehaviour {
         Card card = cardView.card;
         if (card != null)
         {
-            card.Activate();
+            card.Activate(self, opponent);
             // TODO: Add to a list where later effects can be activated from
             cardView.gameObject.SetActive(false);
             Debug.Log("Card is played!");
