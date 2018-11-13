@@ -23,7 +23,7 @@ public class EndOfMatch : MonoBehaviour {
 	public void EndMatch()
     {
         bool win = System.Convert.ToBoolean(Random.Range(0, 2)); 
-	    RestController.Instance.Post("/match/add", new MatchResult());
+	    RestController.Instance.Post("/match/add", new MatchResult(player.players[0], null));
         ToggleUI(win);
     }
 

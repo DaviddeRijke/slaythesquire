@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 @RequestMapping(path="api/match")
 public class MatchController{
@@ -27,9 +30,13 @@ public class MatchController{
         public @ResponseBody
         boolean addMatch(@RequestBody final MatchResult match) {
             System.out.println("Receiving match");
+            System.out.println(match.getWinner());
+            System.out.println(match.getLoser());
             Player winner = playerRepository.findById(match.getWinner().getId()).orElse(null);
             Player loser = playerRepository.findById(match.getLoser().getId()).orElse(null);
-            if(winner == null || loser == null) return false;
+            if(winner == loser) System.out.println("HOUSTON WE GOT A PROBLEM");
+            if(winner == null) winner = loser;
+            if(loser == null) loser = winner;
 
             System.out.println(match);
             eloService.changeElo(winner, loser);
