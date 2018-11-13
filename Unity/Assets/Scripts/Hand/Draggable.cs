@@ -17,7 +17,7 @@ public class Draggable : MonoBehaviour {
 
     void OnMouseDown()
     {
-        if (!GameManager._instance.CanPlay)
+        if (!GameManager._instance.AcceptCardInput)
             return;
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -35,7 +35,7 @@ public class Draggable : MonoBehaviour {
 
     void OnMouseDrag()
     {
-        if (!GameManager._instance.CanPlay)
+        if (!GameManager._instance.AcceptCardInput)
             return;
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -47,7 +47,7 @@ public class Draggable : MonoBehaviour {
 
     void OnMouseUp()
     {
-        if (!GameManager._instance.CanPlay)
+        if (!GameManager._instance.AcceptCardInput)
             return;
 
         GetComponent<BoxCollider>().enabled = false;

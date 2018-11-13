@@ -1,14 +1,11 @@
+using System;
 using System.Collections.Generic;
-    
+using System.Linq;
+using UnityEngine;
+
 //Deze class is het deck zoals die door de speler gemaakt wordt. Voor de class die de kaarten beheert INGAME, kijk naar IngameDeck!
-public class Deck
+[Serializable]
+public class Deck : MonoBehaviour
 {
-    private List<Card> _cards;
-
-    public List<Card> Cards
-    {
-        get { return _cards; }
-        set { _cards = value; }
-    }
-
+    public Card[] Cards;
 }

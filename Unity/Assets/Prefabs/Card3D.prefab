@@ -21,8 +21,8 @@ GameObject:
   - component: {fileID: 4886030301665614}
   - component: {fileID: 65593820221383586}
   - component: {fileID: 114402855212197798}
-  - component: {fileID: 114837721566574056}
-  m_Layer: 0
+  - component: {fileID: 114713616532807316}
+  m_Layer: 10
   m_Name: Card3D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -906,7 +906,22 @@ MonoBehaviour:
   title: {fileID: 114283181094431788}
   description: {fileID: 114344076046865576}
   picture: {fileID: 23539303439309778}
---- !u!114 &114837721566574056
+  OnSelect:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  OnDeselect:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  OnDrop:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+--- !u!114 &114713616532807316
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -914,7 +929,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1023669767803962}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d132f7d1af7b5074289bc6cf0a7b9715, type: 3}
+  m_Script: {fileID: 11500000, guid: cfa61572098e4848b6fabc9f3389e43b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!222 &222033636544099336
