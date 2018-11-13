@@ -9,4 +9,6 @@ public class Match {
         this.firstPlayer = firstPlayer;
         this.secondPlayer = secondPlayer;
     }
+
+    public Match(){}
 }

@@ -22,4 +22,9 @@ public class PlayerLoader : MonoBehaviour {
 		Container.players[0].currency += amount;
 		RestController.Instance.Put("/players/" + Container.players[0].id + "/changecurrency/", amount);
 	}
+
+	public void ChangeEloScore(int amount)
+	{
+		Container.players[0].eloScore += amount;
+	}
 }

@@ -7,4 +7,7 @@ import java.util.Collection;
 
 public interface PlayerRepository extends CrudRepository<Player, Integer> {
     Collection<Player> findAll();
+
+    Player findFirstByUsername(String username);
+
 }
