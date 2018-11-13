@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 public class TestMessageHandler {
-
+/*
 
     Map<String, List<DelegateAction>> topics;
 
@@ -43,5 +43,5 @@ public class TestMessageHandler {
 
         void invoke(Packet packet);
 
-    }
+    }*/
 }
