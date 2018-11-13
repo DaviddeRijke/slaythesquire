@@ -35,8 +35,12 @@ namespace DefaultNamespace.Hand
             Draw(GameRules.AmountOfStartingCards);
         }
 
-        private void Shuffle()
+        private void Shuffle(int remainder)
         {
+            var cardsLeft = Stash.Reset();
+            if (cardsLeft.Count == 0) return;
+            Deck.Shuffle(cardsLeft);
+            Draw(remainder);
         }
 
         private void Discard(Card card)

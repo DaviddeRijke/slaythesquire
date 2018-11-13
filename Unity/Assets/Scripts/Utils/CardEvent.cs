@@ -11,4 +11,8 @@ namespace Utils
     public class CardViewEvent : UnityEvent<CardView3D>
     {
     }
+
+    public class IntEvent : UnityEvent<int>
+    {
+    }
 }
