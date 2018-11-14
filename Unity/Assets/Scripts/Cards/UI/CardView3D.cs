@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class CardView3D : MonoBehaviour {
 
@@ -11,20 +12,9 @@ public class CardView3D : MonoBehaviour {
     public TMPro.TextMeshPro description;
     public MeshRenderer picture;
 
-    private void Awake()
-    {
-        
-    }
-
-    // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public UnityEvent OnSelect = new UnityEvent();
+    public UnityEvent OnDeselect = new UnityEvent();
+    public UnityEvent OnDrop = new UnityEvent();
 
     public void initCard(Card c)
     {

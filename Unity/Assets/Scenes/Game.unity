@@ -4405,6 +4405,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d69a473ff50a2db40a0c240911374d34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  self: {fileID: 1798359243}
+  opponent: {fileID: 1152235103}
 --- !u!64 &599836900
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -12051,8 +12053,55 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c891f32a543e8b04a9248bc9af70f8f7, type: 3}
   m_IsPrefabAsset: 0
+<<<<<<< HEAD
 --- !u!1 &1143995313
 GameObject:
+=======
+--- !u!1 &1152235102
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1152235104}
+  - component: {fileID: 1152235103}
+  m_Layer: 0
+  m_Name: Knight opponent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1152235103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1152235102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d3a00dc70b5c7c48a9d460322b7f560, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 0
+  armor: 0
+--- !u!4 &1152235104
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1152235102}
+  m_LocalRotation: {x: -0.5000004, y: -0, z: -0, w: 0.8660252}
+  m_LocalPosition: {x: 0, y: 5.27, z: 5.09}
+  m_LocalScale: {x: 2.2531927, y: 1.0300002, z: 1.0370595}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1153944506
+Prefab:
+>>>>>>> c90e54dcf6d6e1176f3f3e9366503312f30c6e0d
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 100056, guid: ffaf641b210f5ea41952cf36f1379d66,
     type: 3}
@@ -20586,6 +20635,48 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: c891f32a543e8b04a9248bc9af70f8f7,
     type: 3}
   m_PrefabInternal: {fileID: 22937041}
+--- !u!1 &1798359242
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1798359244}
+  - component: {fileID: 1798359243}
+  m_Layer: 0
+  m_Name: Knight self
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1798359243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1798359242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d3a00dc70b5c7c48a9d460322b7f560, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 0
+  armor: 0
+--- !u!4 &1798359244
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1798359242}
+  m_LocalRotation: {x: -0.5000004, y: -0, z: -0, w: 0.8660252}
+  m_LocalPosition: {x: 0, y: 5.27, z: 5.09}
+  m_LocalScale: {x: 2.2531927, y: 1.0300002, z: 1.0370595}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1805862909
 Prefab:
   m_ObjectHideFlags: 0

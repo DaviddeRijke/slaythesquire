@@ -22,7 +22,7 @@ public class MainPhase : Phase
         if (isInit)
         {
             isInit = false;
-            GameManager._instance.CanPlay = false;
+            GameManager._instance.AcceptCardInput = false;
         }
     }
 
@@ -31,7 +31,7 @@ public class MainPhase : Phase
         if (!isInit)
         {
             isInit = true;
-            GameManager._instance.CanPlay = true;
+            GameManager._instance.AcceptCardInput = true;
             // TODO: Call Effect.OnStartTurn()
         }
     }

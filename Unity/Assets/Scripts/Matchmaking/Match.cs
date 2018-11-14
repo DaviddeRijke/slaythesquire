@@ -1,7 +1,8 @@
 using UnityEngine;
 
-namespace DefaultNamespace
+namespace Matchmaking
 {
+    //*addingcontenttopreventdeletionbygit*
     [System.Serializable]
     public class Match : MonoBehaviour
     {

@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour {
     public static GameManager _instance;
     private Turn turnManager;
     public CardHolder hand;
-    public bool CanPlay = false;
+    public bool AcceptCardInput = false;
 
     public Text PhaseText;
 
