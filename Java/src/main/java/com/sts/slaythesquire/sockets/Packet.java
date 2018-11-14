@@ -1,28 +1,21 @@
 package com.sts.slaythesquire.sockets;
 
-import java.net.Socket;
-
 public class Packet {
 
-    private Socket clientSocket;
-    private String function;
+    private String action;
     private String[] args;
 
-    public Socket getClient() {
-        return clientSocket;
-    }
-    public String getFunction() {
-        return function;
+    public String getAction() {
+        return action;
     }
     public String[] getArgs() {
         return args;
     }
 
-    public Packet(Socket clientSocket, String message) {
-        this.clientSocket = clientSocket;
+    public Packet(String message) {
 
         String[] packet = message.split("/");
-        function = packet[0].toUpperCase().trim();
+        action = packet[0].toUpperCase().trim();
         if (packet.length > 1)
         args = new String[packet.length - 1];
         for (int i = 0; i < packet.length - 1; i++) {
@@ -31,7 +24,7 @@ public class Packet {
     }
 
     public String getMessage() {
-        StringBuilder message = new StringBuilder(function);
+        StringBuilder message = new StringBuilder(action);
         if (args != null)
             for (String arg : args) {
                 message.append("/").append(arg);

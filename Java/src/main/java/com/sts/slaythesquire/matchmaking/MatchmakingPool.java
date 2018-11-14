@@ -31,8 +31,19 @@ public class MatchmakingPool {
         playerMonitor = new ReadWriteMonitor();
         matchMonitor = new ReadWriteMonitor();
 
-        timer.schedule(new MatchmakingTimerTask(this), timerStartDelay, timerPeriod);
+        //timer.schedule(new MatchmakingTimerTask(this), timerStartDelay, timerPeriod);
 
+    }
+
+    public synchronized void initializePlayerForMatchmaking(Player player){
+        player.getMessageHandler().subscribe("JOINMATCHMAKING", p -> {
+            try {
+                addPlayerToPool(player);
+                player.sendPacket(new Packet("JOINEDMATCHMAKING"));
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     public void createMatches() throws InterruptedException {
@@ -70,7 +81,7 @@ public class MatchmakingPool {
         playerMonitor.exitWriter();
 
         System.out.println("Added player to pool: " + player.getUsername());
-        MessageHandler.sendPacket(new Packet(player.getSocket(), "OKMATCHMAKING"));
+        //MessageHandler.sendPacket(new Packet(player.getSocket(), "OKMATCHMAKING"));
     }
 
     public void removeMatch(Match match) throws InterruptedException {

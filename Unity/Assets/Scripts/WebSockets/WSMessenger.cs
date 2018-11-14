@@ -66,7 +66,6 @@ public class WSMessenger : MonoBehaviour {
         clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
         clientSocket.Connect(serverAddress);
-        SendPacket(new Packet("CONNECT"));
 
         listenerThread = new Thread(new ThreadStart(ListenSocket));
         listenerThread.IsBackground = true;
@@ -107,24 +106,33 @@ public class WSMessenger : MonoBehaviour {
 
     public void HandleMessage(Packet packet)
     {
-        if (packet.Function.Equals("MOVE"))
+        /*if (packet.Function.Equals("MOVE"))
         {
             float moveAmount = float.Parse(packet.Args[0]);
             DoOnMainThread.ExecuteOnMainThread.Enqueue(() => { StartCoroutine(MoveCube(moveAmount)); });
         }
-        else if (packet.Function.Equals("OKCONNECT"))
+        else */if(packet.Function.Equals("READYTOCONNECT"))
+        {
+            Debug.Log("Ready to connect.");
+        }
+        else if (packet.Function.Equals("CONNECTED"))
         {
             IsConnected = true;
+            Debug.Log("Connected with player id");
         }
-        else if (packet.Function.Equals("OKMATCHMAKING"))
+        else if (packet.Function.Equals("JOINEDMATCHMAKING"))
         {
             DoOnMainThread.ExecuteOnMainThread.Enqueue(() => { ConfirmMatchmaking(); });
+        } else if (packet.Function.Equals("MESSAGE"))
+        {
+            Debug.Log("Recieved message: " + packet.Args[0]);
         }
     }
 
     private void ConfirmMatchmaking()
     {
         Matchmaking.JoinedPool = true;
+        Debug.Log("Joined matchmaking");
     }
 
     private IEnumerator MoveCube(float amount)
@@ -147,6 +155,14 @@ public class WSMessenger : MonoBehaviour {
 
     void OnApplicationQuit()
     {
-        DisconnectFromServer(true);
+        if (clientSocket == null)
+        {
+            return;
+        }
+
+        if (clientSocket.Connected)
+        {
+            DisconnectFromServer(true);
+        }
     }
 }

@@ -1,10 +1,5 @@
 package com.sts.slaythesquire.sockets;
 
-
-import com.sts.slaythesquire.models.Player;
-import com.sts.slaythesquire.repos.PlayerRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.Socket;
@@ -12,67 +7,72 @@ import java.util.*;
 
 public class MessageHandler {
 
-    private ClientManager clientManager;
+    private Socket socket;
 
-    private static int dirtyIdHack = 1;
+    private Map<String, List<DelegateAction>> topics;
 
-    private PlayerRepository playerRepository;
+    public MessageHandler(Socket socket) {
+        this.socket = socket;
 
-    //Map<String, List<DelegateAction>> topics;
-
-    public MessageHandler(PlayerRepository playerRepository) {
-        this.playerRepository = playerRepository;
-        clientManager = new ClientManager();
-/*
         topics = new LinkedHashMap<>();
-
+        /*
         subscibe("CONNECT", packet -> {
-            System.out.println(packet.getFunction());
+            System.out.println(packet.getAction());
         });
-*/
+        */
     }
-/*
-    public void subscibe(String topic, DelegateAction action){
+
+    public void subscribe(String topic, DelegateAction action){
         if (!topics.containsKey(topic)){
             topics.put(topic, new LinkedList<>());
         }
         topics.get(topic).add(action);
     }
-*/
+
+    public void unsubscribe(String topic){
+        //how?
+    }
+
     public void handleMessage(Packet packet) {
-/*
-        if (topics.containsKey(packet.getFunction())){
-            for (DelegateAction action : topics.get(packet.getFunction())){
+        System.out.println("Handling packet...");
+        if (topics.containsKey(packet.getAction())){
+            for (DelegateAction action : topics.get(packet.getAction())){
+                System.out.println("Invoking...");
                 action.invoke(packet);
             }
+        }else {
+            //does not contain key
+            System.out.println("Nothing subscribed to: " + packet.getAction());
         }
-*/
-        if (packet.getFunction().equals("HEARTBEAT")) {
-            clientManager.keepAlive(packet.getClient());
+        /*
+        if (packet.getAction().equals("HEARTBEAT")) {
+            //clientManager.keepAlive(packet.getClient());
         }
-        else if (packet.getFunction().equals("CONNECT")) {
+        else if (packet.getAction().equals("CONNECT")) {
             connect(packet);
         }
-        else if (packet.getFunction().equals("DISCONNECT")) {
+        else if (packet.getAction().equals("DISCONNECT")) {
             disconnect(packet.getClient());
         }
-        else if (packet.getFunction().equals("TESTMOVE")) {
-            testMove(packet);
+        else if (packet.getAction().equals("TESTMOVE")) {
+            //testMove(packet);
         }
-        else if (packet.getFunction().equals("STARTMATCHMAKING")){
+        else if (packet.getAction().equals("STARTMATCHMAKING")){
 
-
-            System.out.println("handling: " + packet.getMessage());
-            joinMatchmaking(packet);
+            //joinMatchmaking(packet);
 
         }
         else {
             Packet p = new Packet(packet.getClient(), "ERROR/No valid function");
             sendPacket(p);
-        }
+        }*/
     }
 
-    private void joinMatchmaking(Packet packet){
+    public Socket getSocket() {
+        return socket;
+    }
+
+    /*private void joinMatchmaking(Packet packet){
         int id = -1;
 
         try{
@@ -81,15 +81,6 @@ public class MessageHandler {
         }catch(NumberFormatException e){
             e.printStackTrace();
         }
-
-
-        /*
-        id = dirtyIdHack;
-        dirtyIdHack++;
-        if (dirtyIdHack > 2){
-            dirtyIdHack = 1;
-        }*/
-
 
         if(id == -1){
             System.out.println("id is wrong");
@@ -104,14 +95,15 @@ public class MessageHandler {
             return;
         }
 
-        p.setSocket(packet.getClient());
+        //p.setSocket(packet.getClient());
 
         System.out.println("adding " + p.getUsername() + " to matchmaking pool.");
         clientManager.addPlayerToMatchmaking(p);
 
 
-    }
+    }*/
 
+    /*
     public void disconnect(Socket socket) {
         try {
             clientManager.removeClient(socket);
@@ -119,21 +111,23 @@ public class MessageHandler {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
+    /*
     private void connect(Packet packet) {
         clientManager.addClient(packet.getClient());
 
         Packet response = new Packet(packet.getClient(), "OkConnect/Connected");
         sendPacket(response);
-    }
+    }*/
 
-    public static void sendPacket(Packet packet) {
+    public void sendPacket(Packet packet) {
         try {
-            Socket clientSocket = packet.getClient();
-            OutputStream os = clientSocket.getOutputStream();
+            OutputStream os = socket.getOutputStream();
             String toSend = packet.getMessage();
             byte[] toSendBytes = toSend.getBytes();
+
+            System.out.println("Sending message: " + toSend);
 
             os.write(toSendBytes);
         } catch (IOException e) {
@@ -141,7 +135,7 @@ public class MessageHandler {
         }
     }
 
-    private void testMove(final Packet packet) {
+    /*private void testMove(final Packet packet) {
         Timer timer = new Timer();
         TimerTask timerTask = new TimerTask() {
             @Override
@@ -152,12 +146,6 @@ public class MessageHandler {
         };
 
         timer.schedule(timerTask,0, 200);
-    }
-
-    private interface DelegateAction{
-
-        void invoke(Packet packet);
-
-    }
+    }*/
 
 }

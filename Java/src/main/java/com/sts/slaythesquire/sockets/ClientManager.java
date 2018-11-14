@@ -1,8 +1,8 @@
 package com.sts.slaythesquire.sockets;
 
 import com.sts.slaythesquire.matchmaking.MatchmakingPool;
-import com.sts.slaythesquire.matchmaking.matchmakers.RandomMatchmaker;
 import com.sts.slaythesquire.models.Player;
+import com.sts.slaythesquire.repos.PlayerRepository;
 
 import java.net.Socket;
 import java.util.ArrayList;
@@ -13,22 +13,55 @@ import java.util.TimerTask;
 public class ClientManager {
 
     private List<Socket> clients = new ArrayList<>();
-    private List<Socket> connectedSockets = new ArrayList<>();
 
     private MatchmakingPool matchmakingPool;
+
+    private PlayerRepository playerRepository;
 
     public List<Socket> getClients() {
         return clients;
     }
-    public List<Socket> getConnectedSockets() {
-        return connectedSockets;
-    }
 
-    public ClientManager() {
+    public ClientManager(PlayerRepository playerRepository, MatchmakingPool matchmakingPool) {
         //startHeartbeatTimerTask(2000);
-        matchmakingPool = new MatchmakingPool(new RandomMatchmaker(), 10000, 20000);
+        this.playerRepository = playerRepository;
+        this.matchmakingPool = matchmakingPool;
     }
 
+    public synchronized void addNewMessageHandler(MessageHandler messageHandler){
+
+        System.out.println("subscribing to CONNECT");
+
+        messageHandler.subscribe("CONNECT", p ->{
+            System.out.println("Handling connect packet...");
+            Player player = getPlayerFromPacket(p);
+            if (player == null){
+                System.out.println("Player not found... :(");
+                return;
+            }
+            player.setMessageHandler(messageHandler);
+            matchmakingPool.initializePlayerForMatchmaking(player);
+
+            messageHandler.sendPacket(new Packet("CONNECTED"));
+        });
+
+        System.out.println("sending...");
+        messageHandler.sendPacket(new Packet("READYTOCONNECT"));
+    }
+
+    private synchronized Player getPlayerFromPacket(Packet packet){
+        int id;
+        try{
+            id = Integer.parseInt(packet.getArgs()[0].trim());
+        } catch (NumberFormatException e){
+            System.out.println("This is not a number... : " + packet.getArgs()[0]);
+            return null;
+        }
+
+        return playerRepository.findById(id).orElse(null);
+    }
+
+    /*
     public boolean addClient(Socket client) {
         if (clients.contains(client)) {
             return false;
@@ -44,7 +77,7 @@ public class ClientManager {
         }
 
         clients.remove(client);
-        connectedSockets.remove(client);
+        //connectedSockets.remove(client);
         return true;
     }
 
@@ -72,7 +105,7 @@ public class ClientManager {
             e.printStackTrace();
         }
     }
-
+*/
     private void startHeartbeatTimerTask(int interval) {
         Timer timer = new Timer();
         TimerTask heartbeatTimerTask = new HeartbeatTimerTask(this);

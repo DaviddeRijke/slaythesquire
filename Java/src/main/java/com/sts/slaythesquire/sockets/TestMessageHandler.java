@@ -24,8 +24,8 @@ public class TestMessageHandler {
 
     public void handleMessage(Packet packet) {
 
-        if (topics.containsKey(packet.getFunction())){
-            for (DelegateAction action : topics.get(packet.getFunction())){
+        if (topics.containsKey(packet.getAction())){
+            for (DelegateAction action : topics.get(packet.getAction())){
                 action.invoke(packet);
             }
         }

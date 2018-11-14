@@ -4,6 +4,7 @@ import com.sts.slaythesquire.models.Player;
 import com.sts.slaythesquire.repos.CardRepository;
 import com.sts.slaythesquire.repos.DeckRepository;
 import com.sts.slaythesquire.repos.PlayerRepository;
+import com.sts.slaythesquire.sockets.Packet;
 import com.sts.slaythesquire.utils.serializers.IntegerWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
@@ -40,6 +41,20 @@ public class PlayerController {
         ((ArrayList<Player>) players).add(playerRepository.findById(id).orElse(null));
         if (((ArrayList<Player>) players).get(0) == null) throw new NullPointerException("The player is not allowed to be null.");
         return players;
+    }
+
+    @RequestMapping(path= "/message/{userId}/{message}", method = RequestMethod.GET)
+    public @ResponseBody
+    boolean messagePlayer(@PathVariable(value = "userId") int id, @PathVariable(value = "message") String message){
+
+        Player p = playerRepository.findById(id).orElse(null);
+        if (p == null){
+            return false;
+        }
+
+        p.sendPacket(new Packet("MESSAGE/" + message));
+
+        return true;
     }
 
     @PostMapping(path= "/add")

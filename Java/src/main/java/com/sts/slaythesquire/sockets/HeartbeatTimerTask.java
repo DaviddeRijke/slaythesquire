@@ -14,7 +14,7 @@ public class HeartbeatTimerTask extends TimerTask {
     }
 
     @Override
-    public void run() {
+    public void run() {/*
         List<Socket> socketsToRemove = new ArrayList<>();
 
         List<Socket> sockets = manager.getClients();
@@ -28,6 +28,6 @@ public class HeartbeatTimerTask extends TimerTask {
             manager.removeClient(s);
         }
 
-        manager.getConnectedSockets().clear();
+        manager.getConnectedSockets().clear();*/
     }
 }

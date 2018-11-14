@@ -30,10 +30,16 @@ public class MatchmakingManager : MonoBehaviour {
         StartCoroutine(ConnectRoutine());
     }
 
-    public void StartMatchmaking()
+    public void ConnectWithPlayerID()
     {
         Id = IdInput.text;
-        SocketMessenger.SendPacket(new Packet("STARTMATCHMAKING/"+ 1));
+        SocketMessenger.SendPacket(new Packet("CONNECT/" + Id));
+    }
+
+
+    public void StartMatchmaking()
+    {
+        SocketMessenger.SendPacket(new Packet("JOINMATCHMAKING"));
     }
 
     IEnumerator ConnectRoutine()

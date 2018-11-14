@@ -1,6 +1,9 @@
 package com.sts.slaythesquire.models;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.sts.slaythesquire.matchmaking.MatchmakingPool;
+import com.sts.slaythesquire.sockets.MessageHandler;
+import com.sts.slaythesquire.sockets.Packet;
 import com.sts.slaythesquire.utils.serializers.PlayerDeckSerializer;
 
 import javax.persistence.*;
@@ -15,17 +18,25 @@ public class Player {
     private String username;
 
     @Transient
-    private Match match;
+    private transient Match match;
 
     @Transient
-    private Socket socket;
+    private transient MessageHandler messageHandler;
 
-    public Socket getSocket() {
-        return socket;
+    public MessageHandler getMessageHandler() {
+        return messageHandler;
     }
 
-    public void setSocket(Socket socket) {
-        this.socket = socket;
+    public void setMessageHandler(MessageHandler messageHandler) {
+        this.messageHandler = messageHandler;
+    }
+
+    public void sendPacket(Packet packet){
+        if (messageHandler != null){
+            messageHandler.sendPacket(packet);
+        } else{
+            System.out.println("no message handler");
+        }
     }
 
     public int getId(){

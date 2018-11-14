@@ -1,8 +1,11 @@
 package com.sts.slaythesquire;
 
 import com.sts.slaythesquire.controllers.PlayerController;
+import com.sts.slaythesquire.matchmaking.MatchmakingPool;
+import com.sts.slaythesquire.matchmaking.matchmakers.RandomMatchmaker;
+import com.sts.slaythesquire.sockets.ClientManager;
 import com.sts.slaythesquire.sockets.MessageHandler;
-import com.sts.slaythesquire.sockets.SocketListener;
+import com.sts.slaythesquire.sockets.ServerSocketListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -28,7 +31,9 @@ public class Application implements CommandLineRunner {
     @Override
     public void run(String... args) {
         try {
-            pool.submit(new SocketListener(new ServerSocket(4343, 10), new MessageHandler(playerController.getPlayerRepository())));
+            //pool.submit(new ServerSocketListener(new ServerSocket(4343,10), playerController.getPlayerRepository()));
+
+            pool.submit(new ServerSocketListener(new ServerSocket(4343,10), new ClientManager(playerController.getPlayerRepository(), new MatchmakingPool(new RandomMatchmaker(), 10000, 20000))));
         } catch (IOException e) {
             e.printStackTrace();
         }
