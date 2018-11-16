@@ -30,12 +30,17 @@ public class Application implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
+        MatchmakingPool matchmakingPool = new MatchmakingPool(new RandomMatchmaker(), 10000, 20000);
+
         try {
             //pool.submit(new ServerSocketListener(new ServerSocket(4343,10), playerController.getPlayerRepository()));
 
-            pool.submit(new ServerSocketListener(new ServerSocket(4343,10), new ClientManager(playerController.getPlayerRepository(), new MatchmakingPool(new RandomMatchmaker(), 10000, 20000))));
+
+            pool.submit(new ServerSocketListener(new ServerSocket(4343,10), new ClientManager(playerController.getPlayerRepository(), matchmakingPool)));
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        //playerController.setMatchmakingPool(matchmakingPool);
     }
 }

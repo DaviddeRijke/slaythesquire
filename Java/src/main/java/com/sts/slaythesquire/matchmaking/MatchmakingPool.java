@@ -35,6 +35,15 @@ public class MatchmakingPool {
 
     }
 
+    /*public Player getPlayerById(int id){
+        for (Player p : unmatchedPlayers){
+            if (p.getId() == id){
+                return p;
+            }
+        }
+        return null;
+    }*/
+
     public synchronized void initializePlayerForMatchmaking(Player player){
         player.getMessageHandler().subscribe("JOINMATCHMAKING", p -> {
             try {

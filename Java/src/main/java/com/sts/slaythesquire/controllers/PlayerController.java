@@ -1,5 +1,6 @@
 package com.sts.slaythesquire.controllers;
 
+import com.sts.slaythesquire.matchmaking.MatchmakingPool;
 import com.sts.slaythesquire.models.Player;
 import com.sts.slaythesquire.repos.CardRepository;
 import com.sts.slaythesquire.repos.DeckRepository;
@@ -23,6 +24,12 @@ public class PlayerController {
         return playerRepository;
     }
 
+    //private MatchmakingPool matchmakingPool;
+
+    //public void setMatchmakingPool(MatchmakingPool matchmakingPool){
+        //this.matchmakingPool = matchmakingPool;
+    //}
+
     @Autowired
     public PlayerController(final PlayerRepository playerRepository){
         this.playerRepository = playerRepository;
@@ -43,11 +50,11 @@ public class PlayerController {
         return players;
     }
 
-    @RequestMapping(path= "/message/{userId}/{message}", method = RequestMethod.GET)
+    /*@RequestMapping(path= "/message/{userId}/{message}", method = RequestMethod.GET)
     public @ResponseBody
     boolean messagePlayer(@PathVariable(value = "userId") int id, @PathVariable(value = "message") String message){
 
-        Player p = playerRepository.findById(id).orElse(null);
+        Player p = matchmakingPool.getPlayerById(id);
         if (p == null){
             return false;
         }
@@ -55,7 +62,7 @@ public class PlayerController {
         p.sendPacket(new Packet("MESSAGE/" + message));
 
         return true;
-    }
+    }*/
 
     @PostMapping(path= "/add")
     public @ResponseBody

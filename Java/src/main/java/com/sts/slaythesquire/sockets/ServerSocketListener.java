@@ -53,8 +53,6 @@ public class ServerSocketListener implements Runnable {
         String clientIp = clientSocket.getInetAddress().getHostAddress();
         System.out.println("Connection from: " + clientIp + " Starting Client Socket Listener.");
 
-        //TODO: control on what thread this runs, don't use .run().... :'(
-
         MessageHandler mh = new MessageHandler(clientSocket);
         Runnable listener  =new ClientSocketListener(mh);
 
