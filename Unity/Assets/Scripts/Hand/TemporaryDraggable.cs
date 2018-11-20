@@ -2,6 +2,9 @@ using UnityEngine;
 
 namespace DefaultNamespace.Hand
 {
+    /// <summary>
+    /// Not much changed from the original draggable, but because the old draggable was still being used, I did it in this class.
+    /// </summary>
     [RequireComponent(typeof(CardView3D))]
     public class TemporaryDraggable : MonoBehaviour
     {
@@ -18,6 +21,11 @@ namespace DefaultNamespace.Hand
             cv3d = GetComponent<CardView3D>();
         }
 
+        /// <summary>
+        /// Please keep in mind that this class should not be the one limiting which cards can or cannot be dragged.
+        /// When checking mana/energy for a card, remember that it should still be draggable to discard.
+        /// Instead, implement this logic at the corresponding dropzones or their associated scripts.
+        /// </summary>
         void OnMouseDown()
         {
             //if acceptinput
