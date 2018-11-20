@@ -3,55 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(MessageHandler))]
 public class MatchmakingManager : MonoBehaviour {
 
-    public WSMessenger SocketMessenger;
-
-    public bool Connected;
+    public MessageHandler handler;
 
     public bool JoinedPool;
-
-    public string Id;
-
-    public InputField IdInput;
-
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+    
+	void Awake () {
+        handler = GetComponent<MessageHandler>();
 	}
 
     public void ConnectToServer()
     {
-        StartCoroutine(ConnectRoutine());
+        handler.Connect();
     }
-
-    public void ConnectWithPlayerID()
-    {
-        Id = IdInput.text;
-        SocketMessenger.SendPacket(new Packet("CONNECT/" + Id));
-    }
-
 
     public void StartMatchmaking()
     {
-        SocketMessenger.SendPacket(new Packet("JOINMATCHMAKING"));
-    }
+        handler.Subscribe("JOINEDMATCHMAKING", p => {
+            Debug.Log("JOINEDMATCHMAKING");
+            JoinedPool = true;
+        });
 
-    IEnumerator ConnectRoutine()
-    {
-        SocketMessenger.Connect();
-
-        while (!SocketMessenger.IsConnected)
-        {
-            yield return null;
-        }
-
-        Connected = true;
-
+        handler.SendPacket(new Packet("JOINMATCHMAKING"));
     }
 }

@@ -1,5 +1,6 @@
 package com.sts.slaythesquire.sockets;
 
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.Socket;
@@ -129,6 +130,14 @@ public class MessageHandler {
 
             System.out.println("Sending message: " + toSend);
 
+//            int toSendLength = toSendBytes.length;
+//            byte[] toSendLenBytes = new byte[4];
+//            toSendLenBytes[0] = (byte)(toSendLength & 0xff);
+//            toSendLenBytes[1] = (byte)((toSendLength >> 8) & 0xff);
+//            toSendLenBytes[2] = (byte)((toSendLength >> 16) & 0xff);
+//            toSendLenBytes[3] = (byte)((toSendLength >> 24) & 0xff);
+//
+//            os.write(toSendLenBytes);
             os.write(toSendBytes);
         } catch (IOException e) {
             e.printStackTrace();

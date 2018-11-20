@@ -5,6 +5,7 @@ using UnityEngine;
 using System;
 using System.Collections;
 
+// REDACTED
 public class WSMessenger : MonoBehaviour {
 
     public string ServerIp = "127.0.0.1";

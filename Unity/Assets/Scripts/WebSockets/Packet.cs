@@ -46,6 +46,6 @@ public class Packet {
             {
                 args[i] = packet[i + 1];
             }
-        }          
+        }
     }
 }
