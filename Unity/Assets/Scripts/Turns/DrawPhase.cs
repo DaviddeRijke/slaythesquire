@@ -6,6 +6,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "DrawPhase", menuName = "Phases/DrawPhase")]
 public class DrawPhase : Phase
 {
+    private int round = 0;
+
     public override bool isComplete()
     {
         if (forceExit)
@@ -30,6 +32,10 @@ public class DrawPhase : Phase
         if (!isInit)
         {
             isInit = true;
+
+            ++round;
+            Splash.instance.SetRoundNumber(round);
+            Splash.instance.StartSplash();
 
             GameManager._instance.DrawCards();
 
