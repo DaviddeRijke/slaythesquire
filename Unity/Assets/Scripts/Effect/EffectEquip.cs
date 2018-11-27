@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Resolve;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "EffectEquip", menuName = "Effects/Equip")]
-public class EffectEquip : Effect {
+public class EffectEquip : Effect, INoInteraction {
 
 	public Equipment equipment;
 

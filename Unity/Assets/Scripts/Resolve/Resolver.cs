@@ -11,6 +11,9 @@ namespace DefaultNamespace
         private List<Card> _other;
         private List<Effect> _effects;
         
+        public Knight OwnKnight;
+        public Knight OtherKnight;
+        
 
         public void Resolve()
         {
@@ -26,19 +29,7 @@ namespace DefaultNamespace
 
         private void ResolveCards(Card ownCard, Card otherCard)
         {
-            Knight knight = null; //todo
-            foreach (var effect in ownCard.effects)
-            {
-                effect.Activate(knight);
-            }
-
-            foreach (var effect in otherCard.effects)
-            {
-                effect.Activate(knight);
-            }
-
-            ownCard.effects.ToList().ToSortedQueue(otherCard.effects.ToList());
-
+            var forAnimator = ownCard.effects.ToList().ToSortedQueue(otherCard.effects.ToList(), OwnKnight, OtherKnight);          
         }
 
 
