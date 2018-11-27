@@ -7,8 +7,8 @@ public class EffectEquip : Effect {
 
 	public Equipment equipment;
 
-	public override void Activate(Knight self, Knight opponent)
+	public override void Activate(Knight target)
 	{
-		self.Equip(equipment);
+		target.Equip(equipment);
 	}
 }

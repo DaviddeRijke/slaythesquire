@@ -18,11 +18,11 @@ public class Card {
     public UnityEvent OnEnable;
     public UnityEvent OnDisable;
 
-    public void Activate(Knight self, Knight opponent)
+    public void Activate(Knight target)
     {
         foreach(Effect effect in effects)
         {
-            effect.Activate(self, opponent);
+            effect.Activate(target);
         }
     }
 

@@ -7,8 +7,8 @@ public class EffectHeal : Effect {
 
 	public int amount;
 
-	public override void Activate(Knight self, Knight opponent)
+	public override void Activate(Knight target)
 	{
-		self.health += amount;
+		target.health += amount;
 	}
 }
