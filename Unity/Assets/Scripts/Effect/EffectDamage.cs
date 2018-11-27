@@ -9,6 +9,11 @@ public class EffectDamage : Effect {
 
 	public override void Activate(Knight target)
 	{
-		target.health -= amount;
+		int totalArmor = 0;
+		foreach (Equipment equipment in target.equipped)
+		{
+			totalArmor += equipment.armor;
+		}
+		target.health -= (amount / 100) * (100 - totalArmor);
 	}
 }
