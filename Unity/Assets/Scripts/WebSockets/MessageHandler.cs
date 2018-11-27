@@ -18,12 +18,14 @@ public class MessageHandler : MonoBehaviour {
     private Socket socket;
     //private SocketListener listener;
 
+    public int PlayerID = 1;
+
     private Dictionary<string, List<Action<Packet>>> topics;
 
     void Awake()
     {
         // TODO: Get player from somewhere else
-        player = new Player() { id = 1 };
+        player = new Player() { id = PlayerID };
         topics = new Dictionary<string, List<Action<Packet>>>();
     }
 
