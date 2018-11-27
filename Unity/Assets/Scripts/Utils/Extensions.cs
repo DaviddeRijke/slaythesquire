@@ -60,19 +60,40 @@ public static class Extensions
         for (int i = 0; i < Mathf.Max(bo1.Count, bo2.Count); i++)
         {
             if (i < bo1.Count)
-            {
-                queue.Enqueue(bo1[i]);
+            {               
                 own.Remove(bo1[i]);
-                if(block2 != null) queue.Enqueue(block2);
+                if (block2 != null)
+                {
+                    queue.Enqueue(block2);
+                    //bo1[i]. set block
+                }
+                queue.Enqueue(bo1[i]);
             }
 
             if (i < bo2.Count)
-            {
-                queue.Enqueue(bo2[i]);
+            {               
                 own.Remove(bo2[i]);
-                if(block1 != null) queue.Enqueue(block1);
+                if (block1 != null)
+                {
+                    queue.Enqueue(block1);
+                    //bo2[i]. set block
+                }
+                queue.Enqueue(bo2[i]);
             }
-        }    
+        }
+
+        if (bo1.Count == 0 && block2 != null)
+        {
+            queue.Enqueue(block2);
+            bo2.Remove(block2);
+        }
+
+        if (bo2.Count == 0 && block1 != null)
+        {
+            queue.Enqueue(block1);
+            bo1.Remove(block1);
+        }
+        
         return queue;
     }
 
