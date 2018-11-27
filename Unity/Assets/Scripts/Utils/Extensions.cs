@@ -34,7 +34,7 @@ public static class Extensions
         return queue;
     }
 
-    public static Queue<Effect> ToSortedQueue(this List<Effect> own, List<Effect> other)
+    public static Queue<Effect> ToSortedQueue(this List<Effect> own, List<Effect> other, Knight p1, Knight p2)
     {
         var queue = new Queue<Effect>();
         var no1 = own.SortOnInteraction();
@@ -44,11 +44,13 @@ public static class Extensions
             if (i < no1.Count)
             {
                 queue.Enqueue(no1[i]);
+                no2[i].Activate(p1);
                 own.Remove(no1[i]);
             }
             if (i < no2.Count)
             {
                 queue.Enqueue(no2[i]);
+                no2[i].Activate(p2);
                 own.Remove(no2[i]);
             }
         }
@@ -59,35 +61,43 @@ public static class Extensions
         var block2 = other.GetBlock();
         for (int i = 0; i < Mathf.Max(bo1.Count, bo2.Count); i++)
         {
+            //Attack wordt uitgevoerd
             if (i < bo1.Count)
             {               
                 own.Remove(bo1[i]);
+                //Attack wordt geblockt
                 if (block2 != null)
                 {
                     queue.Enqueue(block2);
-                    //bo1[i]. set block
+                    //(blockable)bo1[i]. set block
                 }
                 queue.Enqueue(bo1[i]);
+                bo1[i].Activate(p2);
             }
 
+            //Attack wordt uitgevoerd
             if (i < bo2.Count)
             {               
                 own.Remove(bo2[i]);
+                //Attack wordt geblockt
                 if (block1 != null)
                 {
                     queue.Enqueue(block1);
-                    //bo2[i]. set block
+                    //(blockable)bo2[i]. set block
                 }
                 queue.Enqueue(bo2[i]);
+                bo2[i].Activate(p1);
             }
         }
 
+        //Alleen animations, er wordt geen attack geblockt
         if (bo1.Count == 0 && block2 != null)
         {
             queue.Enqueue(block2);
             bo2.Remove(block2);
         }
 
+        //Alleen animations, er wordt geen attack geblockt
         if (bo2.Count == 0 && block1 != null)
         {
             queue.Enqueue(block1);

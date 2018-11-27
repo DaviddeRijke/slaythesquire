@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Resolve;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "EffectHeal", menuName = "Effects/Heal")]
-public class EffectHeal : Effect {
+public class EffectHeal : Effect, INoInteraction {
 
 	public int amount;
 
