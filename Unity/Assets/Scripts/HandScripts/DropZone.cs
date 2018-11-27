@@ -9,9 +9,6 @@ public class DropZone : MonoBehaviour
 {
     public CardEvent OnDrop = new CardEvent();
 
-	public Knight self;
-	public Knight opponent;
-
     /// <summary>
     /// This method is invoked by the (currently Temporary)Draggable script, whenever a draggable objects is dropped
     /// within the collider of a DropZone. The View3D is passed with the invoke. This way, this script has to know nothing,

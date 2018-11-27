@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1358759612}
-  m_IndirectSpecularColor: {r: 0.270745, g: 0.27964008, b: 0.2855513, a: 1}
+  m_IndirectSpecularColor: {r: 0.27076757, g: 0.2796784, b: 0.28553858, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -788,6 +788,7 @@ GameObject:
   - component: {fileID: 148022293}
   - component: {fileID: 148022292}
   - component: {fileID: 148022291}
+  - component: {fileID: 148022294}
   m_Layer: 0
   m_Name: Player2
   m_TagString: Untagged
@@ -848,6 +849,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 270, z: 0}
+--- !u!114 &148022294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 148022290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d3a00dc70b5c7c48a9d460322b7f560, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+  equipped: []
 --- !u!1 &152874706
 GameObject:
   m_ObjectHideFlags: 0
@@ -4195,8 +4209,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d69a473ff50a2db40a0c240911374d34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  self: {fileID: 0}
-  opponent: {fileID: 0}
 --- !u!64 &599836900
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -5343,8 +5355,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d69a473ff50a2db40a0c240911374d34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  self: {fileID: 0}
-  opponent: {fileID: 0}
 --- !u!64 &785936200
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -22329,6 +22339,7 @@ GameObject:
   - component: {fileID: 1962762456}
   - component: {fileID: 1962762455}
   - component: {fileID: 1962762457}
+  - component: {fileID: 1962762458}
   m_Layer: 0
   m_Name: Player1
   m_TagString: Untagged
@@ -22389,6 +22400,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ani: {fileID: 1962762455}
   key: 97
+--- !u!114 &1962762458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1962762454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d3a00dc70b5c7c48a9d460322b7f560, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+  equipped: []
 --- !u!1 &1974066893
 GameObject:
   m_ObjectHideFlags: 0
