@@ -2,10 +2,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //Namespace cannot be fixed, because there is a class Hand in folder Hand at the moment (my bad, should rename folder)
-namespace DefaultNamespace.Hand
+namespace HandScripts
 {
-    [RequireComponent(typeof(TemporaryHand))]
-    public class TemporaryHandUI : MonoBehaviour
+    [RequireComponent(typeof(Hand))]
+    public class HandUI : MonoBehaviour
     {
         //The prefab for the View3D, that can be instantiated for any card drawn from the deck
         public GameObject View3DPrefab;
@@ -14,7 +14,7 @@ namespace DefaultNamespace.Hand
         public Transform Container;
         
         //Links to the hand where this is the UI from
-        private TemporaryHand hand;
+        private Hand hand;
         
         //Links to the UI of the cards in hand.
         //'Card' is accessible here, but should not be used, as this is an UI class
@@ -30,7 +30,7 @@ namespace DefaultNamespace.Hand
         void Awake()
         {
             cardsInHand = new List<CardView3D>();
-            hand = GetComponent<TemporaryHand>();
+            hand = GetComponent<Hand>();
         }
 
         void Start()

@@ -6,13 +6,13 @@ namespace Game
     /// <summary>
     /// There were too many not-useful-for-me functions in the GameManager, so I needed a custom one for a moment.
     /// </summary>
-    public class TemporaryGameManager : MonoBehaviour
+    public class GameManager : MonoBehaviour
     {
         public Player player;
         public IngameDeck deck;
 
         public bool AcceptCardInput;
-        public static TemporaryGameManager _instance;
+        public static GameManager _instance;
         private Turn turnManager;
         public Text PhaseText;
 

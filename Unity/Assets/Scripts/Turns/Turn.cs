@@ -11,7 +11,7 @@ public class Turn : MonoBehaviour {
 
     void Start()
     {
-        TemporaryGameManager._instance.SetPhaseText(phases[index].name);
+        GameManager._instance.SetPhaseText(phases[index].name);
     }
 
     public bool Execute()
@@ -34,7 +34,7 @@ public class Turn : MonoBehaviour {
                 completed = true;
             }
 
-            TemporaryGameManager._instance.SetPhaseText(phases[index].name);
+            GameManager._instance.SetPhaseText(phases[index].name);
         }
 
         return completed;

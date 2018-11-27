@@ -1,12 +1,12 @@
 using System.Collections.Generic;
-using System.Linq;
+using DefaultNamespace;
+using DefaultNamespace.Hand;
 using UnityEngine;
-using UnityEngine.Events;
 using Utils;
 
-namespace DefaultNamespace.Hand
+namespace HandScripts
 {
-    public class TemporaryHand : MonoBehaviour
+    public class Hand : MonoBehaviour
     {
         //This is not a list to the gameobjects, but to the script instances! Thus this are the objects you want to work with, if it's not for UI.
         public List<Card> CardsInHand;
