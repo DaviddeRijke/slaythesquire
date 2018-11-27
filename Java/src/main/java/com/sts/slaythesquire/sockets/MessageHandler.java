@@ -16,11 +16,7 @@ public class MessageHandler {
         this.socket = socket;
 
         topics = new LinkedHashMap<>();
-        /*
-        subscibe("CONNECT", packet -> {
-            System.out.println(packet.getAction());
-        });
-        */
+
     }
 
     public void subscribe(String topic, DelegateAction action){
@@ -31,7 +27,7 @@ public class MessageHandler {
     }
 
     public void unsubscribe(String topic){
-        //how?
+        //TODO:how?
     }
 
     public void handleMessage(Packet packet) {
@@ -45,82 +41,11 @@ public class MessageHandler {
             //does not contain key
             System.out.println("Nothing subscribed to: " + packet.getAction());
         }
-        /*
-        if (packet.getAction().equals("HEARTBEAT")) {
-            //clientManager.keepAlive(packet.getClient());
-        }
-        else if (packet.getAction().equals("CONNECT")) {
-            connect(packet);
-        }
-        else if (packet.getAction().equals("DISCONNECT")) {
-            disconnect(packet.getClient());
-        }
-        else if (packet.getAction().equals("TESTMOVE")) {
-            //testMove(packet);
-        }
-        else if (packet.getAction().equals("STARTMATCHMAKING")){
-
-            //joinMatchmaking(packet);
-
-        }
-        else {
-            Packet p = new Packet(packet.getClient(), "ERROR/No valid function");
-            sendPacket(p);
-        }*/
     }
 
     public Socket getSocket() {
         return socket;
     }
-
-    /*private void joinMatchmaking(Packet packet){
-        int id = -1;
-
-        try{
-            id = Integer.parseInt(packet.getArgs()[0].trim());
-
-        }catch(NumberFormatException e){
-            e.printStackTrace();
-        }
-
-        if(id == -1){
-            System.out.println("id is wrong");
-            return;
-        }
-
-        System.out.println("retrieving player");
-        Player p = playerRepository.findById(id).orElse(null);
-
-        if (p == null){
-            System.out.println("player not found");
-            return;
-        }
-
-        //p.setSocket(packet.getClient());
-
-        System.out.println("adding " + p.getUsername() + " to matchmaking pool.");
-        clientManager.addPlayerToMatchmaking(p);
-
-
-    }*/
-
-    /*
-    public void disconnect(Socket socket) {
-        try {
-            clientManager.removeClient(socket);
-            socket.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }*/
-
-    /*
-    private void connect(Packet packet) {
-        clientManager.addClient(packet.getClient());
-
-        Packet response = new Packet(packet.getClient(), "OkConnect/Connected");
-        sendPacket(response);
-    }*/
 
     public void sendPacket(Packet packet) {
         try {
@@ -143,18 +68,4 @@ public class MessageHandler {
             e.printStackTrace();
         }
     }
-
-    /*private void testMove(final Packet packet) {
-        Timer timer = new Timer();
-        TimerTask timerTask = new TimerTask() {
-            @Override
-            public void run() {
-                Packet moveCommand = new Packet(packet.getClient(), "MOVE/0.1");
-                sendPacket(moveCommand);
-            }
-        };
-
-        timer.schedule(timerTask,0, 200);
-    }*/
-
 }

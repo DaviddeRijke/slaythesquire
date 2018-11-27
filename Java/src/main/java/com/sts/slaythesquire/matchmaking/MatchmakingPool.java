@@ -31,7 +31,7 @@ public class MatchmakingPool {
         playerMonitor = new ReadWriteMonitor();
         matchMonitor = new ReadWriteMonitor();
 
-        //timer.schedule(new MatchmakingTimerTask(this), timerStartDelay, timerPeriod);
+        timer.schedule(new MatchmakingTimerTask(this), timerStartDelay, timerPeriod);
 
     }
 
