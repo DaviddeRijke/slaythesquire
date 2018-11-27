@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Game
 {
@@ -9,10 +10,26 @@ namespace Game
     {
         public Player player;
         public IngameDeck deck;
-        
+
+        public bool AcceptCardInput;
+        public static TemporaryGameManager _instance;
+        private Turn turnManager;
+        public Text PhaseText;
+
         private void Awake()
         {
             deck.Init(player.decks[0]);
+            _instance = this;
+            turnManager = GetComponent<Turn>();
+        }
+        
+        void Update () {
+            turnManager.Execute();
+        }
+
+        public void SetPhaseText(string phaseText)
+        {
+            PhaseText.text = phaseText;
         }
     }
 }

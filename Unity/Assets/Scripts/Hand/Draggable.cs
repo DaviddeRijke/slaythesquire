@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Game;
 using UnityEngine;
 
 [RequireComponent(typeof(CardView3D))]
@@ -17,7 +18,7 @@ public class Draggable : MonoBehaviour {
 
     void OnMouseDown()
     {
-        if (!GameManager._instance.AcceptCardInput)
+        if (!TemporaryGameManager._instance.AcceptCardInput)
             return;
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -35,7 +36,7 @@ public class Draggable : MonoBehaviour {
 
     void OnMouseDrag()
     {
-        if (!GameManager._instance.AcceptCardInput)
+        if (!TemporaryGameManager._instance.AcceptCardInput)
             return;
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -47,7 +48,7 @@ public class Draggable : MonoBehaviour {
 
     void OnMouseUp()
     {
-        if (!GameManager._instance.AcceptCardInput)
+        if (!TemporaryGameManager._instance.AcceptCardInput)
             return;
 
         GetComponent<BoxCollider>().enabled = false;

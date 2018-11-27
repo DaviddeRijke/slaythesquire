@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Game;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "DrawPhase", menuName = "Phases/DrawPhase")]
@@ -36,8 +37,6 @@ public class DrawPhase : Phase
             ++round;
             Splash.instance.SetRoundNumber(round);
             Splash.instance.StartSplash();
-
-            GameManager._instance.DrawCards();
 
             // TODO: Call Effect.BeforeTurn()
             // TODO: Draw Card(s)

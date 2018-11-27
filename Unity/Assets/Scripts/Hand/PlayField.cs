@@ -29,6 +29,7 @@ namespace DefaultNamespace.Hand
         {
             if (IsValidOperation(c))
             {
+                Debug.Log("receiving card");
                 CardsInField.Add(c);
                 OnCardReceived.Invoke(c);
             }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Game;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "MainPhase", menuName = "Phases/MainPhase")]
@@ -22,7 +23,7 @@ public class MainPhase : Phase
         if (isInit)
         {
             isInit = false;
-            GameManager._instance.AcceptCardInput = false;
+            TemporaryGameManager._instance.AcceptCardInput = false;
         }
     }
 
@@ -31,7 +32,7 @@ public class MainPhase : Phase
         if (!isInit)
         {
             isInit = true;
-            GameManager._instance.AcceptCardInput = true;
+            TemporaryGameManager._instance.AcceptCardInput = true;
             // TODO: Call Effect.OnStartTurn()
         }
     }

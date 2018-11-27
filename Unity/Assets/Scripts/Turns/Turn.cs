@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Game;
 using UnityEngine;
 
 public class Turn : MonoBehaviour {
@@ -10,7 +11,7 @@ public class Turn : MonoBehaviour {
 
     void Start()
     {
-        GameManager._instance.SetPhaseText(phases[index].name);
+        TemporaryGameManager._instance.SetPhaseText(phases[index].name);
     }
 
     public bool Execute()
@@ -33,7 +34,7 @@ public class Turn : MonoBehaviour {
                 completed = true;
             }
 
-            GameManager._instance.SetPhaseText(phases[index].name);
+            TemporaryGameManager._instance.SetPhaseText(phases[index].name);
         }
 
         return completed;
