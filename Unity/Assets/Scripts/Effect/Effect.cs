@@ -27,5 +27,4 @@ public class Effect : ScriptableObject
     public virtual void OnDamageDealt() { }
     public virtual void OnDamageReceived() { }
     public virtual void OnHealed() { }
-
 }
