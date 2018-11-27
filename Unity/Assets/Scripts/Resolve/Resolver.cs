@@ -26,14 +26,15 @@ namespace DefaultNamespace
 
         private void ResolveCards(Card ownCard, Card otherCard)
         {
+            Knight knight = null; //todo
             foreach (var effect in ownCard.effects)
             {
-                effect.Activate(otherCard.effects);
+                effect.Activate(knight);
             }
 
             foreach (var effect in otherCard.effects)
             {
-                effect.Activate(ownCard.effects);
+                effect.Activate(knight);
             }
 
             ownCard.effects.ToList().ToSortedQueue(otherCard.effects.ToList());
