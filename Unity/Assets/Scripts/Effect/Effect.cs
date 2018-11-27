@@ -11,7 +11,7 @@ public class Effect : ScriptableObject
     public virtual void OnStartTurn() { }
 
     public virtual void BeforeActivate() { }
-    public virtual void Activate(Knight self, Knight opponent) { } // Called when Card played
+    public virtual void Activate(Knight target) { }
     public virtual void AfterActivate() { }
 
     public virtual void BeforeBattle() { }
@@ -27,5 +27,4 @@ public class Effect : ScriptableObject
     public virtual void OnDamageDealt() { }
     public virtual void OnDamageReceived() { }
     public virtual void OnHealed() { }
-
 }

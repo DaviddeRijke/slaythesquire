@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "EffectHeal", menuName = "ScriptableObjects/EffectHeal")]
+[CreateAssetMenu(fileName = "EffectHeal", menuName = "Effects/Heal")]
 public class EffectHeal : Effect {
 
 	public int amount;
 
-	public override void Activate(Knight self, Knight opponent)
+	public override void Activate(Knight target)
 	{
-		self.hp += amount;
+		target.health += amount;
 	}
 }
