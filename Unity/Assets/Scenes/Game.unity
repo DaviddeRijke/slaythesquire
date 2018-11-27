@@ -860,8 +860,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d3a00dc70b5c7c48a9d460322b7f560, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 30
-  armor: 0
+  health: 100
+  equipped: []
 --- !u!1 &152874706
 GameObject:
   m_ObjectHideFlags: 0
@@ -4209,8 +4209,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d69a473ff50a2db40a0c240911374d34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  self: {fileID: 1962762458}
-  opponent: {fileID: 148022294}
 --- !u!64 &599836900
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -5357,8 +5355,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d69a473ff50a2db40a0c240911374d34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  self: {fileID: 0}
-  opponent: {fileID: 0}
 --- !u!64 &785936200
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -13972,6 +13968,104 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 52.300003, y: -50.372, z: -27.661001}
+--- !u!1001 &1359367742
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 114402855212197798, guid: b977b3ba3dc15e34d9065494afbf5d3c,
+        type: 2}
+      propertyPath: card.effects.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4886030301665614, guid: b977b3ba3dc15e34d9065494afbf5d3c, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4886030301665614, guid: b977b3ba3dc15e34d9065494afbf5d3c, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 2.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 4886030301665614, guid: b977b3ba3dc15e34d9065494afbf5d3c, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4886030301665614, guid: b977b3ba3dc15e34d9065494afbf5d3c, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4886030301665614, guid: b977b3ba3dc15e34d9065494afbf5d3c, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4886030301665614, guid: b977b3ba3dc15e34d9065494afbf5d3c, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4886030301665614, guid: b977b3ba3dc15e34d9065494afbf5d3c, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4886030301665614, guid: b977b3ba3dc15e34d9065494afbf5d3c, type: 2}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 114283181094431788, guid: b977b3ba3dc15e34d9065494afbf5d3c,
+        type: 2}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114283181094431788, guid: b977b3ba3dc15e34d9065494afbf5d3c,
+        type: 2}
+      propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114210682761395674, guid: b977b3ba3dc15e34d9065494afbf5d3c,
+        type: 2}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114210682761395674, guid: b977b3ba3dc15e34d9065494afbf5d3c,
+        type: 2}
+      propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 33683940993201990, guid: b977b3ba3dc15e34d9065494afbf5d3c,
+        type: 2}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 33513492855317136, guid: b977b3ba3dc15e34d9065494afbf5d3c,
+        type: 2}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114344076046865576, guid: b977b3ba3dc15e34d9065494afbf5d3c,
+        type: 2}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114344076046865576, guid: b977b3ba3dc15e34d9065494afbf5d3c,
+        type: 2}
+      propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 33727482875830802, guid: b977b3ba3dc15e34d9065494afbf5d3c,
+        type: 2}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114402855212197798, guid: b977b3ba3dc15e34d9065494afbf5d3c,
+        type: 2}
+      propertyPath: card.effects.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: f8e653350ebe7c342b3b8e22297aaef4,
+        type: 2}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b977b3ba3dc15e34d9065494afbf5d3c, type: 2}
+  m_IsPrefabAsset: 0
 --- !u!1 &1367517498
 GameObject:
   m_ObjectHideFlags: 0
@@ -22415,8 +22509,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d3a00dc70b5c7c48a9d460322b7f560, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 30
-  armor: 0
+  health: 100
+  equipped: []
 --- !u!1 &1974066893
 GameObject:
   m_ObjectHideFlags: 0
