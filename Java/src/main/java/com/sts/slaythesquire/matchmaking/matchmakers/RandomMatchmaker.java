@@ -12,7 +12,7 @@ public class RandomMatchmaker implements IMatchmaker {
     @Override
     public List<Match> makeMatches(List<Player> unmatchedPlayers, MatchmakingPool pool) throws InterruptedException {
 
-        System.out.println("making matches...");
+//        System.out.println("making matches...");
 
         List<Player> matchedPlayers = new LinkedList<>();
         List<Match> newMatches = new LinkedList<>();

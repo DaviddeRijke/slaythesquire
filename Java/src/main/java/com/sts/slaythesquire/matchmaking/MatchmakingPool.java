@@ -48,7 +48,12 @@ public class MatchmakingPool {
         player.getMessageHandler().subscribe("JOINMATCHMAKING", p -> {
             try {
                 addPlayerToPool(player);
-                player.sendPacket(new Packet("JOINEDMATCHMAKING"));
+
+                Packet packet = new Packet();
+                packet.setAction("JOINEDMATCHMAKING");
+
+                player.sendPacket(packet);
+//                player.sendPacket(new Packet("JOINEDMATCHMAKING"));
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

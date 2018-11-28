@@ -23,8 +23,13 @@ public class Match {
         preMatchPreparation(this.firstPlayer);
         preMatchPreparation(this.secondPlayer);
 
-        this.firstPlayer.sendPacket(new Packet("MATCHED/" + secondPlayer.getId()));
-        this.secondPlayer.sendPacket(new Packet("MATCHED/" + firstPlayer.getId()));
+        Packet packet = new Packet();
+        packet.setAction("MATCHED");
+        packet.addProperty("playerId", Integer.toString(secondPlayer.getId()));
+
+        this.firstPlayer.sendPacket(packet);
+        packet.overrideProperty("playerId", Integer.toString(firstPlayer.getId()));
+        this.secondPlayer.sendPacket(packet);
     }
 
     private void preMatchPreparation(Player player){
@@ -39,17 +44,21 @@ public class Match {
             return;
         }
 
+        Packet packet = new Packet();
+        packet.setAction("PLAYPHASE");
+        packet.addProperty("turnCount", Integer.toString(turnCount));
 
-
-        sendToBoth(new Packet("PLAYPHASE/" + turnCount));
-
+        sendToBoth(packet);
     }
 
     private DelegateAction playerPlayedCardAction(Player player){
         return p -> {
-            int playedCard = Integer.parseInt(p.getArgs()[0].trim());
+            int playedCard = Integer.parseInt(p.getProperty("playedCard"));
 
-            sendToOtherPlayer(player, new Packet("PLAYEDCARD"));
+            Packet packet = new Packet();
+            packet.setAction("PLAYEDCARD");
+
+            sendToOtherPlayer(player, packet);
 
         };
     }
@@ -57,11 +66,11 @@ public class Match {
     private DelegateAction playerPlayedTurnAction(Player player){
         return p -> {
 
-            StringBuilder s = new StringBuilder().append(String.format("RESOLVEPHASE/%d", turnCount));
-
-            for (String arg : p.getArgs()){
-                s.append(String.format("/%s", arg));
-            }
+//            StringBuilder s = new StringBuilder().append(String.format("RESOLVEPHASE/%d", turnCount));
+//
+//            for (String arg : p.getArgs()){
+//                s.append(String.format("/%s", arg));
+//            }
 
 
 

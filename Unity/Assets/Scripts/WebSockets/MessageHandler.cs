@@ -11,19 +11,19 @@ public class MessageHandler : MonoBehaviour {
     public string ServerIp = "127.0.0.1";
     public int ServerPort = 4343;
     private IPEndPoint serverAddress;
-    
+
+    public int playerID = 1;
     private Player player;
     public bool IsConnected = false;
 
     private Socket socket;
-    //private SocketListener listener;
 
     private Dictionary<string, List<Action<Packet>>> topics;
 
     void Awake()
     {
         // TODO: Get player from somewhere else
-        player = new Player() { id = 1 };
+        player = new Player() { id = playerID };
         topics = new Dictionary<string, List<Action<Packet>>>();
     }
 
@@ -50,7 +50,9 @@ public class MessageHandler : MonoBehaviour {
                 Debug.Log("Connected with player id " + player.id);
             });
 
-            Packet packet = new Packet("CONNECT/" + player.id);
+            Packet packet = new Packet() { Action = "CONNECT" };
+            packet.AddProperty("playerId", player.id.ToString());
+
             SendPacket(packet);
         });
 
@@ -82,7 +84,7 @@ public class MessageHandler : MonoBehaviour {
                 if (recievePacket[count] == 0)
                     break;
             }
-
+            
             string message = System.Text.Encoding.ASCII.GetString(recievePacket, 0, count);
             Packet packet = new Packet(message);
 
@@ -101,7 +103,7 @@ public class MessageHandler : MonoBehaviour {
 
     public void HandleMessage(Packet packet)
     {
-        List<Action<Packet>> actions = topics[packet.Function];
+        List<Action<Packet>> actions = topics[packet.Action];
 
         if (actions != null)
         {
@@ -112,7 +114,7 @@ public class MessageHandler : MonoBehaviour {
         }
         else
         {
-            Debug.Log("No subscription on " + packet.Function);
+            Debug.Log("No subscription on " + packet.Action);
         }
     }
 
@@ -138,7 +140,8 @@ public class MessageHandler : MonoBehaviour {
 
         if (IsConnected)
         {
-            Packet packet = new Packet("DISCONNECT");
+            Packet packet = new Packet() { Action = "DISCONNECT" };
+
             SendPacket(packet);
             IsConnected = false;
         }

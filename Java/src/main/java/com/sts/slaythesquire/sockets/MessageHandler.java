@@ -1,6 +1,5 @@
 package com.sts.slaythesquire.sockets;
 
-import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.Socket;
@@ -16,7 +15,6 @@ public class MessageHandler {
         this.socket = socket;
 
         topics = new LinkedHashMap<>();
-
     }
 
     public void subscribe(String topic, DelegateAction action){
@@ -37,7 +35,7 @@ public class MessageHandler {
                 System.out.println("Invoking...");
                 action.invoke(packet);
             }
-        }else {
+        } else {
             //does not contain key
             System.out.println("Nothing subscribed to: " + packet.getAction());
         }

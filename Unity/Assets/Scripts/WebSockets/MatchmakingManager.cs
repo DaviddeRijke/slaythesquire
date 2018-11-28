@@ -26,6 +26,8 @@ public class MatchmakingManager : MonoBehaviour {
             JoinedPool = true;
         });
 
-        handler.SendPacket(new Packet("JOINMATCHMAKING"));
+        Packet packet = new Packet() { Action = "JOINMATCHMAKING" };
+
+        handler.SendPacket(packet);
     }
 }

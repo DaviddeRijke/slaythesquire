@@ -1,9 +1,15 @@
 package com.sts.slaythesquire.sockets;
 
+import com.google.gson.Gson;
 import com.sts.slaythesquire.matchmaking.MatchmakingPool;
+import com.sts.slaythesquire.models.Card;
 import com.sts.slaythesquire.models.Player;
 import com.sts.slaythesquire.repos.PlayerRepository;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.swing.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -23,7 +29,7 @@ public class ClientManager {
 
         System.out.println("subscribing to CONNECT");
 
-        messageHandler.subscribe("CONNECT", p ->{
+        messageHandler.subscribe("CONNECT", p -> {
             System.out.println("Handling connect packet...");
             Player player = getPlayerFromPacket(p);
             if (player == null){
@@ -33,19 +39,25 @@ public class ClientManager {
             player.setMessageHandler(messageHandler);
             matchmakingPool.initializePlayerForMatchmaking(player);
 
-            messageHandler.sendPacket(new Packet("CONNECTED"));
-        });
+            Packet packet = new Packet();
+            packet.setAction("CONNECTED");
 
+            messageHandler.sendPacket(packet);
+        });
+        
         System.out.println("sending...");
-        messageHandler.sendPacket(new Packet("READYTOCONNECT"));
+
+        Packet packet = new Packet();
+        packet.setAction("READYTOCONNECT");
+        messageHandler.sendPacket(packet);
     }
 
     private synchronized Player getPlayerFromPacket(Packet packet){
         int id;
         try{
-            id = Integer.parseInt(packet.getArgs()[0].trim());
+            id = Integer.parseInt(packet.getProperty("playerId"));
         } catch (NumberFormatException e){
-            System.out.println("This is not a number... : " + packet.getArgs()[0]);
+            System.out.println("This is not a number... : " + packet.getProperty("playerId"));
             return null;
         }
 
