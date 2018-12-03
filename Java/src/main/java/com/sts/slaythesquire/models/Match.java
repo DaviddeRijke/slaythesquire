@@ -16,6 +16,9 @@ public class Match {
     Packet firstPlayerResolvePacket = null;
     Packet secondPlayerResolvePacket = null;
 
+    Packet firstPlayerStatusPacket = null;
+    Packet secondPlayerStatusPacket = null;
+
     public Match(Player firstPlayer, Player secondPlayer) {
         this.firstPlayer = firstPlayer;
         this.secondPlayer = secondPlayer;
@@ -24,10 +27,12 @@ public class Match {
         preMatchPreparation(this.secondPlayer);
 
         Packet packet = new Packet();
-        packet.setAction("MATCHED");
-        packet.addProperty("playerId", Integer.toString(secondPlayer.getId()));
 
+        packet.setAction("MATCHED");
+
+        packet.addProperty("playerId", Integer.toString(secondPlayer.getId()));
         this.firstPlayer.sendPacket(packet);
+
         packet.overrideProperty("playerId", Integer.toString(firstPlayer.getId()));
         this.secondPlayer.sendPacket(packet);
     }
@@ -35,15 +40,15 @@ public class Match {
     private void preMatchPreparation(Player player){
         player.getMessageHandler().subscribe("CONFIRMMATCH", p -> {
             playerConfirmed(player);
-            checkToStartMatch();
         });
+
+        player.getMessageHandler().subscribe("PLAYEDCARD", playerPlayedCardAction(player));
+        player.getMessageHandler().subscribe("CARDSPLAYED", playerPlayedTurnAction(player));
+        player.getMessageHandler().subscribe("STATUS", playerSendsStatus(player));
+
     }
 
-    private void checkToStartMatch(){
-        if (!(firstPlayerConfirmed && secondPlayerConfirmed)){
-            return;
-        }
-
+    private void startNewRound(){
         Packet packet = new Packet();
         packet.setAction("PLAYPHASE");
         packet.addProperty("turnCount", Integer.toString(turnCount));
@@ -66,19 +71,100 @@ public class Match {
     private DelegateAction playerPlayedTurnAction(Player player){
         return p -> {
 
-//            StringBuilder s = new StringBuilder().append(String.format("RESOLVEPHASE/%d", turnCount));
-//
-//            for (String arg : p.getArgs()){
-//                s.append(String.format("/%s", arg));
-//            }
+            Packet newPacket = new Packet();
+            newPacket.setAction("RESOLVEPHASE");
 
+            newPacket.setProperties(p.getProperties());
 
+            setResolvePacketForPlayer(player, newPacket);
 
         };
     }
 
+    private DelegateAction playerSendsStatus(Player player){
+        return p -> setStatusForPlayer(player, p);
+    }
+
     private void setResolvePacketForPlayer(Player player, Packet packet){
 
+        if (player.getId() == firstPlayer.getId()){
+            firstPlayerResolvePacket = packet;
+        }
+
+        if (player.getId() == secondPlayer.getId()){
+            secondPlayerResolvePacket = packet;
+        }
+
+        if (firstPlayerResolvePacket != null && secondPlayerResolvePacket != null){
+            sendToOtherPlayer(firstPlayer, firstPlayerResolvePacket);
+            sendToOtherPlayer(secondPlayer, secondPlayerResolvePacket);
+
+            firstPlayerResolvePacket = null;
+            secondPlayerResolvePacket = null;
+
+        }
+
+    }
+
+    private void setStatusForPlayer(Player player, Packet status){
+        if (player.getId() == firstPlayer.getId()){
+            firstPlayerStatusPacket = status;
+        }
+
+        if (player.getId() == secondPlayer.getId()){
+            secondPlayerStatusPacket = status;
+        }
+
+        if (firstPlayerStatusPacket != null && secondPlayerStatusPacket != null){
+
+            checkStatus();
+
+            firstPlayerStatusPacket = null;
+            secondPlayerStatusPacket = null;
+
+        }
+
+    }
+
+    private void checkStatus(){
+
+        if (!firstPlayerStatusPacket.getProperty("data").equals(secondPlayerStatusPacket.getProperty("data"))
+                || !firstPlayerStatusPacket.getProperty("winner").equals(secondPlayerResolvePacket.getProperty("winner"))) {
+            //void
+            declareVoid();
+            return;
+        }
+
+        int winnerId = 0;
+
+        try{
+            winnerId = Integer.parseInt(firstPlayerStatusPacket.getProperty("winner"));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        if (winnerId == 0){
+            startNewRound();
+        } else{
+            declareWinner(winnerId);
+        }
+
+    }
+
+    private void declareVoid(){
+        Packet p = new Packet();
+        p.setAction("MATCHVOID");
+
+        sendToBoth(p);
+    }
+
+    private void declareWinner(int winnerId){
+
+        Packet p = new Packet();
+        p.setAction("WINNER");
+        p.addProperty("playerId", winnerId);
+
+        sendToBoth(p);
     }
 
 
@@ -93,6 +179,10 @@ public class Match {
         }
         if (player.getId() == secondPlayer.getId()){
             secondPlayerConfirmed = true;
+        }
+
+        if (firstPlayerConfirmed && secondPlayerConfirmed){
+            startNewRound();
         }
 
     }

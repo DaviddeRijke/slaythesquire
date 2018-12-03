@@ -80,6 +80,10 @@ public class Packet {
         return true;
     }
 
+    public boolean addProperty(String property, int value){
+        return addProperty(property, Integer.toString(value));
+    }
+
     public boolean addArrayProperty(String property, List<String> jsonList) {
         if (properties.containsKey(property))
             return false;
@@ -121,5 +125,13 @@ public class Packet {
         }
 
         return jsonList;
+    }
+
+    public HashMap<String, String> getProperties() {
+        return properties;
+    }
+
+    public void setProperties(HashMap<String, String> properties) {
+        this.properties = properties;
     }
 }
