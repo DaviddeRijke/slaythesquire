@@ -14,6 +14,8 @@ public class KnightUI : MonoBehaviour {
     public Gradient healthBarColor;
     public Button equipmentButton;
     public GameObject equipmentPanel;
+    public EquipmentSlotUI[] equipment;
+    public Sprite emptySlotImage;
     private Animator ani;
     private bool collapse;
 
@@ -63,5 +65,37 @@ public class KnightUI : MonoBehaviour {
             equipmentButton.GetComponentInChildren<Text>().text = "Show Equipment";
         }
         ani.SetBool("Collapse", collapse);
+    }
+
+    public void EquipItem(Equipment item)
+    {
+        equipment[((int)item.equipmentSlot)].SetData(item);
+    }
+
+    [System.Serializable]
+    public struct EquipmentSlotUI
+    {
+        public Image image;
+        public Text stat;
+
+        public void SetData(Equipment e)
+        {
+            image.sprite = e.image;
+
+            if (e.equipmentSlot == EquipmentSlot.mainHand)
+            {
+                stat.text = "+ " + e.damage.ToString();
+            }
+            else
+            {
+                stat.text = "+ " + e.armor.ToString();
+            }
+        }
+
+        public void ResetData()
+        {
+            image.sprite = Resources.Load<Sprite>("Sprite/Equipment/Nothing");
+            stat.text = "+ 0";
+        }
     }
 }

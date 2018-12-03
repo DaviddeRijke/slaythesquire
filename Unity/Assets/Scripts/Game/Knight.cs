@@ -6,11 +6,31 @@ using UnityEngine.Events;
 public class Knight : MonoBehaviour {
 	public int health;
 	public List<Equipment> equipped;
+    public ValueChanged healthChanged;
+    public UnityEvent death;
+    public EquipmentChanged equipChanged;
 
 	public Knight()
 	{
 		equipped = new List<Equipment>();
 	}
+
+    public void AddHealth(int amount)
+    {
+        health += Mathf.Abs(amount);
+        healthChanged.Invoke(health);
+    }
+
+    public void RemoveHealth(int amount)
+    {
+        health -= Mathf.Abs(amount);
+        if (health <= 0)
+        {
+            health = 0;
+            death.Invoke();
+        }
+        healthChanged.Invoke(health);
+    }
 
 	public void Equip(Equipment equipment)
 	{
@@ -23,8 +43,12 @@ public class Knight : MonoBehaviour {
 			}
 		}
 		equipped.Add(equipment);
+        equipChanged.Invoke(equipment);
 	}
 
 	[System.Serializable]
-	public class ValueChanged : UnityEvent<int> { }
+	public class ValueChanged : UnityEvent<float> { }
+
+    [System.Serializable]
+    public class EquipmentChanged : UnityEvent<Equipment> { }
 }

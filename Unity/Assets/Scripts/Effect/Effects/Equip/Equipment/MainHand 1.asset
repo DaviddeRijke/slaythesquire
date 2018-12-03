@@ -14,3 +14,4 @@ MonoBehaviour:
   equipmentSlot: 3
   armor: 0
   damage: 1
+  image: {fileID: 21300000, guid: a993a08d0b346084a8344cb5f9cadf60, type: 3}

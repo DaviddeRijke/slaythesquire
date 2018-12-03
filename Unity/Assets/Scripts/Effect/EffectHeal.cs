@@ -10,6 +10,6 @@ public class EffectHeal : Effect, INoInteraction {
 
 	public override void Activate(Knight target)
 	{
-		target.health += amount;
+		target.AddHealth(amount);
 	}
 }

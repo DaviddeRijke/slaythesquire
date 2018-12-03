@@ -15,7 +15,7 @@ public class EffectDamage : Effect, IBlockable {
 		{
 			totalArmor += equipment.armor;
 		}
-		target.health -= (amount / 100) * (100 - totalArmor);
+		target.RemoveHealth( (amount / 100) * (100 - totalArmor) );
 	}
 
 	public void Block()
