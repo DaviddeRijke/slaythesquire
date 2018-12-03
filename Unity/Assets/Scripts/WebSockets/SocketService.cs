@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -7,72 +6,110 @@ using UnityEngine.Events;
 [RequireComponent(typeof(MessageHandler))]
 public class SocketService : MonoBehaviour {
 
-    public MessageHandler handler;
+    private MessageHandler handler;
 
     public UnityEvent OnOpponentCardPlayed;
-    public UnityEvent<List<Card>, List<Card>> OnRecieve;
+    public UnityEvent<int> OnPlayPhase;
+    public UnityEvent<List<Card>> OnResolvePhase;
+    public UnityEvent<int> OnWinner;
+    public UnityEvent OnMatchVoid;
 
-    void Awake()
+    private void Awake()
     {
         handler = GetComponent<MessageHandler>();
     }
 
-    void Start()
+    private void Start()
     {
-        handler.Subscribe("CARDPLAYED", p => {
-            // TODO: Actually handle the packet
-            OnOpponentCardPlayed.Invoke();
-            Debug.Log("Opponent played a card...");
-        });
-        handler.Subscribe("RESOLVE", p => {
-            // TODO: Actually resolve the packet
-            Debug.Log("Resolve...");
-        });
+        handler.Subscribe("PLAYEDCARD", CardPlayed());
+        handler.Subscribe("PLAYPHASE", PlayPhase());
+        handler.Subscribe("RESOLVEPHASE", ResolvePhase());
+        handler.Subscribe("WINNER", Winner());
+        handler.Subscribe("MATCHVOID", MatchVoid());
     }
 
-    void Recieve(List<Card> cards, List<Card> cards2)
+    public void OnPlayCard(Card card)
     {
-        OnRecieve.Invoke(cards, cards2);
-    }
-
-    void OnPlayCard(Card card)
-    {
-        Packet packet = new Packet() { Action = "CARDPLAYED" };
-        packet.AddProperty("card", JsonConvert.SerializeObject(card));
+        Packet packet = new Packet() { Action = "PLAYEDCARD" };
+        packet.AddProperty("card", card.id);
 
         handler.SendPacket(packet);
     }
 
-    //public void TestSendList()
-    //{
-    //    handler.Subscribe("TESTLIST", p => {
-    //        TestRecieveList(p);
-    //    });
+    public void SendCardsPlayed(List<Card> cards)
+    {
+        Packet packet = new Packet() { Action = "CARDSPLAYED" };
 
-    //    List<string> jsonList = new List<string>();
-    //    Card c = new Card() { name = "testName"};
-    //    jsonList.Add(JsonConvert.SerializeObject(c));
-    //    jsonList.Add(JsonConvert.SerializeObject(c));
-    //    jsonList.Add(JsonConvert.SerializeObject(c));
+        List<string> cardIds = new List<string>();
+        foreach (Card card in cards)
+        {
+            cardIds.Add(card.id.ToString());
+        }
+        packet.AddArrayProperty("card", cardIds);
 
-    //    Packet testPacket = new Packet() { Action = "TESTLIST" };
-    //    testPacket.AddArrayProperty("cards", jsonList);
+        handler.SendPacket(packet);
+    }
 
-    //    handler.SendPacket(testPacket);
-    //}
+    public void SendStatus(string status, int winnerId = 0)
+    {
+        Packet packet = new Packet() { Action = "STATUS" };
+        packet.AddProperty("winner", winnerId);
+        packet.AddProperty("data", status);
 
-    //public void TestRecieveList(Packet packet)
-    //{
-    //    Debug.Log("Packet recieved: " + packet.Message);
+        Debug.Log("Sending status...");
+        handler.SendPacket(packet);
+    }
+    
+    private Action<Packet> CardPlayed()
+    {
+        return p => {
+            Debug.Log("Opponent played a card...");
+            OnOpponentCardPlayed.Invoke();
+        };
+    }
 
-    //    List<string> jsonList = packet.GetArrayProperty("cards");
+    private Action<Packet> PlayPhase()
+    {
+        return p => {
+            int turn = int.Parse(p.GetProperty("turn"));
+            Debug.Log("Starting turn " + turn);
+            OnPlayPhase.Invoke(turn);
+        };
+    }
 
-    //    List<Card> cards = new List<Card>();
-    //    foreach (string json in jsonList)
-    //    {
-    //        cards.Add((Card)JsonConvert.DeserializeObject(json));
-    //    }
+    private Action<Packet> ResolvePhase()
+    {
+        return p => {
+            List<string> jsonCards = p.GetArrayProperty("cards");
 
-    //    Debug.Log("Cards recieved: " + cards.Count);
-    //}
+            int[] cardIds = new int[jsonCards.Count];
+            for (int i = 0; i < cardIds.Length; i++)
+            {
+                cardIds[i] = int.Parse(jsonCards[i]);
+            }
+            List<Card> opponentCards = new List<Card>();
+            //TODO: opponentCards = getCardsWithCardIds(cardIds);
+            Debug.Log("TODO: Get cards from cardIds");
+
+            OnResolvePhase.Invoke(opponentCards);
+        };
+    }
+
+    private Action<Packet> Winner()
+    {
+        return p => {
+            int winnerId = int.Parse(p.GetProperty("winner"));
+
+            Debug.Log("Winner is player " + winnerId);
+            OnWinner.Invoke(winnerId);
+        };
+    }
+
+    private Action<Packet> MatchVoid()
+    {
+        return p => {
+            Debug.Log("Match is declared void");
+            OnMatchVoid.Invoke();
+        };
+    }
 }
