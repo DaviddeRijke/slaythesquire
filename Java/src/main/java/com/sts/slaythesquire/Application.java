@@ -6,6 +6,7 @@ import com.sts.slaythesquire.matchmaking.matchmakers.RandomMatchmaker;
 import com.sts.slaythesquire.sockets.ClientManager;
 import com.sts.slaythesquire.sockets.MessageHandler;
 import com.sts.slaythesquire.sockets.ServerSocketListener;
+import com.sts.slaythesquire.utils.ServerStartTestConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -24,6 +25,9 @@ public class Application implements CommandLineRunner {
     @Autowired
     PlayerController playerController;
 
+    @Autowired
+    ServerStartTestConfig testConfig;
+
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
@@ -40,6 +44,8 @@ public class Application implements CommandLineRunner {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        testConfig.init();
 
         //playerController.setMatchmakingPool(matchmakingPool);
     }
