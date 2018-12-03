@@ -6,8 +6,10 @@ using UnityEngine.UI;
 
 public class SocketServiceTester : MonoBehaviour {
 
-    public InputField field;
-    
+    public InputField cardIdField;
+    public InputField winnerIdField;
+    public InputField dataStringField;
+
     private SocketService ss;
     public List<Card> cards;
     
@@ -28,7 +30,7 @@ public class SocketServiceTester : MonoBehaviour {
     public void PlayedCard()
     {
         int cardId = 0;
-        if (field != null && int.TryParse(field.text, out cardId))
+        if (cardIdField != null && int.TryParse(cardIdField.text, out cardId))
         {
             Card card = new Card() { id = cardId };
             cards.Add(card);
@@ -40,6 +42,17 @@ public class SocketServiceTester : MonoBehaviour {
     {
         ss.SendCardsPlayed(cards);
         cards.Clear();
+    }
+
+    public void SendStatus()
+    {
+        int winner = 0;
+        string dataString = "";
+        if (winnerIdField != null && int.TryParse(winnerIdField.text, out winner)
+            && dataStringField != null)
+        {
+            ss.SendStatus(dataString, winner);
+        }
     }
 
     public void OnOpponentCardPlayed()
