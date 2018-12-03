@@ -22,6 +22,10 @@ public class MatchmakingManager : MonoBehaviour {
     public void StartMatchmaking()
     {
         handler.Subscribe("JOINEDMATCHMAKING", p => {
+            handler.Subscribe("MATCHED", p2 =>
+            {
+                Debug.Log("Matched with: " + p2.GetProperty("playerId"));
+            });
             Debug.Log("JOINEDMATCHMAKING");
             JoinedPool = true;
         });

@@ -9,6 +9,7 @@ public class SocketService : MonoBehaviour {
 
     public MessageHandler handler;
 
+    public UnityEvent OnOpponentCardPlayed;
     public UnityEvent<List<Card>, List<Card>> OnRecieve;
 
     void Awake()
@@ -18,6 +19,11 @@ public class SocketService : MonoBehaviour {
 
     void Start()
     {
+        handler.Subscribe("CARDPLAYED", p => {
+            // TODO: Actually handle the packet
+            OnOpponentCardPlayed.Invoke();
+            Debug.Log("Opponent played a card...");
+        });
         handler.Subscribe("RESOLVE", p => {
             // TODO: Actually resolve the packet
             Debug.Log("Resolve...");
