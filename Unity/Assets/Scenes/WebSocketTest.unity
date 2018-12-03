@@ -180,7 +180,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Send Played Cards
+  m_Text: Send Status
 --- !u!222 &97032694
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -331,7 +331,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 547234300}
-        m_MethodName: SendPlayedCards
+        m_MethodName: SendStatus
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -659,6 +659,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d2d78359f3355e468e902122b513174, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playedCards: []
   OnOpponentCardPlayed:
     m_PersistentCalls:
       m_Calls: []
@@ -683,7 +684,6 @@ MonoBehaviour:
   cardIdField: {fileID: 1112166759}
   winnerIdField: {fileID: 1853141982}
   dataStringField: {fileID: 1880320131}
-  cards: []
 --- !u!1 &916086237
 GameObject:
   m_ObjectHideFlags: 0
