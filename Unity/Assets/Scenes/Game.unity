@@ -8469,6 +8469,8 @@ MonoBehaviour:
     stat: {fileID: 674617731}
   - image: {fileID: 1193737228}
     stat: {fileID: 63350234}
+  totalDamageText: {fileID: 927359452}
+  totalArmorText: {fileID: 1177358197}
   emptySlotImage: {fileID: 21300000, guid: a40081fa29c3261489055676bb2b83db, type: 3}
 --- !u!114 &701782265
 MonoBehaviour:
@@ -18888,6 +18890,8 @@ MonoBehaviour:
     stat: {fileID: 719500173}
   - image: {fileID: 1291635740}
     stat: {fileID: 1980909411}
+  totalDamageText: {fileID: 927359452}
+  totalArmorText: {fileID: 1177358197}
   emptySlotImage: {fileID: 21300000, guid: a40081fa29c3261489055676bb2b83db, type: 3}
 --- !u!114 &1193322462
 MonoBehaviour:

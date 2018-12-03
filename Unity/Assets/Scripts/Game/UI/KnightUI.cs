@@ -15,6 +15,10 @@ public class KnightUI : MonoBehaviour {
     public Button equipmentButton;
     public GameObject equipmentPanel;
     public EquipmentSlotUI[] equipment;
+    public Text totalDamageText;
+    private int totalDamage;
+    public Text totalArmorText;
+    private int totalArmor;
     public Sprite emptySlotImage;
     private Animator ani;
     private bool collapse;
@@ -27,6 +31,10 @@ public class KnightUI : MonoBehaviour {
 
         SetHealth(hp);
         initialHp = hp;
+
+        totalDamage = 0;
+        totalArmor = 0;
+        SetTotalsUI();
 
         collapse = false;
         ani = equipmentPanel.GetComponent<Animator>();
@@ -52,6 +60,12 @@ public class KnightUI : MonoBehaviour {
         healthBar.color = healthBarColor.Evaluate(1 - relative);
     }
 
+    private void SetTotalsUI()
+    {
+        totalDamageText.text = "+" + totalDamage.ToString();
+        totalArmorText.text = "+" + totalArmor.ToString();
+    }
+
     public void ToggleEquipmentPanel()
     {
         if (collapse)
@@ -70,6 +84,9 @@ public class KnightUI : MonoBehaviour {
     public void EquipItem(Equipment item)
     {
         equipment[((int)item.equipmentSlot)].SetData(item);
+        totalArmor += item.armor;
+        totalDamage += item.damage;
+        SetTotalsUI();
     }
 
     [System.Serializable]
