@@ -38,8 +38,10 @@ namespace DefaultNamespace.Hand
                 
                 _ogPosition = card.position;
                 _ogRotation = card.rotation;
-      
-                card.rotation = new Quaternion(0f, 0f, 0f, 0f);
+
+                card.position = new Vector3(card.position.x, card.position.y, card.position.z - 0.05f);
+                card.eulerAngles = new Vector3(card.eulerAngles.x, card.eulerAngles.y, 0f);
+
                 plane.SetNormalAndPosition(Camera.main.transform.forward, card.position);
                 dragOffset = card.position - Offset(ray);
             }
