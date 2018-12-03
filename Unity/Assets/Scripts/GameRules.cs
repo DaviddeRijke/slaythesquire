@@ -6,6 +6,6 @@ namespace DefaultNamespace
     public static class GameRules
     {
         public static int AmountOfStartingCards = 3;
-        public static int AmountOfCardsInHand = 7;
+        public static int AmountOfCardsInHand = 8;
     }
 }
