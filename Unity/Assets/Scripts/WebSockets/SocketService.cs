@@ -7,6 +7,7 @@ using UnityEngine.Events;
 public class SocketService : MonoBehaviour {
 
     private MessageHandler handler;
+    public List<Card> playedCards;
 
     public UnityEvent OnOpponentCardPlayed;
     public UnityIntEvent OnPlayPhase;
@@ -17,6 +18,8 @@ public class SocketService : MonoBehaviour {
     private void Awake()
     {
         handler = GetComponent<MessageHandler>();
+        playedCards = new List<Card>();
+
         OnPlayPhase = new UnityIntEvent();
         OnResolvePhase = new UnityCardListEvent();
         OnWinner = new UnityIntEvent();
@@ -25,16 +28,26 @@ public class SocketService : MonoBehaviour {
     private void Start()
     {
         handler.Subscribe("PLAYEDCARD", CardPlayed());
+        handler.Subscribe("ENDTURN", EndTurn());
         handler.Subscribe("PLAYPHASE", PlayPhase());
         handler.Subscribe("RESOLVEPHASE", ResolvePhase());
         handler.Subscribe("WINNER", Winner());
         handler.Subscribe("MATCHVOID", MatchVoid());
     }
 
-    public void OnPlayCard(Card card)
+    public void SendPlayedCard(Card card)
     {
+        playedCards.Add(card);
+
         Packet packet = new Packet() { Action = "PLAYEDCARD" };
         packet.AddProperty("card", card.id);
+
+        handler.SendPacket(packet);
+    }
+
+    public void SendEndTurn()
+    {
+        Packet packet = new Packet() { Action = "ENDTURN" };
 
         handler.SendPacket(packet);
     }
@@ -48,7 +61,7 @@ public class SocketService : MonoBehaviour {
         {
             cardIds.Add(card.id.ToString());
         }
-        packet.AddArrayProperty("card", cardIds);
+        packet.AddArrayProperty("cards", cardIds);
 
         handler.SendPacket(packet);
     }
@@ -68,6 +81,14 @@ public class SocketService : MonoBehaviour {
         return p => {
             Debug.Log("Opponent played a card...");
             OnOpponentCardPlayed.Invoke();
+        };
+    }
+
+    private Action<Packet> EndTurn()
+    {
+        return p =>
+        {
+            SendCardsPlayed(playedCards);
         };
     }
 

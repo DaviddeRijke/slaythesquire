@@ -11,11 +11,9 @@ public class SocketServiceTester : MonoBehaviour {
     public InputField dataStringField;
 
     private SocketService ss;
-    public List<Card> cards;
     
 	void Awake () {
         ss = GetComponent<SocketService>();
-        cards = new List<Card>();
 	}
 
     void Start()
@@ -33,15 +31,14 @@ public class SocketServiceTester : MonoBehaviour {
         if (cardIdField != null && int.TryParse(cardIdField.text, out cardId))
         {
             Card card = new Card() { id = cardId };
-            cards.Add(card);
-            ss.OnPlayCard(card);
+            ss.SendPlayedCard(card);
         }
     }
 
     public void SendPlayedCards()
     {
-        ss.SendCardsPlayed(cards);
-        cards.Clear();
+        ss.SendCardsPlayed(ss.playedCards);
+        ss.playedCards.Clear();
     }
 
     public void SendStatus()
