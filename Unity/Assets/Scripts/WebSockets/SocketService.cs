@@ -9,14 +9,17 @@ public class SocketService : MonoBehaviour {
     private MessageHandler handler;
 
     public UnityEvent OnOpponentCardPlayed;
-    public UnityEvent<int> OnPlayPhase;
-    public UnityEvent<List<Card>> OnResolvePhase;
-    public UnityEvent<int> OnWinner;
+    public UnityIntEvent OnPlayPhase;
+    public UnityCardListEvent OnResolvePhase;
+    public UnityIntEvent OnWinner;
     public UnityEvent OnMatchVoid;
 
     private void Awake()
     {
         handler = GetComponent<MessageHandler>();
+        OnPlayPhase = new UnityIntEvent();
+        OnResolvePhase = new UnityCardListEvent();
+        OnWinner = new UnityIntEvent();
     }
 
     private void Start()

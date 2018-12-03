@@ -410,7 +410,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ba82056feb7d8e4298b5dd0dc692c55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ServerIp: 127.0.0.1
+  ServerIp: 192.168.1.102
   ServerPort: 4343
   playerID: 2
   IsConnected: 0
