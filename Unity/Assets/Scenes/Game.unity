@@ -11152,11 +11152,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Cards:
   - id: 1
-    name: kaart1
+    name: Damage 1
     description: 
     cost: 0
     tags: []
-    effects: []
+    effects:
+    - {fileID: 11400000, guid: 7725f3c6ea816d94ab087a95da7ae088, type: 2}
     OnEnable:
       m_PersistentCalls:
         m_Calls: []
@@ -11168,11 +11169,12 @@ MonoBehaviour:
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
   - id: 2
-    name: kaart2
+    name: heal 1
     description: 
     cost: 0
     tags: []
-    effects: []
+    effects:
+    - {fileID: 11400000, guid: 7d12bebafdc311a4db62ecb43130e267, type: 2}
     OnEnable:
       m_PersistentCalls:
         m_Calls: []
@@ -11184,11 +11186,12 @@ MonoBehaviour:
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
   - id: 3
-    name: kaart3
+    name: equip helm 1
     description: 
     cost: 0
     tags: []
-    effects: []
+    effects:
+    - {fileID: 11400000, guid: f8e653350ebe7c342b3b8e22297aaef4, type: 2}
     OnEnable:
       m_PersistentCalls:
         m_Calls: []
@@ -11200,11 +11203,12 @@ MonoBehaviour:
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
   - id: 4
-    name: kaart4
+    name: equip body 1
     description: 
     cost: 0
     tags: []
-    effects: []
+    effects:
+    - {fileID: 11400000, guid: a40938375ca4626409702b6e2d28cf39, type: 2}
     OnEnable:
       m_PersistentCalls:
         m_Calls: []
@@ -11216,171 +11220,12 @@ MonoBehaviour:
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
   - id: 5
-    name: kaart5
+    name: equip legs 1
     description: 
     cost: 0
     tags: []
-    effects: []
-    OnEnable:
-      m_PersistentCalls:
-        m_Calls: []
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-    OnDisable:
-      m_PersistentCalls:
-        m_Calls: []
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-  - id: 5
-    name: kaart5
-    description: 
-    cost: 0
-    tags: []
-    effects: []
-    OnEnable:
-      m_PersistentCalls:
-        m_Calls: []
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-    OnDisable:
-      m_PersistentCalls:
-        m_Calls: []
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-  - id: 5
-    name: kaart5
-    description: 
-    cost: 0
-    tags: []
-    effects: []
-    OnEnable:
-      m_PersistentCalls:
-        m_Calls: []
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-    OnDisable:
-      m_PersistentCalls:
-        m_Calls: []
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-  - id: 5
-    name: kaart5
-    description: 
-    cost: 0
-    tags: []
-    effects: []
-    OnEnable:
-      m_PersistentCalls:
-        m_Calls: []
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-    OnDisable:
-      m_PersistentCalls:
-        m_Calls: []
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-  - id: 5
-    name: kaart5
-    description: 
-    cost: 0
-    tags: []
-    effects: []
-    OnEnable:
-      m_PersistentCalls:
-        m_Calls: []
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-    OnDisable:
-      m_PersistentCalls:
-        m_Calls: []
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-  - id: 5
-    name: kaart5
-    description: 
-    cost: 0
-    tags: []
-    effects: []
-    OnEnable:
-      m_PersistentCalls:
-        m_Calls: []
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-    OnDisable:
-      m_PersistentCalls:
-        m_Calls: []
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-  - id: 5
-    name: kaart5
-    description: 
-    cost: 0
-    tags: []
-    effects: []
-    OnEnable:
-      m_PersistentCalls:
-        m_Calls: []
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-    OnDisable:
-      m_PersistentCalls:
-        m_Calls: []
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-  - id: 5
-    name: kaart5
-    description: 
-    cost: 0
-    tags: []
-    effects: []
-    OnEnable:
-      m_PersistentCalls:
-        m_Calls: []
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-    OnDisable:
-      m_PersistentCalls:
-        m_Calls: []
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-  - id: 5
-    name: kaart5
-    description: 
-    cost: 0
-    tags: []
-    effects: []
-    OnEnable:
-      m_PersistentCalls:
-        m_Calls: []
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-    OnDisable:
-      m_PersistentCalls:
-        m_Calls: []
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-  - id: 5
-    name: kaart5
-    description: 
-    cost: 0
-    tags: []
-    effects: []
-    OnEnable:
-      m_PersistentCalls:
-        m_Calls: []
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-    OnDisable:
-      m_PersistentCalls:
-        m_Calls: []
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-  - id: 5
-    name: kaart5
-    description: 
-    cost: 0
-    tags: []
-    effects: []
+    effects:
+    - {fileID: 11400000, guid: 829f9d3b4b5ff2a4089b2590021cd0f4, type: 2}
     OnEnable:
       m_PersistentCalls:
         m_Calls: []

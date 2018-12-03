@@ -16,7 +16,12 @@ public class CardView3D : MonoBehaviour {
     public UnityEvent OnDeselect = new UnityEvent();
     public UnityEvent OnDrop = new UnityEvent();
 
-    public void initCard(Card c)
+	public void Start()
+	{
+		initCard(card);
+	}
+
+	public void initCard(Card c)
     {
         this.card = c;
         this.cost.SetText(card.cost.ToString());

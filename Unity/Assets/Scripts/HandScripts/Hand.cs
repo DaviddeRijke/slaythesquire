@@ -35,14 +35,14 @@ namespace HandScripts
         public void Awake()
         {
             CardsInHand = new List<Card>();
-        }
-
-        public void Start()
-        {
+            
             Stash.OnCardReceived.AddListener(Discard);
             PlayField.OnCardReceived.AddListener(Play);
             Deck.OnRequestShuffle.AddListener(Shuffle);
-            
+        }
+
+        public void Start()
+        {                 
             //makes sure the game is started with the amount of cards specified in the static GameRules class
             Draw(GameRules.AmountOfStartingCards);
         }

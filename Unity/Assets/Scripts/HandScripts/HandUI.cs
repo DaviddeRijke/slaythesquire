@@ -31,14 +31,14 @@ namespace HandScripts
         {
             cardsInHand = new List<CardView3D>();
             hand = GetComponent<Hand>();
-        }
-
-        void Start()
-        {     
+            
             hand.OnDiscard.AddListener(OnDiscard);
             hand.OnDraw.AddListener(OnDraw);
             hand.OnPlay.AddListener(OnPlay);
-            
+        }
+
+        void Start()
+        {              
             //This should be redundant, however, if there are any cards in the hand that are in there by default through the inspector
             //(or for example the Mana card in Hearthstone) it won't break the system.
             FitCards();
