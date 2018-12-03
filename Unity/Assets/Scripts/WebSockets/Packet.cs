@@ -17,7 +17,7 @@ public class Packet {
         }
         set
         {
-            action = value;
+            action = value.ToUpper();
         }
     }
     /// <summary>
@@ -82,6 +82,11 @@ public class Packet {
     {
         RemoveProperty(property);
         AddArrayProperty(property, value);
+    }
+
+    public bool AddProperty(string property, int value)
+    {
+        return AddProperty(property, value.ToString());
     }
 
     public bool AddProperty(string property, string value)

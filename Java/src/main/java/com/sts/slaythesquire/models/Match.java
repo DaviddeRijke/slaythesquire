@@ -61,7 +61,7 @@ public class Match {
             int playedCard = Integer.parseInt(p.getProperty("playedCard"));
 
             Packet packet = new Packet();
-            packet.setAction("PLAYEDCARD");
+            packet.setAction("CARDPLAYED");
 
             sendToOtherPlayer(player, packet);
 
