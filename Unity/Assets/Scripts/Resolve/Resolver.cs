@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Utils;
 
 namespace DefaultNamespace
 {
@@ -35,23 +36,23 @@ namespace DefaultNamespace
             for (int i = 0; i < forAnimator.Count; i++)
             {
                 //Grab first effect and look at the second
-                Effect e1 = forAnimator.Dequeue();
-                Effect e2 = forAnimator.Peek();
+                EffectData e1 = forAnimator.Dequeue();
+                EffectData e2 = forAnimator.Peek();
 
-                if (e1 is INoInteraction)
+                if (e1.Effect is INoInteraction)
                 {
                     //e1.Activate
-                    if (e2 is INoInteraction) //Binnen blok 1
+                    if (e2.Effect is INoInteraction) //Binnen blok 1
                     {
                         e2 = forAnimator.Dequeue();
                         //e2.Activate
                         i++;
                     }
                 }
-                else if (e1 is IBlock)
+                else if (e1.Effect is IBlock)
                 {
                     //e1.Activate
-                    if (e2 is Resolve.IBlockable)
+                    if (e2.Effect is IBlockable)
                     {
 
                     }
