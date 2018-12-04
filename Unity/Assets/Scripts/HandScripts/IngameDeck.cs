@@ -52,7 +52,7 @@ public class IngameDeck : MonoBehaviour
         //Debug.Log(actualAmount);
         for (var i = 0; i < actualAmount; i++)
         {
-            Debug.Log(cardsInDeck.Count);
+            //Debug.Log(cardsInDeck.Count);
             cardsDrawn[i] = cardsInDeck.Dequeue();
         }
         return cardsDrawn;

@@ -36,7 +36,7 @@ namespace DefaultNamespace.Hand
         {
             Card[] ret = new Card[CardsInStash.Count];
             CardsInStash.CopyTo(ret);
-            Debug.Log(CardsInStash.Count);
+            //Debug.Log(CardsInStash.Count);
             CardsInStash.Clear();
             return ret.ToList();
         }

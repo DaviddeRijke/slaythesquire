@@ -36,7 +36,7 @@ namespace DefaultNamespace.Hand
 
 				//temp demo code
 				c.Activate(knight);
-				Debug.Log("activated!");
+				//Debug.Log("activated!");
 				//---
 
                 Debug.Log("receiving card");
