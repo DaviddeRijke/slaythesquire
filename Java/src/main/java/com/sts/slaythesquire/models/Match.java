@@ -58,10 +58,11 @@ public class Match {
 
     private DelegateAction playerPlayedCardAction(Player player){
         return p -> {
-            int playedCard = Integer.parseInt(p.getProperty("playedCard"));
+            int playedCard = Integer.parseInt(p.getProperty("card"));
 
             Packet packet = new Packet();
-            packet.setAction("CARDPLAYED");
+            packet.setAction("PLAYEDCARD");
+            System.out.println("Played card");
 
             sendToOtherPlayer(player, packet);
 
@@ -127,9 +128,9 @@ public class Match {
     }
 
     private void checkStatus(){
-
+        
         if (!firstPlayerStatusPacket.getProperty("data").equals(secondPlayerStatusPacket.getProperty("data"))
-                || !firstPlayerStatusPacket.getProperty("winner").equals(secondPlayerResolvePacket.getProperty("winner"))) {
+                || !firstPlayerStatusPacket.getProperty("winner").equals(secondPlayerStatusPacket.getProperty("winner"))) {
             //void
             declareVoid();
             return;

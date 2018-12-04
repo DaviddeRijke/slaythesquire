@@ -29,10 +29,9 @@ public class MessageHandler {
     }
 
     public void handleMessage(Packet packet) {
-        System.out.println("Handling packet...");
         if (topics.containsKey(packet.getAction())){
             for (DelegateAction action : topics.get(packet.getAction())){
-                System.out.println("Invoking...");
+                System.out.println("Invoking: " + packet.getAction());
                 action.invoke(packet);
             }
         } else {

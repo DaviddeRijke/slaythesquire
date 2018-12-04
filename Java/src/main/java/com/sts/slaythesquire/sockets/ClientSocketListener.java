@@ -3,6 +3,7 @@ package com.sts.slaythesquire.sockets;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.Socket;
+import java.net.SocketException;
 
 public class ClientSocketListener implements Runnable {
 
@@ -38,7 +39,7 @@ public class ClientSocketListener implements Runnable {
             }
         } catch (IOException e) {
             e.printStackTrace();
-            //messageHandler.disconnect(client);
+            connected = false;
         }
     }
 }

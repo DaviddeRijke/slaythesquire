@@ -122,10 +122,13 @@ public class SocketService : MonoBehaviour {
     private Action<Packet> Winner()
     {
         return p => {
-            int winnerId = int.Parse(p.GetProperty("winner"));
-
-            Debug.Log("Winner is player " + winnerId);
-            OnWinner.Invoke(winnerId);
+            int winnerId = 0;
+            if (int.TryParse(p.GetProperty("playerId"), out winnerId) && winnerId != 0)
+            {
+                Debug.Log("Winner is player " + winnerId);
+                OnWinner.Invoke(winnerId);
+            }
+            else Debug.Log("Not an int: " + p.GetProperty("playerId"));
         };
     }
 
