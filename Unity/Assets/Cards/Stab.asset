@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Name: Stab
   m_EditorClassIdentifier: 
   id: 0
-  name: 
-  description: 
+  name: Stab
+  description: Stabs the enemy knight for 4 damage.
   cost: 0
   tags: []
-  effects: []
+  effects:
+  - {fileID: 11400000, guid: 59e6737d28d49b14e8a2f08b443ba311, type: 2}
   OnEnable:
     m_PersistentCalls:
       m_Calls: []

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   name: Slash
-  description: Slashes the enemy knight for 5 damage.
-  cost: 1
+  description: Slashes the enemy knight for 7 damage.
+  cost: 2
   tags: []
   effects:
   - {fileID: 11400000, guid: 02323f86b5eaaf647bbfc3ebff149040, type: 2}

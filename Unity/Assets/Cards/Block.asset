@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Name: Block
   m_EditorClassIdentifier: 
   id: 0
-  name: 
-  description: 
+  name: Block
+  description: Your knight blocks incomming damage.
   cost: 0
   tags: []
   effects: []

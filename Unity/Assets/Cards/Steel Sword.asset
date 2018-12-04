@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Name: Steel Sword
   m_EditorClassIdentifier: 
   id: 0
-  name: 
-  description: 
-  cost: 0
+  name: Steel Sword
+  description: Equip a Steel Sword with 5 bonus damage
+  cost: 4
   tags: []
-  effects: []
+  effects:
+  - {fileID: 11400000, guid: 36441c489b1e57a419a37d8dd0007ad0, type: 2}
   OnEnable:
     m_PersistentCalls:
       m_Calls: []

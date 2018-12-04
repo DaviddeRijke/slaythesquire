@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Name: Iron Platebody
   m_EditorClassIdentifier: 
   id: 0
-  name: 
-  description: 
-  cost: 0
+  name: Iron Platebody
+  description: Equip an Iron Patebody with 5 armor.
+  cost: 2
   tags: []
-  effects: []
+  effects:
+  - {fileID: 11400000, guid: a40938375ca4626409702b6e2d28cf39, type: 2}
   OnEnable:
     m_PersistentCalls:
       m_Calls: []

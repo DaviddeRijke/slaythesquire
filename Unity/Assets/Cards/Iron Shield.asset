@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Name: Iron Shield
   m_EditorClassIdentifier: 
   id: 0
-  name: 
-  description: 
-  cost: 0
+  name: Iron Shield
+  description: Equip an Iron Shield with 5 armor
+  cost: 2
   tags: []
-  effects: []
+  effects:
+  - {fileID: 11400000, guid: 6f241bfa29c285342b253730a4e92841, type: 2}
   OnEnable:
     m_PersistentCalls:
       m_Calls: []

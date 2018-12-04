@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Name: Iron Platelegs
   m_EditorClassIdentifier: 
   id: 0
-  name: 
-  description: 
-  cost: 0
+  name: Iron Platelegs
+  description: Equip Iron Platelegs with 5 armor.
+  cost: 2
   tags: []
-  effects: []
+  effects:
+  - {fileID: 11400000, guid: 829f9d3b4b5ff2a4089b2590021cd0f4, type: 2}
   OnEnable:
     m_PersistentCalls:
       m_Calls: []

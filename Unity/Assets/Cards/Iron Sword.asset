@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Name: Iron Sword
   m_EditorClassIdentifier: 
   id: 0
-  name: 
-  description: 
-  cost: 0
+  name: Iron Sword
+  description: Equip an Iron Sword with 2 bonus damage.
+  cost: 2
   tags: []
-  effects: []
+  effects:
+  - {fileID: 11400000, guid: ec3608ae9ac17f04e9c03311fc31508e, type: 2}
   OnEnable:
     m_PersistentCalls:
       m_Calls: []

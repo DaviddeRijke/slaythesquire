@@ -9,14 +9,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2c9728daf0d371a449a22c3b8eaf4932, type: 3}
-  m_Name: Equip Iron Helm
+  m_Name: Iron Helm
   m_EditorClassIdentifier: 
   id: 0
-  name: 
-  description: 
-  cost: 0
+  name: Iron Helm
+  description: Equip an Iron Helm with 5 armor.
+  cost: 2
   tags: []
-  effects: []
+  effects:
+  - {fileID: 11400000, guid: f8e653350ebe7c342b3b8e22297aaef4, type: 2}
   OnEnable:
     m_PersistentCalls:
       m_Calls: []
