@@ -10,7 +10,7 @@ public class Knight : MonoBehaviour {
     public UnityEvent death;
     public EquipmentChanged equipChanged;
 
-	public Knight()
+	public void Start()
 	{
 		equipped = new List<Equipment>();
 	}
@@ -44,6 +44,26 @@ public class Knight : MonoBehaviour {
 		}
 		equipped.Add(equipment);
         equipChanged.Invoke(equipment);
+	}
+
+	public int GetDamage()
+	{
+		int totalDamage = 0;
+		foreach (Equipment equipment in this.equipped)
+		{
+			totalDamage += equipment.damage;
+		}
+		return totalDamage;
+	}
+
+	public int GetArmor()
+	{
+		int totalArmor = 0;
+		foreach (Equipment equipment in this.equipped)
+		{
+			totalArmor += equipment.armor;
+		}
+		return totalArmor;
 	}
 
 	[System.Serializable]
