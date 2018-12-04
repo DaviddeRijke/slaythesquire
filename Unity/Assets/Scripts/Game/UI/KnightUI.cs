@@ -63,7 +63,7 @@ public class KnightUI : MonoBehaviour {
     private void SetTotalsUI()
     {
         totalDamageText.text = "+" + totalDamage.ToString();
-        totalArmorText.text = "+" + totalArmor.ToString();
+        totalArmorText.text = totalArmor.ToString() + "%";
     }
 
     public void ToggleEquipmentPanel()

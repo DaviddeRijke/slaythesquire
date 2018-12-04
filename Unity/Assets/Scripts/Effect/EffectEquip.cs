@@ -8,8 +8,8 @@ public class EffectEquip : Effect, INoInteraction {
 
 	public Equipment equipment;
 
-	public override void Activate(Knight target)
+	public override void Activate(Knight self, Knight opponent)
 	{
-		target.Equip(equipment);
+		self.Equip(equipment);
 	}
 }

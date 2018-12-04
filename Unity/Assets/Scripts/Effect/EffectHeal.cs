@@ -8,8 +8,8 @@ public class EffectHeal : Effect, INoInteraction {
 
 	public int amount;
 
-	public override void Activate(Knight target)
+	public override void Activate(Knight self, Knight opponent)
 	{
-		target.AddHealth(amount);
+		self.AddHealth(amount);
 	}
 }

@@ -11,7 +11,7 @@ public class Effect : ScriptableObject
     public virtual void OnStartTurn() { }
 
     public virtual void BeforeActivate() { }
-    public virtual void Activate(Knight target) { }
+    public virtual void Activate(Knight self, Knight opponent) { }
     public virtual void AfterActivate() { }
 
     public virtual void BeforeBattle() { }

@@ -44,13 +44,13 @@ public static class Extensions
             if (i < no1.Count)
             {
                 queue.Enqueue(no1[i]);
-                no2[i].Activate(p1);
+                no2[i].Activate(p1, p2);
                 own.Remove(no1[i]);
             }
             if (i < no2.Count)
             {
                 queue.Enqueue(no2[i]);
-                no2[i].Activate(p2);
+                no2[i].Activate(p1, p2);
                 own.Remove(no2[i]);
             }
         }
@@ -72,7 +72,7 @@ public static class Extensions
                     //(blockable)bo1[i]. set block
                 }
                 queue.Enqueue(bo1[i]);
-                bo1[i].Activate(p2);
+                bo1[i].Activate(p1, p2);
             }
 
             //Attack wordt uitgevoerd
@@ -86,7 +86,7 @@ public static class Extensions
                     //(blockable)bo2[i]. set block
                 }
                 queue.Enqueue(bo2[i]);
-                bo2[i].Activate(p1);
+                bo2[i].Activate(p1, p2);
             }
         }
 
