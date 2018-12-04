@@ -1,3 +1,4 @@
+using Resolve;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,7 +30,24 @@ namespace DefaultNamespace
 
         private void ResolveCards(Card ownCard, Card otherCard)
         {
-            var forAnimator = ownCard.effects.ToList().ToSortedQueue(otherCard.effects.ToList(), OwnKnight, OtherKnight);          
+            var forAnimator = ownCard.effects.ToList().ToSortedQueue(otherCard.effects.ToList(), OwnKnight, OtherKnight);
+
+            for (int i = 0; i < forAnimator.Count; i++)
+            {
+                //Grab first effect and look at the second
+                Effect e1 = forAnimator.Dequeue();
+                Effect e2 = forAnimator.Peek();
+
+                if (e1 is INoInteraction)
+                {
+                    if (e2 is INoInteraction)
+                    {
+                        e2 = forAnimator.Dequeue();
+                        //e2.Activate
+                    }
+                }
+
+            }
         }
 
 

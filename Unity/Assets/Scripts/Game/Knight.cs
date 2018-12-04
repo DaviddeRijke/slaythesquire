@@ -10,10 +10,10 @@ public class Knight : MonoBehaviour {
     public UnityEvent death;
     public EquipmentChanged equipChanged;
 
-	public Knight()
-	{
-		equipped = new List<Equipment>();
-	}
+    private void Start()
+    {
+        equipped = new List<Equipment>();
+    }
 
     public void AddHealth(int amount)
     {

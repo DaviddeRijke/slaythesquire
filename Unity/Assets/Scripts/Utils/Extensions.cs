@@ -35,7 +35,7 @@ public static class Extensions
     }
 
     public static Queue<Effect> ToSortedQueue(this List<Effect> own, List<Effect> other, Knight p1, Knight p2)
-    {
+    {   //REMOVED ALL ACTIVATES FROM THIS METHOD TO MOVE THEM TOWARDS RESOLVER!
         var queue = new Queue<Effect>();
         var no1 = own.SortOnInteraction();
         var no2 = other.SortOnInteraction();
@@ -44,13 +44,13 @@ public static class Extensions
             if (i < no1.Count)
             {
                 queue.Enqueue(no1[i]);
-                no2[i].Activate(p1, p2);
+                //no2[i].Activate(p1, p2);
                 own.Remove(no1[i]);
             }
             if (i < no2.Count)
             {
                 queue.Enqueue(no2[i]);
-                no2[i].Activate(p1, p2);
+                //no2[i].Activate(p1, p2);
                 own.Remove(no2[i]);
             }
         }
@@ -69,10 +69,14 @@ public static class Extensions
                 if (block2 != null)
                 {
                     queue.Enqueue(block2);
-                    //(blockable)bo1[i]. set block
+                    var blockable = bo1[i] as IBlockable;
+                    if(blockable != null)
+                    {
+                        blockable.Block();
+                    }
                 }
                 queue.Enqueue(bo1[i]);
-                bo1[i].Activate(p1, p2);
+                //bo1[i].Activate(p1, p2);
             }
 
             //Attack wordt uitgevoerd
@@ -83,10 +87,14 @@ public static class Extensions
                 if (block1 != null)
                 {
                     queue.Enqueue(block1);
-                    //(blockable)bo2[i]. set block
+                    var blockable = bo2[i] as IBlockable;
+                    if (blockable != null)
+                    {
+                        blockable.Block();
+                    }
                 }
                 queue.Enqueue(bo2[i]);
-                bo2[i].Activate(p1, p2);
+                //bo2[i].Activate(p1, p2);
             }
         }
 
