@@ -46,6 +46,26 @@ public class Knight : MonoBehaviour {
         equipChanged.Invoke(equipment);
 	}
 
+	public int GetDamage()
+	{
+		int totalDamage = 0;
+		foreach (Equipment equipment in this.equipped)
+		{
+			totalDamage += equipment.damage;
+		}
+		return totalDamage;
+	}
+
+	public int GetArmor()
+	{
+		int totalArmor = 0;
+		foreach (Equipment equipment in this.equipped)
+		{
+			totalArmor += equipment.armor;
+		}
+		return totalArmor;
+	}
+
 	[System.Serializable]
 	public class ValueChanged : UnityEvent<float> { }
 

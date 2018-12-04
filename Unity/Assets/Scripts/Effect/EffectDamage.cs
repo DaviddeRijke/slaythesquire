@@ -30,6 +30,7 @@ public class EffectDamage : Effect, IBlockable {
         {
             //Blocked
         }
+		opponent.RemoveHealth( Mathf.RoundToInt(((amount + self.GetDamage()) / 100f) * (100f - opponent.GetArmor())) );
 	}
 
 	public void Block()

@@ -1192,7 +1192,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: +1
+  m_Text: 0%
 --- !u!222 &83073653
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5112,7 +5112,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 86fc0d5cfa13c1b4b8e66735873e6f36, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a40081fa29c3261489055676bb2b83db, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -8395,6 +8395,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc99f53c22ce7414a8526c645cea0f3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  knight: {fileID: 148022294}
   knightName: Red Knight
   hp: 100
   nameText: {fileID: 40335715}
@@ -11119,7 +11120,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: +1
+  m_Text: +0
 --- !u!222 &927359453
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -11155,125 +11156,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Cards:
-  - id: 1
-    name: Damage 1
-    description: 10 damage
-    cost: 1
-    tags: []
-    effects:
-    - {fileID: 11400000, guid: 7725f3c6ea816d94ab087a95da7ae088, type: 2}
-    OnEnable:
-      m_PersistentCalls:
-        m_Calls: []
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-    OnDisable:
-      m_PersistentCalls:
-        m_Calls: []
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-  - id: 2
-    name: heal 1
-    description: 10 heal
-    cost: 1
-    tags: []
-    effects:
-    - {fileID: 11400000, guid: 7d12bebafdc311a4db62ecb43130e267, type: 2}
-    OnEnable:
-      m_PersistentCalls:
-        m_Calls: []
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-    OnDisable:
-      m_PersistentCalls:
-        m_Calls: []
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-  - id: 3
-    name: equip helm 1
-    description: 10 armor
-    cost: 2
-    tags: []
-    effects:
-    - {fileID: 11400000, guid: f8e653350ebe7c342b3b8e22297aaef4, type: 2}
-    OnEnable:
-      m_PersistentCalls:
-        m_Calls: []
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-    OnDisable:
-      m_PersistentCalls:
-        m_Calls: []
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-  - id: 4
-    name: equip body 1
-    description: 10 armor
-    cost: 2
-    tags: []
-    effects:
-    - {fileID: 11400000, guid: a40938375ca4626409702b6e2d28cf39, type: 2}
-    OnEnable:
-      m_PersistentCalls:
-        m_Calls: []
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-    OnDisable:
-      m_PersistentCalls:
-        m_Calls: []
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-  - id: 5
-    name: equip legs 1
-    description: 10 armor
-    cost: 2
-    tags: []
-    effects:
-    - {fileID: 11400000, guid: 829f9d3b4b5ff2a4089b2590021cd0f4, type: 2}
-    OnEnable:
-      m_PersistentCalls:
-        m_Calls: []
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-    OnDisable:
-      m_PersistentCalls:
-        m_Calls: []
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-  - id: 6
-    name: Damage 1
-    description: 10 damage
-    cost: 1
-    tags: []
-    effects:
-    - {fileID: 11400000, guid: 7725f3c6ea816d94ab087a95da7ae088, type: 2}
-    OnEnable:
-      m_PersistentCalls:
-        m_Calls: []
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-    OnDisable:
-      m_PersistentCalls:
-        m_Calls: []
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-  - id: 7
-    name: Damage 1
-    description: 10 damage
-    cost: 1
-    tags: []
-    effects:
-    - {fileID: 11400000, guid: 7725f3c6ea816d94ab087a95da7ae088, type: 2}
-    OnEnable:
-      m_PersistentCalls:
-        m_Calls: []
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-    OnDisable:
-      m_PersistentCalls:
-        m_Calls: []
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
+  - {fileID: 11400000, guid: cded8a79ca67e5a428b21a6725f66f27, type: 2}
+  - {fileID: 11400000, guid: 6ac72951eb715ab45a3cf0c34d35acd7, type: 2}
+  - {fileID: 11400000, guid: fc3e75a4ceaf263468d3f16ebdba282b, type: 2}
+  - {fileID: 11400000, guid: ae42f092130ec604d85ea92cb4ff2927, type: 2}
+  - {fileID: 11400000, guid: 9362788f4279a1c4ebb5a083afb1b8e2, type: 2}
+  - {fileID: 11400000, guid: a31fc860da8b5a844915f7be09becd53, type: 2}
+  - {fileID: 11400000, guid: 6cd24b53dcb65ab40af6c2b527a9896d, type: 2}
+  - {fileID: 11400000, guid: 5db298574033d434c8a7ed6eeda65dc9, type: 2}
+  - {fileID: 11400000, guid: acff789f3fcf0d1479b04582dc0a38b0, type: 2}
+  - {fileID: 11400000, guid: 4b0e77aa1884b474ba96221d6bffa6b2, type: 2}
 --- !u!4 &928757574
 Transform:
   m_ObjectHideFlags: 0
@@ -18649,7 +18541,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: +1
+  m_Text: +0%
 --- !u!222 &1177358198
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -18850,6 +18742,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc99f53c22ce7414a8526c645cea0f3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  knight: {fileID: 1962762458}
   knightName: Blue Knight
   hp: 100
   nameText: {fileID: 315059230}
@@ -19029,7 +18922,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: f23f36efaf568fd44951c6b45c6e56ab, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a40081fa29c3261489055676bb2b83db, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -19111,7 +19004,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: +1
+  m_Text: +0
 --- !u!222 &1193758910
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -19413,7 +19306,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: a993a08d0b346084a8344cb5f9cadf60, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a40081fa29c3261489055676bb2b83db, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -30001,7 +29894,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 18d001ce644cf74439289a86c6e970f0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a40081fa29c3261489055676bb2b83db, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -31011,7 +30904,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: b80ff29eb36a3684d9dc400b77706aec, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a40081fa29c3261489055676bb2b83db, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
