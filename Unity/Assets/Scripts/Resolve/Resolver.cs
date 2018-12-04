@@ -34,18 +34,18 @@ namespace DefaultNamespace
 
             for (int i = 0; i < forAnimator.Count; i++)
             {
-                //Grab first effect and look at the second
-                Effect e1 = forAnimator.Dequeue();
-                Effect e2 = forAnimator.Peek();
-
-                if (e1 is INoInteraction)
-                {
-                    if (e2 is INoInteraction)
-                    {
-                        e2 = forAnimator.Dequeue();
-                        //e2.Activate
-                    }
-                }
+//                //Grab first effect and look at the second
+//                Effect e1 = forAnimator.Dequeue();
+//                Effect e2 = forAnimator.Peek();
+//
+//                if (e1 is INoInteraction)
+//                {
+//                    if (e2 is INoInteraction)
+//                    {
+//                        e2 = forAnimator.Dequeue();
+//                        //e2.Activate
+//                    }
+//                }
 
             }
         }
