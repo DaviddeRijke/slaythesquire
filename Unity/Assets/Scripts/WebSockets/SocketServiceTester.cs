@@ -44,11 +44,10 @@ public class SocketServiceTester : MonoBehaviour {
     public void SendStatus()
     {
         int winner = 0;
-        string dataString = "";
         if (winnerIdField != null && int.TryParse(winnerIdField.text, out winner)
             && dataStringField != null)
         {
-            ss.SendStatus(dataString, winner);
+            ss.SendStatus(dataStringField.text, winner);
         }
     }
 
