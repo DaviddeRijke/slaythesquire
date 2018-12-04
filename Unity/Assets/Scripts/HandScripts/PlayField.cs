@@ -6,7 +6,9 @@ namespace DefaultNamespace.Hand
 {   
     [RequireComponent(typeof(DropZone))]
     public class PlayField : MonoBehaviour
-    {    
+    {
+        public Resolver Resolver;
+        
         private DropZone _dropZone;
         private List<Card> CardsInField;
 
@@ -22,6 +24,17 @@ namespace DefaultNamespace.Hand
             CardsInField = new List<Card>();
             _dropZone = GetComponent<DropZone>();
             _dropZone.OnDrop.AddListener(AddCard);
+        }
+
+        private void Start()
+        {
+            SocketService.Instance.OnEndTurn.AddListener(SendCards);
+        }
+
+        private void SendCards()
+        {
+            SocketService.Instance.SendCardsPlayed(CardsInField);
+            Resolver.SetOwnCards(CardsInField);
         }
 
         /// <summary>

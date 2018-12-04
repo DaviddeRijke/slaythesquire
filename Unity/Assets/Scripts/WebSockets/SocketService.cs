@@ -10,19 +10,24 @@ public class SocketService : MonoBehaviour {
     public List<Card> playedCards;
 
     public UnityEvent OnOpponentCardPlayed;
-    public UnityIntEvent OnPlayPhase;
-    public UnityCardListEvent OnResolvePhase;
-    public UnityIntEvent OnWinner;
+    public UnityIntEvent OnPlayPhase = new UnityIntEvent();
+    public UnityCardListEvent OnResolvePhase = new UnityCardListEvent();
+    public UnityIntEvent OnWinner = new UnityIntEvent();
     public UnityEvent OnMatchVoid;
+    public UnityEvent OnEndTurn;
+    
+    public static SocketService Instance;
 
     private void Awake()
     {
+        if (Instance != null)
+        {
+            Destroy(Instance);
+            Instance = this;
+        }
+
         handler = GetComponent<MessageHandler>();
         playedCards = new List<Card>();
-
-        OnPlayPhase = new UnityIntEvent();
-        OnResolvePhase = new UnityCardListEvent();
-        OnWinner = new UnityIntEvent();
     }
 
     private void Start()
@@ -88,7 +93,7 @@ public class SocketService : MonoBehaviour {
     {
         return p =>
         {
-            SendCardsPlayed(playedCards);
+            OnEndTurn.Invoke();
         };
     }
 

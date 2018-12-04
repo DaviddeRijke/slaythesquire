@@ -8,9 +8,6 @@ namespace HandScripts
 {
     public class Hand : MonoBehaviour
     {
-        //Webconnect
-        public SocketService SocketService;
-        
         //This is not a list to the gameobjects, but to the script instances! Thus this are the objects you want to work with, if it's not for UI.
         public List<Card> CardsInHand;
         
@@ -47,8 +44,7 @@ namespace HandScripts
 
         public void Start()
         {
-            if(SocketService == null) Debug.LogError("No SocketService attached");
-            OnPlay.AddListener(SocketService.SendPlayedCard);
+            OnPlay.AddListener(SocketService.Instance.SendPlayedCard);
             
             //makes sure the game is started with the amount of cards specified in the static GameRules class
             Draw(GameRules.AmountOfStartingCards);
