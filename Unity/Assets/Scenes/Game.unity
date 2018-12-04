@@ -7682,7 +7682,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30bd775c0102495dafd9313b921163eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knight: {fileID: 1962762458}
+  self: {fileID: 1962762458}
+  opponent: {fileID: 148022294}
 --- !u!4 &608042519 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 7ac2de8fbdb842e419727d09c0416ea6,

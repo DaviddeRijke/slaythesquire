@@ -8,14 +8,19 @@ public class EffectDamage : Effect, IBlockable {
 
 	public int amount;
 
-	public override void Activate(Knight target)
+	public override void Activate(Knight self, Knight opponent)
 	{
+		int totalDamage = 0;
+		foreach (Equipment equipment in self.equipped)
+		{
+			totalDamage += equipment.damage;
+		}
 		int totalArmor = 0;
-		foreach (Equipment equipment in target.equipped)
+		foreach (Equipment equipment in opponent.equipped)
 		{
 			totalArmor += equipment.armor;
 		}
-		target.RemoveHealth( Mathf.RoundToInt((amount / 100f) * (100f - totalArmor)) );
+		opponent.RemoveHealth( Mathf.RoundToInt(((amount + totalDamage) / 100f) * (100f - totalArmor)) );
 	}
 
 	public void Block()

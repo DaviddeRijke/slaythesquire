@@ -11,7 +11,8 @@ namespace DefaultNamespace.Hand
         private List<Card> CardsInField;
 
 		//temp demo code
-		public Knight knight;
+		public Knight self;
+		public Knight opponent;
 		//---
 
         public CardEvent OnCardReceived = new CardEvent();
@@ -35,7 +36,7 @@ namespace DefaultNamespace.Hand
             {
 
 				//temp demo code
-				c.Activate(knight);
+				c.Activate(self, opponent);
 				//Debug.Log("activated!");
 				//---
 
