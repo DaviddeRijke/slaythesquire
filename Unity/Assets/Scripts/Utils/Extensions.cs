@@ -2,9 +2,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.NetworkInformation;
 using System.Runtime.CompilerServices;
-using DefaultNamespace.Resolve;
 using Resolve;
 using UnityEngine;
+using Utils;
+using Wilberforce.FinalVignette;
 using Random = System.Random;
 
 public static class Extensions
@@ -34,22 +35,28 @@ public static class Extensions
         return queue;
     }
 
-    public static Queue<Effect> ToSortedQueue(this List<Effect> own, List<Effect> other, Knight p1, Knight p2)
+    public static EffectData ToData(this Effect effect, Knight caster)
+    {
+        var ed = new EffectData {Effect = effect, Caster = caster};
+        return ed;
+    }
+
+    public static Queue<EffectData> ToSortedQueue(this List<Effect> own, List<Effect> other, Knight p1, Knight p2)
     {   //REMOVED ALL ACTIVATES FROM THIS METHOD TO MOVE THEM TOWARDS RESOLVER!
-        var queue = new Queue<Effect>();
+        var queue = new Queue<EffectData>();
         var no1 = own.SortOnInteraction();
         var no2 = other.SortOnInteraction();
         for (int i = 0; i < Mathf.Max(no1.Count, no2.Count); i++)
         {
             if (i < no1.Count)
             {
-                queue.Enqueue(no1[i]);
+                queue.Enqueue(no1[i].ToData(p1));
                 //no2[i].Activate(p1, p2);
                 own.Remove(no1[i]);
             }
             if (i < no2.Count)
             {
-                queue.Enqueue(no2[i]);
+                queue.Enqueue(no2[i].ToData(p2));
                 //no2[i].Activate(p1, p2);
                 own.Remove(no2[i]);
             }
@@ -68,14 +75,14 @@ public static class Extensions
                 //Attack wordt geblockt
                 if (block2 != null)
                 {
-                    queue.Enqueue(block2);
+                    queue.Enqueue(block2.ToData(p2));
                     var blockable = bo1[i] as IBlockable;
                     if(blockable != null)
                     {
                         blockable.Block();
                     }
                 }
-                queue.Enqueue(bo1[i]);
+                queue.Enqueue(bo1[i].ToData(p1));
                 //bo1[i].Activate(p1, p2);
             }
 
@@ -86,14 +93,14 @@ public static class Extensions
                 //Attack wordt geblockt
                 if (block1 != null)
                 {
-                    queue.Enqueue(block1);
+                    queue.Enqueue(block1.ToData(p1));
                     var blockable = bo2[i] as IBlockable;
                     if (blockable != null)
                     {
                         blockable.Block();
                     }
                 }
-                queue.Enqueue(bo2[i]);
+                queue.Enqueue(bo2[i].ToData(p2));
                 //bo2[i].Activate(p1, p2);
             }
         }
@@ -101,14 +108,14 @@ public static class Extensions
         //Alleen animations, er wordt geen attack geblockt
         if (bo1.Count == 0 && block2 != null)
         {
-            queue.Enqueue(block2);
+            queue.Enqueue(block2.ToData(p2));
             bo2.Remove(block2);
         }
 
         //Alleen animations, er wordt geen attack geblockt
         if (bo2.Count == 0 && block1 != null)
         {
-            queue.Enqueue(block1);
+            queue.Enqueue(block1.ToData(p1));
             bo1.Remove(block1);
         }
         
