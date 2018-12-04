@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using DefaultNamespace.Resolve;
+using Resolve;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "EffectDamage", menuName = "Effects/Damage")]

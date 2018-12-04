@@ -40,10 +40,20 @@ namespace DefaultNamespace
 
                 if (e1 is INoInteraction)
                 {
-                    if (e2 is INoInteraction)
+                    //e1.Activate
+                    if (e2 is INoInteraction) //Binnen blok 1
                     {
                         e2 = forAnimator.Dequeue();
                         //e2.Activate
+                        i++;
+                    }
+                }
+                else if (e1 is IBlock)
+                {
+                    //e1.Activate
+                    if (e2 is Resolve.IBlockable)
+                    {
+
                     }
                 }
 

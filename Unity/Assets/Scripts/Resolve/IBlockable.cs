@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace DefaultNamespace.Resolve
+namespace Resolve
 {
     public interface IBlockable
     {
