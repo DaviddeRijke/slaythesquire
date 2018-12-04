@@ -38,8 +38,17 @@ public class ClientSocketListener implements Runnable {
                 messageHandler.handleMessage(new Packet(message));
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Connection lost, closing socket");
             connected = false;
+            closeSocket();
+        }
+    }
+
+    private void closeSocket() {
+        try {
+            clientSocket.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

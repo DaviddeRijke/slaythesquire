@@ -608,9 +608,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ba82056feb7d8e4298b5dd0dc692c55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ServerIp: 192.168.1.101
+  ServerIp: 127.0.0.1
   ServerPort: 4343
-  playerID: 2
+  playerId: 2
   IsConnected: 0
 --- !u!4 &547234296
 Transform:
@@ -661,6 +661,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playedCards: []
   OnOpponentCardPlayed:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  OnEndTurn:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,

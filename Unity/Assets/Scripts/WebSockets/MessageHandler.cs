@@ -12,8 +12,7 @@ public class MessageHandler : MonoBehaviour {
     public int ServerPort = 4343;
     private IPEndPoint serverAddress;
 
-    public int playerID = 1;
-    private Player player;
+    public int playerId = 1;
     public bool IsConnected = false;
 
     private Socket socket;
@@ -23,8 +22,9 @@ public class MessageHandler : MonoBehaviour {
     void Awake()
     {
         // TODO: Get player from somewhere else
-        player = new Player() { id = playerID };
         topics = new Dictionary<string, List<Action<Packet>>>();
+
+        DontDestroyOnLoad(gameObject);
     }
 
     public void Connect()
@@ -47,11 +47,11 @@ public class MessageHandler : MonoBehaviour {
         Subscribe("READYTOCONNECT", p => {
             Subscribe("CONNECTED", p2 => {
                 IsConnected = true;
-                Debug.Log("Connected with player id " + player.id);
+                Debug.Log("Connected with player id " + playerId);
             });
 
             Packet packet = new Packet() { Action = "CONNECT" };
-            packet.AddProperty("playerId", player.id.ToString());
+            packet.AddProperty("playerId", playerId.ToString());
 
             SendPacket(packet);
         });
@@ -151,5 +151,10 @@ public class MessageHandler : MonoBehaviour {
         if (socket != null)
             socket.Close();
         socket = null;
+    }
+
+    void OnApplicationQuit()
+    {
+        DisconnectFromServer();
     }
 }

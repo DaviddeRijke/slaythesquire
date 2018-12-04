@@ -4,11 +4,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Packet {
+public class Packet
+{
 
     private string action;
     private Dictionary<string, string> properties;
-    
+
     public string Action
     {
         get
