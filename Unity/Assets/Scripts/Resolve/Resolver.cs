@@ -7,13 +7,30 @@ namespace DefaultNamespace
 {
     public class Resolver : MonoBehaviour
     {
+        public SocketService SocketService;
+        
         private List<Card> _own;
         private List<Card> _other;
         private List<Effect> _effects;
         
         public Knight OwnKnight;
         public Knight OtherKnight;
-        
+
+        public void Awake()
+        {
+        }
+
+        private void Start()
+        {
+            SocketService.OnOpponentCardPlayed.AddListener(OpponentPlayedCard);
+        }
+
+        /// <summary>
+        /// This method will be refactored as it does not belong here. It is put here for the sake of debugging
+        /// </summary>
+        public void OpponentPlayedCard()
+        {
+        }
 
         public void Resolve()
         {

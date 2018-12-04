@@ -8,6 +8,9 @@ namespace HandScripts
 {
     public class Hand : MonoBehaviour
     {
+        //Webconnect
+        public SocketService SocketService;
+        
         //This is not a list to the gameobjects, but to the script instances! Thus this are the objects you want to work with, if it's not for UI.
         public List<Card> CardsInHand;
         
@@ -27,13 +30,14 @@ namespace HandScripts
         /// <summary>
         /// Returns the amount of cards that can still be added to the hand. Value is defined in the static GameRules class.
         /// </summary>
-        private int capacity
+        private int Capacity
         {
             get { return GameRules.AmountOfCardsInHand - CardsInHand.Count; }
         }
 
         public void Awake()
         {
+            
             CardsInHand = new List<Card>();
             
             Stash.OnCardReceived.AddListener(Discard);
@@ -42,7 +46,10 @@ namespace HandScripts
         }
 
         public void Start()
-        {                 
+        {
+            if(SocketService == null) Debug.LogError("No SocketService attached");
+            OnPlay.AddListener(SocketService.SendPlayedCard);
+            
             //makes sure the game is started with the amount of cards specified in the static GameRules class
             Draw(GameRules.AmountOfStartingCards);
         }
@@ -94,7 +101,7 @@ namespace HandScripts
         /// <param name="amount"></param>
         public void Draw(int amount)
         {
-            if (capacity <= 0) return;
+            if (Capacity <= 0) return;
             var cardsDrawn = Deck.DrawCards(amount);
             CardsInHand.AddRange(cardsDrawn);
             foreach (var card in cardsDrawn)
@@ -108,7 +115,7 @@ namespace HandScripts
         /// </summary>
         public void Fill()
         {
-            Draw(capacity);
+            Draw(Capacity);
         }
     }
 }
