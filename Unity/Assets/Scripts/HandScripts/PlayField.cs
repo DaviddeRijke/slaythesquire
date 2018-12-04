@@ -9,7 +9,11 @@ namespace DefaultNamespace.Hand
     {    
         private DropZone _dropZone;
         private List<Card> CardsInField;
-    
+
+		//temp demo code
+		public Knight knight;
+		//---
+
         public CardEvent OnCardReceived = new CardEvent();
 
         private void Awake()
@@ -29,6 +33,12 @@ namespace DefaultNamespace.Hand
         {
             if (IsValidOperation(c))
             {
+
+				//temp demo code
+				c.Activate(knight);
+				Debug.Log("activated!");
+				//---
+
                 Debug.Log("receiving card");
                 CardsInField.Add(c);
                 OnCardReceived.Invoke(c);

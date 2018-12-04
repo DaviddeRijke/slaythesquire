@@ -49,7 +49,7 @@ public class IngameDeck : MonoBehaviour
             OnRequestShuffle.Invoke(amount - actualAmount);
         }
         Card[] cardsDrawn = new Card[actualAmount];
-        Debug.Log(actualAmount);
+        //Debug.Log(actualAmount);
         for (var i = 0; i < actualAmount; i++)
         {
             Debug.Log(cardsInDeck.Count);

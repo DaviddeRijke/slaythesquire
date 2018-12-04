@@ -17,7 +17,7 @@ public class Knight : MonoBehaviour {
 
     public void AddHealth(int amount)
     {
-        health += Mathf.Abs(amount);
+		health = Mathf.Min(health + amount, 100);
         healthChanged.Invoke(health);
     }
 
