@@ -18,6 +18,18 @@ public class CardContainer : ScriptableObject, ILoadable
                 }
 
                 Cards = (entities as Card[]).ToList();
+        }
 
+        public List<Card> GetCards(int[] ids)
+        {
+                var ret = new List<Card>();
+                foreach(Card card in Cards)
+                {
+                        if (ids.Contains(card.id))
+                        {
+                                ret.Add(card);
+                        }
+                }
+                return ret;
         }
 }

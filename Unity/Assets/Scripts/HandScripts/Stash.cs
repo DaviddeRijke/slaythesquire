@@ -34,12 +34,11 @@ namespace DefaultNamespace.Hand
         /// <returns></returns>
         public List<Card> Reset()
         {
-            Card[] ret = new Card[CardsInStash.Capacity];
+            Card[] ret = new Card[CardsInStash.Count];
             CardsInStash.CopyTo(ret);
             Debug.Log(CardsInStash.Count);
             CardsInStash.Clear();
             return ret.ToList();
-            //TODO seems to be a bug
         }
 
         /// <summary>
