@@ -8119,6 +8119,7 @@ GameObject:
   - component: {fileID: 1117240005}
   - component: {fileID: 1117240004}
   - component: {fileID: 1117240006}
+  - component: {fileID: 1117240007}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -8200,12 +8201,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 557e65053c65af14da336a117d7e5e80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1117240007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1117240001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04928e7e25f3403f899c54b9f89b623e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   objectsToHide:
+  - {fileID: 610547758}
   - {fileID: 684234841}
-  - {fileID: 599947200}
-  - {fileID: 1624628873}
-  - {fileID: 1386486185}
-  - {fileID: 1545726521}
   objectsToShow:
   - {fileID: 2121358115}
 --- !u!1 &1117430223
@@ -13488,7 +13497,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1117240006}
+      - m_Target: {fileID: 1117240007}
         m_MethodName: ToggleUI
         m_Mode: 6
         m_Arguments:
@@ -13982,7 +13991,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1117240006}
+      - m_Target: {fileID: 1117240007}
         m_MethodName: ToggleUI
         m_Mode: 6
         m_Arguments:
