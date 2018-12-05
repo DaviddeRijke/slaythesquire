@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class KnightMovement : MonoBehaviour {
     public Animator ani;
+    public FloatingCanvas floatingNumbers;
     public KeyCode key;
     private bool isInAction;
 
@@ -21,22 +22,33 @@ public class KnightMovement : MonoBehaviour {
         }
         if (Input.GetKeyDown(key))
         {
-            PlayAttackAnimation();
+            PlayAttackAnimation(25);
         }
         if (Input.GetKeyDown(KeyCode.F))
         {
             PlayForfeitAnimation();
         }
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            PlayHealAnimation(15);
+        }
     }
 
-    public void PlayAttackAnimation()
+    public float PlayAttackAnimation(int damage)
     {
-        PlayAnimation(Attack());
+        PlayAnimation(Attack(damage));
+        return 2.8f;
     }
 
-    public void PlayDuckAnimation()
+    public float PlayDuckAnimation()
     {
         PlayAnimation(Duck());
+        return 0.9f;
+    }
+
+    public void PlayHealAnimation(int hp)
+    {
+        PlayAnimation(Heal(hp));
     }
 
     public void PlayForfeitAnimation()
@@ -53,7 +65,7 @@ public class KnightMovement : MonoBehaviour {
     }
 
 
-    private IEnumerator Attack()
+    private IEnumerator Attack(int damage)
     {
         isInAction = true;
 
@@ -67,8 +79,17 @@ public class KnightMovement : MonoBehaviour {
         yield return new WaitForSeconds(0.593f * 2 * .4f);
         ani.SetFloat("Forward", 0);
         ani.SetBool("Attack", false);
-        yield return new WaitForSeconds(3.4f / 2);
-        
+        yield return new WaitForSeconds(0.2f);
+        if (damage > 0)
+        {
+            floatingNumbers.ShowDamage(damage);
+        }
+        else
+        {
+            floatingNumbers.ShowBlocking();
+        }
+        yield return new WaitForSeconds(1.5f);
+
 
         //Turn around (1.233 s)
         ani.SetFloat("Turn", 1);
@@ -103,6 +124,17 @@ public class KnightMovement : MonoBehaviour {
         ani.SetBool("Crouch", true);
         yield return new WaitForSeconds(2f);
         ani.SetBool("Crouch", false);
+        isInAction = false;
+    }
+
+    public IEnumerator Heal(int hp)
+    {
+        isInAction = true;
+        ani.SetBool("Heal", true);
+        yield return new WaitForSeconds(0.4f);
+        floatingNumbers.ShowHealing(hp);
+        yield return new WaitForSeconds(0.4f);
+        ani.SetBool("Heal", false);
         isInAction = false;
     }
 

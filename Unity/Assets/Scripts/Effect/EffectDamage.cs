@@ -21,7 +21,7 @@ public class EffectDamage : Effect, IBlockable {
 			totalArmor += equipment.armor;
 		}
 
-        self.gameObject.GetComponent<KnightMovement>().PlayAttackAnimation();
+        self.gameObject.GetComponent<KnightMovement>().PlayAttackAnimation(amount);
         if (amount > 0)
         {
             opponent.RemoveHealth(Mathf.RoundToInt(((amount + totalDamage) / 100f) * (100f - totalArmor)));
