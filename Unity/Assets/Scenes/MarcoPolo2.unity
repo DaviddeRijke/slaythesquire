@@ -1771,6 +1771,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ani: {fileID: 148022292}
+  vfx: {fileID: 1446281304}
   floatingNumbers: {fileID: 2059502463}
   key: 98
 --- !u!95 &148022292
@@ -7897,6 +7898,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d69a473ff50a2db40a0c240911374d34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playedCards: []
 --- !u!64 &599836900
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -9878,6 +9880,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d69a473ff50a2db40a0c240911374d34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playedCards: []
 --- !u!64 &785936200
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -12533,6 +12536,34 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 996888308}
   m_CullTransparentMesh: 0
+--- !u!1 &1001840343
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1001840344}
+  m_Layer: 0
+  m_Name: VisualEffects
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1001840344
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1001840343}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1446281297}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1006225212 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 7ac2de8fbdb842e419727d09c0416ea6,
@@ -22672,6 +22703,7 @@ GameObject:
   - component: {fileID: 1446281300}
   - component: {fileID: 1446281303}
   - component: {fileID: 1446281298}
+  - component: {fileID: 1446281304}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -22706,6 +22738,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 928757574}
+  - {fileID: 1001840344}
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -22844,6 +22877,17 @@ MonoBehaviour:
   deck: {fileID: 657464377}
   AcceptCardInput: 0
   PhaseText: {fileID: 1993962361}
+--- !u!114 &1446281304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1446281295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 041d83d29d2a95749b6b070e774b95cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1446477711
 GameObject:
   m_ObjectHideFlags: 0
@@ -33238,6 +33282,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ani: {fileID: 1962762455}
+  vfx: {fileID: 1446281304}
   floatingNumbers: {fileID: 229921597}
   key: 97
 --- !u!114 &1962762458

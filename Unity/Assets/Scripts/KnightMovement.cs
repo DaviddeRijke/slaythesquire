@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class KnightMovement : MonoBehaviour {
     public Animator ani;
+    public VisualEffectsController vfx;
     public FloatingCanvas floatingNumbers;
     public KeyCode key;
     private bool isInAction;
@@ -64,6 +65,25 @@ public class KnightMovement : MonoBehaviour {
         }
     }
 
+    private void PlayBloodVisualEffects()
+    {
+        float x = this.gameObject.transform.position.x;
+        float z = this.gameObject.transform.position.z;
+        int direction = Mathf.RoundToInt(x / Mathf.Abs(x));
+        Vector3 pos = new Vector3(x + (direction * 0.66f), 1.75f, z - 0.5f);
+        vfx.PlayEffect(visualEffectNames.bloodExplosion, pos);
+        vfx.PlayEffect(visualEffectNames.bloodAndGutsExplosion, pos);
+    }
+
+    private void PlayHealVisualEffects()
+    {
+        float x = this.gameObject.transform.position.x;
+        float z = this.gameObject.transform.position.z;
+        int direction = -1 * (Mathf.RoundToInt(x / Mathf.Abs(x)));
+        Vector3 pos = new Vector3(x + (direction * 0.4f), 1f, z - 0.5f);
+        vfx.PlayEffect(visualEffectNames.magicLightColumn, pos);
+        vfx.PlayEffect(visualEffectNames.magicLightShining, pos);
+    }
 
     private IEnumerator Attack(int damage)
     {
@@ -83,6 +103,8 @@ public class KnightMovement : MonoBehaviour {
         if (damage > 0)
         {
             floatingNumbers.ShowDamage(damage);
+
+            PlayBloodVisualEffects();
         }
         else
         {
@@ -132,6 +154,7 @@ public class KnightMovement : MonoBehaviour {
         isInAction = true;
         ani.SetBool("Heal", true);
         yield return new WaitForSeconds(0.4f);
+        PlayHealVisualEffects();
         floatingNumbers.ShowHealing(hp);
         yield return new WaitForSeconds(0.4f);
         ani.SetBool("Heal", false);
