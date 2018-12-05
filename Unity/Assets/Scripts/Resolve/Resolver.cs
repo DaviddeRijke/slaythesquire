@@ -33,34 +33,72 @@ namespace DefaultNamespace
         {
             var forAnimator = ownCard.effects.ToList().ToSortedQueue(otherCard.effects.ToList(), OwnKnight, OtherKnight);
 
+            // ----(((((( cob = code execution block ))))))----
             for (int i = 0; i < forAnimator.Count; i++)
             {
                 //Grab first effect and look at the second
                 EffectData e1 = forAnimator.Dequeue();
                 EffectData e2 = forAnimator.Peek();
 
-                if (e1.Effect is INoInteraction)
+                if (e1.Effect is INoInteraction) //Within cob 1
                 {
-                    //e1.Activate
-                    if (e2.Effect is INoInteraction) //Binnen blok 1
+                    e1.Effect.Activate(e1.Caster, GetOtherKnight(e1.Caster));
+                    if (e2.Effect is INoInteraction && !e2.Caster.Equals(e1.Caster)) //Two can play at once
                     {
                         e2 = forAnimator.Dequeue();
-                        //e2.Activate
+                        e2.Effect.Activate(e2.Caster, GetOtherKnight(e2.Caster));
                         i++;
                     }
                 }
                 else if (e1.Effect is IBlock)
                 {
-                    //e1.Activate
-                    if (e2.Effect is IBlockable)
+                    if (e2.Effect is IBlockable && !e2.Caster.Equals(e1.Caster)) //Within cob 2 with block
                     {
-
+                        StartCoroutine(PlayEffectAfterTime(e1, 1.5f));
+                        e2 = forAnimator.Dequeue();
+                        e2.Effect.Activate(e2.Caster, GetOtherKnight(e2.Caster));
+                        i++;
+                    }
+                    else if (e2.Effect is IBlock && !e2.Caster.Equals(e1.Caster)) //Within cob 3 (Play two)
+                    {
+                        e1.Effect.Activate(e1.Caster, GetOtherKnight(e1.Caster));
+                        e2 = forAnimator.Dequeue();
+                        e2.Effect.Activate(e2.Caster, GetOtherKnight(e2.Caster));
+                        i++;
+                    }
+                    else //Within cob 3 (Play one, because the next is from the same knight)
+                    {
+                        e1.Effect.Activate(e1.Caster, GetOtherKnight(e1.Caster));
                     }
                 }
-
+                else if (e1.Effect is IBlockable) //Within cob 2 without block
+                {
+                    e1.Effect.Activate(e1.Caster, GetOtherKnight(e1.Caster));
+                }
             }
         }
 
+        private Knight GetOtherKnight(Knight question)
+        {
+            if (question.Equals(OwnKnight))
+            {
+                return OtherKnight;
+            }
+            else if (question.Equals(OtherKnight))
+            {
+                return OwnKnight;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        private IEnumerator PlayEffectAfterTime(EffectData e, float delay)
+        {
+            yield return new WaitForSeconds(delay);
+            e.Effect.Activate(e.Caster, GetOtherKnight(e.Caster));
+        }
 
         //Hand.OnPlay invokes SocketService.PlayCard
         //xxxx listens to (void)SocketService.OpponentPlaysCard
