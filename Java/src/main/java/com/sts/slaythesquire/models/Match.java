@@ -3,6 +3,9 @@ package com.sts.slaythesquire.models;
 import com.sts.slaythesquire.sockets.DelegateAction;
 import com.sts.slaythesquire.sockets.Packet;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class Match {
 
     private Player firstPlayer;
@@ -11,17 +14,34 @@ public class Match {
     private boolean firstPlayerConfirmed = false;
     private boolean secondPlayerConfirmed = false;
 
+    private boolean firstPlayerEndedTurn = false;
+    private boolean secondPlayerEndedTurn = false;
+
     private int turnCount = 0;
 
-    Packet firstPlayerResolvePacket = null;
-    Packet secondPlayerResolvePacket = null;
+    private Packet firstPlayerResolvePacket = null;
+    private Packet secondPlayerResolvePacket = null;
 
-    Packet firstPlayerStatusPacket = null;
-    Packet secondPlayerStatusPacket = null;
+    private Packet firstPlayerStatusPacket = null;
+    private Packet secondPlayerStatusPacket = null;
+
+    private TimerTask turnTimerTask;
+    private Timer turnTimer;
+
+    private Long turnTime = 30000L;
 
     public Match(Player firstPlayer, Player secondPlayer) {
         this.firstPlayer = firstPlayer;
         this.secondPlayer = secondPlayer;
+
+        turnTimerTask = new TimerTask() {
+            @Override
+            public void run() {
+                endTurn();
+            }
+        };
+
+        turnTimer = new Timer();
 
         preMatchPreparation(this.firstPlayer);
         preMatchPreparation(this.secondPlayer);
@@ -37,12 +57,17 @@ public class Match {
         this.secondPlayer.sendPacket(packet);
     }
 
+    private void endTurn(){
+
+    }
+
     private void preMatchPreparation(Player player){
         player.getMessageHandler().subscribe("CONFIRMMATCH", p -> {
             playerConfirmed(player);
         });
 
         player.getMessageHandler().subscribe("PLAYEDCARD", playerPlayedCardAction(player));
+        player.getMessageHandler().subscribe("ENDTURN", playerEndedTurn(player));
         player.getMessageHandler().subscribe("CARDSPLAYED", playerPlayedTurnAction(player));
         player.getMessageHandler().subscribe("STATUS", playerSendsStatus(player));
 
@@ -54,6 +79,15 @@ public class Match {
         packet.addProperty("turnCount", Integer.toString(turnCount));
 
         sendToBoth(packet);
+
+        turnTimer.schedule(turnTimerTask, turnTime);
+
+    }
+
+    private DelegateAction playerEndedTurn(Player player){
+        return p -> {
+
+        };
     }
 
     private DelegateAction playerPlayedCardAction(Player player){
