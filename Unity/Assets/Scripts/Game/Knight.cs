@@ -48,6 +48,12 @@ public class Knight : MonoBehaviour {
 		energyChanged.Invoke(energy);
 	}
 
+	public void RenewEnergy()
+	{
+		energy = maxEnergy;
+		energyChanged.Invoke(energy);
+	}
+
 	public void Equip(Equipment equipment)
 	{
 		foreach (Equipment item in equipped)
