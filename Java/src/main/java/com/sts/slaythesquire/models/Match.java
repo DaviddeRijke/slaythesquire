@@ -34,13 +34,6 @@ public class Match {
         this.firstPlayer = firstPlayer;
         this.secondPlayer = secondPlayer;
 
-        turnTimerTask = new TimerTask() {
-            @Override
-            public void run() {
-                playersEndedTurn();
-            }
-        };
-
         turnTimer = new Timer();
 
         preMatchPreparation(this.firstPlayer);
@@ -76,6 +69,16 @@ public class Match {
 
         sendToBoth(packet);
 
+        System.out.println("Started new round, starting timer...");
+
+        turnTimerTask = new TimerTask() {
+            @Override
+            public void run() {
+                System.out.println("Ending turn...");
+                playersEndedTurn();
+            }
+        };
+
         turnTimer.schedule(turnTimerTask, turnTime);
 
     }
@@ -101,7 +104,10 @@ public class Match {
 
     private synchronized void playersEndedTurn(){
 
-        turnTimer.cancel();
+        if (turnTimerTask != null){
+            turnTimerTask.cancel();
+            turnTimerTask =null;
+        }
 
         Packet p = new Packet();
         p.setAction("ENDTURN");
@@ -202,6 +208,7 @@ public class Match {
         }
 
         if (winnerId == 0){
+            turnCount++;
             startNewRound();
         } else{
             declareWinner(winnerId);
