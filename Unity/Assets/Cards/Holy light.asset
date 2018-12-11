@@ -14,7 +14,7 @@ MonoBehaviour:
   id: 0
   name: Holy light
   description: Heal your knight 4 health.
-  cost: 12
+  cost: 1
   tags: []
   effects:
   - {fileID: 11400000, guid: 1ef21a3ab71ee4f47a141557c4f94e7b, type: 2}

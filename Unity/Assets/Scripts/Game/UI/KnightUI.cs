@@ -8,17 +8,11 @@ public class KnightUI : MonoBehaviour {
 	public string knightName;
     public float hp = 100;
     private float initialHp;
-	public float energy = 10;
-	private float initialEnergy;
     public Text nameText;
     public Text healthText;
-	public Text energyText;
     public Image healthBar;
-	public Image energyBar;
 	public Gradient healthTextColor;
     public Gradient healthBarColor;
-	public Gradient energyTextColor;
-	public Gradient energyBarColor;
 	public Button equipmentButton;
     public GameObject equipmentPanel;
     public EquipmentSlotUI[] equipment;
@@ -38,9 +32,6 @@ public class KnightUI : MonoBehaviour {
 
         SetHealth(hp);
         initialHp = hp;
-
-		SetEnergy(energy);
-		initialEnergy = energy;
 
 		SetTotalsUI();
 
@@ -67,17 +58,6 @@ public class KnightUI : MonoBehaviour {
         healthText.color = healthTextColor.Evaluate(1 - relative);
         healthBar.color = healthBarColor.Evaluate(1 - relative);
     }
-
-	public void SetEnergy(float newEnergy)
-	{
-		energy = newEnergy;
-		float relative = energy / initialEnergy;
-		energyText.text = Mathf.RoundToInt(energy).ToString();
-		energyBar.fillAmount = relative;
-
-		energyText.color = energyTextColor.Evaluate(1 - relative);
-		energyBar.color = energyBarColor.Evaluate(1 - relative);
-	}
 
 	private void SetTotalsUI()
     {

@@ -5,9 +5,9 @@ using UnityEngine.Events;
 
 public class Knight : MonoBehaviour {
 	public int health;
-	public int maxHealth;
+	private int maxHealth;
 	public int energy;
-	public int maxEnergy;
+	private int maxEnergy;
 	public List<Equipment> equipped;
     public HealthChanged healthChanged;
 	public EnergyChanged energyChanged;
@@ -16,6 +16,8 @@ public class Knight : MonoBehaviour {
 
     private void Start()
     {
+		maxHealth = health;
+		maxEnergy = energy;
         equipped = new List<Equipment>();
     }
 

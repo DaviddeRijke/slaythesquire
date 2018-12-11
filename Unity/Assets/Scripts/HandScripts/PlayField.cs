@@ -42,6 +42,10 @@ namespace DefaultNamespace.Hand
 					CardsInField.Add(c);
 					OnCardReceived.Invoke(c);
 				}
+				else
+				{
+					Debug.Log("Out of energy, can't play card!");
+				}
             }
         }
 

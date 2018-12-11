@@ -1826,9 +1826,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
-  maxHealth: 100
   energy: 10
-  maxEnergy: 10
   equipped: []
   healthChanged:
     m_PersistentCalls:
@@ -2976,7 +2974,7 @@ RectTransform:
   m_Children:
   - {fileID: 41843857}
   m_Father: {fileID: 1969462828}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 270}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -7852,6 +7850,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 614577749}
+  - component: {fileID: 614577750}
   m_Layer: 0
   m_Name: Energy
   m_TagString: Untagged
@@ -7865,20 +7864,92 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 614577748}
-  m_LocalRotation: {x: 0, y: -0, z: 0.70710677, w: -0.7071068}
+  m_LocalRotation: {x: -0, y: -0, z: 0.0000032782555, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1091099764}
   - {fileID: 1128306228}
-  m_Father: {fileID: 1969462828}
-  m_RootOrder: 4
+  - {fileID: 1091099764}
+  m_Father: {fileID: 721171120}
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 270}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -179, y: 81}
+  m_AnchoredPosition: {x: 850, y: -240.58}
   m_SizeDelta: {x: 200, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &614577750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 614577748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 344f08965fb26b0458c2d497cf382f21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  energy: 10
+  energyText: {fileID: 775519931}
+  energyBar: {fileID: 767488840}
+  energyTextColor:
+    serializedVersion: 2
+    key0: {r: 0.27450982, g: 0.20784314, b: 0.039215688, a: 1}
+    key1: {r: 0.9433962, g: 0.93811077, b: 0.87664646, a: 1}
+    key2: {r: 0.9433962, g: 0.93811077, b: 0.87664646, a: 0}
+    key3: {r: 1, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 34502
+    ctime1: 35852
+    ctime2: 65342
+    ctime3: 65535
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_NumColorKeys: 4
+    m_NumAlphaKeys: 2
+  energyBarColor:
+    serializedVersion: 2
+    key0: {r: 0, g: 1, b: 0, a: 1}
+    key1: {r: 1, g: 1, b: 0, a: 1}
+    key2: {r: 1, g: 0, b: 0, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 29491
+    ctime1: 42598
+    ctime2: 55705
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_NumColorKeys: 3
+    m_NumAlphaKeys: 2
 --- !u!4 &619622503 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: c891f32a543e8b04a9248bc9af70f8f7,
@@ -8513,12 +8584,9 @@ MonoBehaviour:
   knight: {fileID: 148022294}
   knightName: Red Knight
   hp: 100
-  energy: 10
   nameText: {fileID: 40335715}
   healthText: {fileID: 305356747}
-  energyText: {fileID: 0}
   healthBar: {fileID: 1547469872}
-  energyBar: {fileID: 0}
   healthTextColor:
     serializedVersion: 2
     key0: {r: 0.27450982, g: 0.20784314, b: 0.039215688, a: 1}
@@ -8576,64 +8644,6 @@ MonoBehaviour:
     atime7: 0
     m_Mode: 0
     m_NumColorKeys: 3
-    m_NumAlphaKeys: 2
-  energyTextColor:
-    serializedVersion: 2
-    key0: {r: 1, g: 1, b: 1, a: 1}
-    key1: {r: 1, g: 1, b: 1, a: 1}
-    key2: {r: 0, g: 0, b: 0, a: 0}
-    key3: {r: 0, g: 0, b: 0, a: 0}
-    key4: {r: 0, g: 0, b: 0, a: 0}
-    key5: {r: 0, g: 0, b: 0, a: 0}
-    key6: {r: 0, g: 0, b: 0, a: 0}
-    key7: {r: 0, g: 0, b: 0, a: 0}
-    ctime0: 0
-    ctime1: 65535
-    ctime2: 0
-    ctime3: 0
-    ctime4: 0
-    ctime5: 0
-    ctime6: 0
-    ctime7: 0
-    atime0: 0
-    atime1: 65535
-    atime2: 0
-    atime3: 0
-    atime4: 0
-    atime5: 0
-    atime6: 0
-    atime7: 0
-    m_Mode: 0
-    m_NumColorKeys: 2
-    m_NumAlphaKeys: 2
-  energyBarColor:
-    serializedVersion: 2
-    key0: {r: 1, g: 1, b: 1, a: 1}
-    key1: {r: 1, g: 1, b: 1, a: 1}
-    key2: {r: 0, g: 0, b: 0, a: 0}
-    key3: {r: 0, g: 0, b: 0, a: 0}
-    key4: {r: 0, g: 0, b: 0, a: 0}
-    key5: {r: 0, g: 0, b: 0, a: 0}
-    key6: {r: 0, g: 0, b: 0, a: 0}
-    key7: {r: 0, g: 0, b: 0, a: 0}
-    ctime0: 0
-    ctime1: 65535
-    ctime2: 0
-    ctime3: 0
-    ctime4: 0
-    ctime5: 0
-    ctime6: 0
-    ctime7: 0
-    atime0: 0
-    atime1: 65535
-    atime2: 0
-    atime3: 0
-    atime4: 0
-    atime5: 0
-    atime6: 0
-    atime7: 0
-    m_Mode: 0
-    m_NumColorKeys: 2
     m_NumAlphaKeys: 2
   equipmentButton: {fileID: 1979767434}
   equipmentPanel: {fileID: 878487020}
@@ -9004,6 +9014,7 @@ RectTransform:
   - {fileID: 1295544709}
   - {fileID: 309576924}
   - {fileID: 1494445795}
+  - {fileID: 614577749}
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -17842,16 +17853,16 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1091099763}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 614577749}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 6.700012, y: 0}
+  m_AnchoredPosition: {x: 12.499931, y: -41.951195}
   m_SizeDelta: {x: 160, y: 35}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1091099765
@@ -18335,7 +18346,7 @@ RectTransform:
   - {fileID: 460726418}
   - {fileID: 775519929}
   m_Father: {fileID: 614577749}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -19100,12 +19111,9 @@ MonoBehaviour:
   knight: {fileID: 1962762458}
   knightName: Blue Knight
   hp: 100
-  energy: 10
   nameText: {fileID: 315059230}
   healthText: {fileID: 1319068189}
-  energyText: {fileID: 775519931}
   healthBar: {fileID: 815662670}
-  energyBar: {fileID: 767488840}
   healthTextColor:
     serializedVersion: 2
     key0: {r: 0.27450982, g: 0.20784314, b: 0.039215688, a: 1}
@@ -19136,64 +19144,6 @@ MonoBehaviour:
     m_NumColorKeys: 4
     m_NumAlphaKeys: 2
   healthBarColor:
-    serializedVersion: 2
-    key0: {r: 0, g: 1, b: 0, a: 1}
-    key1: {r: 1, g: 1, b: 0, a: 1}
-    key2: {r: 1, g: 0, b: 0, a: 0}
-    key3: {r: 0, g: 0, b: 0, a: 0}
-    key4: {r: 0, g: 0, b: 0, a: 0}
-    key5: {r: 0, g: 0, b: 0, a: 0}
-    key6: {r: 0, g: 0, b: 0, a: 0}
-    key7: {r: 0, g: 0, b: 0, a: 0}
-    ctime0: 29491
-    ctime1: 42598
-    ctime2: 55705
-    ctime3: 0
-    ctime4: 0
-    ctime5: 0
-    ctime6: 0
-    ctime7: 0
-    atime0: 0
-    atime1: 65535
-    atime2: 0
-    atime3: 0
-    atime4: 0
-    atime5: 0
-    atime6: 0
-    atime7: 0
-    m_Mode: 0
-    m_NumColorKeys: 3
-    m_NumAlphaKeys: 2
-  energyTextColor:
-    serializedVersion: 2
-    key0: {r: 0.27450982, g: 0.20784314, b: 0.039215688, a: 1}
-    key1: {r: 0.9433962, g: 0.93811077, b: 0.87664646, a: 1}
-    key2: {r: 0.9433962, g: 0.93811077, b: 0.87664646, a: 0}
-    key3: {r: 1, g: 0, b: 0, a: 0}
-    key4: {r: 0, g: 0, b: 0, a: 0}
-    key5: {r: 0, g: 0, b: 0, a: 0}
-    key6: {r: 0, g: 0, b: 0, a: 0}
-    key7: {r: 0, g: 0, b: 0, a: 0}
-    ctime0: 34502
-    ctime1: 35852
-    ctime2: 65342
-    ctime3: 65535
-    ctime4: 0
-    ctime5: 0
-    ctime6: 0
-    ctime7: 0
-    atime0: 0
-    atime1: 65535
-    atime2: 0
-    atime3: 0
-    atime4: 0
-    atime5: 0
-    atime6: 0
-    atime7: 0
-    m_Mode: 0
-    m_NumColorKeys: 4
-    m_NumAlphaKeys: 2
-  energyBarColor:
     serializedVersion: 2
     key0: {r: 0, g: 1, b: 0, a: 1}
     key1: {r: 1, g: 1, b: 0, a: 1}
@@ -31831,7 +31781,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1046933842}
-        m_MethodName: Draw
+        m_MethodName: DrawForEnergy
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -33030,9 +32980,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
-  maxHealth: 100
   energy: 10
-  maxEnergy: 10
   equipped: []
   healthChanged:
     m_PersistentCalls:
@@ -33053,7 +33001,7 @@ MonoBehaviour:
   energyChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1193322461}
+      - m_Target: {fileID: 614577750}
         m_MethodName: SetEnergy
         m_Mode: 0
         m_Arguments:
@@ -33204,7 +33152,6 @@ RectTransform:
   - {fileID: 315059232}
   - {fileID: 297984342}
   - {fileID: 516261515}
-  - {fileID: 614577749}
   - {fileID: 280294369}
   m_Father: {fileID: 1193322460}
   m_RootOrder: 0

@@ -95,13 +95,27 @@ namespace HandScripts
         public void Draw(int amount)
         {
             if (capacity <= 0) return;
-            var cardsDrawn = Deck.DrawCards(amount);
-            CardsInHand.AddRange(cardsDrawn);
-            foreach (var card in cardsDrawn)
-            {
-                OnDraw.Invoke(card);
-            }            
+			var cardsDrawn = Deck.DrawCards(amount);
+			CardsInHand.AddRange(cardsDrawn);
+			foreach (var card in cardsDrawn)
+			{
+				OnDraw.Invoke(card);
+			}
         }
+
+		public void DrawForEnergy(int amount)
+		{
+			if (capacity <= 0) return;
+			if (PlayField.self.energy >= 1)
+			{
+				Draw(amount);
+				PlayField.self.RemoveEnergy(1);
+			}
+			else
+			{
+				Debug.Log("Out of energy, can't draw card!");
+			}
+		}
 
         /// <summary>
         /// Draws the maximum amount of cards that still fit in the hand.
