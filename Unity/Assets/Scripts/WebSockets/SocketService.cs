@@ -108,7 +108,7 @@ public class SocketService : MonoBehaviour {
     private Action<Packet> PlayPhase()
     {
         return p => {
-            int turn = int.Parse(p.GetProperty("turn"));
+            int turn = int.Parse(p.GetProperty("turnCount"));
             Debug.Log("Starting turn " + turn);
             OnPlayPhase.Invoke(turn);
         };
