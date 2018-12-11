@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.27076757, g: 0.2796784, b: 0.28553858, a: 1}
+  m_IndirectSpecularColor: {r: 0.270745, g: 0.27964008, b: 0.2855513, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -773,11 +773,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -8118,7 +8118,6 @@ GameObject:
   - component: {fileID: 1117240002}
   - component: {fileID: 1117240005}
   - component: {fileID: 1117240004}
-  - component: {fileID: 1117240006}
   - component: {fileID: 1117240007}
   m_Layer: 0
   m_Name: GameManager
@@ -8172,33 +8171,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d1e05e0dd55ff5c489cae7f0b32ac9af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  started:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1117240004}
-        m_MethodName: GetPlayer
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
---- !u!114 &1117240006
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1117240001}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 557e65053c65af14da336a117d7e5e80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1117240007
@@ -13498,8 +13470,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1117240007}
-        m_MethodName: ToggleUI
-        m_Mode: 6
+        m_MethodName: CancelMatchMaking
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -13992,8 +13964,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1117240007}
-        m_MethodName: ToggleUI
-        m_Mode: 6
+        m_MethodName: StartMatchMaking
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

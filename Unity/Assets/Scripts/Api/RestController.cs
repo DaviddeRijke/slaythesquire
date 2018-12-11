@@ -11,15 +11,13 @@ namespace Api
     public class RestController : MonoBehaviour
     {
         public const string Api = "http://localhost:8080/api";
-		public UnityEvent started;
-
+        
         public static RestController Instance { get; private set; }
 
         void Awake()
         {
             if(Instance == null) Destroy(Instance);
             Instance = this;
-			started.Invoke();
         }
 
         public void Get<T>(string url, ILoadable loadable)
