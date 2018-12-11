@@ -108,9 +108,13 @@ public class SocketService : MonoBehaviour {
     private Action<Packet> PlayPhase()
     {
         return p => {
-            int turn = int.Parse(p.GetProperty("turnCount"));
-            Debug.Log("Starting turn " + turn);
-            OnPlayPhase.Invoke(turn);
+            int turn = -1;
+            if (int.TryParse(p.GetProperty("turnCount"), out turn) && turn != -1)
+            {
+                Debug.Log("Starting turn " + turn);
+                OnPlayPhase.Invoke(turn);
+            }
+            else Debug.Log("Not an int: " + p.GetProperty("turnCount"));
         };
     }
 
