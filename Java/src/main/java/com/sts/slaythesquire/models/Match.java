@@ -37,7 +37,7 @@ public class Match {
         turnTimerTask = new TimerTask() {
             @Override
             public void run() {
-                endTurn();
+                playersEndedTurn();
             }
         };
 
@@ -55,10 +55,6 @@ public class Match {
 
         packet.overrideProperty("playerId", Integer.toString(firstPlayer.getId()));
         this.secondPlayer.sendPacket(packet);
-    }
-
-    private void endTurn(){
-
     }
 
     private void preMatchPreparation(Player player){
@@ -86,8 +82,35 @@ public class Match {
 
     private DelegateAction playerEndedTurn(Player player){
         return p -> {
+            if (player.getId() == firstPlayer.getId()){
+                firstPlayerEndedTurn = true;
+            }
+
+            if (player.getId() == secondPlayer.getId()){
+                secondPlayerEndedTurn = true;
+            }
+
+            if (firstPlayerEndedTurn && secondPlayerEndedTurn){
+
+                playersEndedTurn();
+
+            }
 
         };
+    }
+
+    private synchronized void playersEndedTurn(){
+
+        turnTimer.cancel();
+
+        Packet p = new Packet();
+        p.setAction("ENDTURN");
+
+        sendToBoth(p);
+
+        firstPlayerEndedTurn = false;
+        secondPlayerEndedTurn = false;
+
     }
 
     private DelegateAction playerPlayedCardAction(Player player){
