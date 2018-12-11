@@ -1771,6 +1771,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ani: {fileID: 148022292}
+  vfx: {fileID: 0}
+  floatingNumbers: {fileID: 0}
   key: 98
 --- !u!95 &148022292
 Animator:
@@ -1824,6 +1826,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
+  maxHealth: 100
+  energy: 10
+  maxEnergy: 10
   equipped: []
   healthChanged:
     m_PersistentCalls:
@@ -1839,7 +1844,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: Knight+ValueChanged, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+    m_TypeName: Knight+HealthChanged, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  energyChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: Knight+EnergyChanged, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   death:
     m_PersistentCalls:
@@ -32658,6 +32668,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ani: {fileID: 1962762455}
+  vfx: {fileID: 0}
+  floatingNumbers: {fileID: 0}
   key: 97
 --- !u!114 &1962762458
 MonoBehaviour:
@@ -32671,6 +32683,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
+  maxHealth: 100
+  energy: 10
+  maxEnergy: 10
   equipped: []
   healthChanged:
     m_PersistentCalls:
@@ -32686,7 +32701,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: Knight+ValueChanged, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+    m_TypeName: Knight+HealthChanged, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  energyChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: Knight+EnergyChanged, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   death:
     m_PersistentCalls:

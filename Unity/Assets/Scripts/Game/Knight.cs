@@ -5,8 +5,12 @@ using UnityEngine.Events;
 
 public class Knight : MonoBehaviour {
 	public int health;
+	public int maxHealth;
+	public int energy;
+	public int maxEnergy;
 	public List<Equipment> equipped;
-    public ValueChanged healthChanged;
+    public HealthChanged healthChanged;
+	public EnergyChanged energyChanged;
     public UnityEvent death;
     public EquipmentChanged equipChanged;
 
@@ -17,7 +21,7 @@ public class Knight : MonoBehaviour {
 
     public void AddHealth(int amount)
     {
-		health = Mathf.Min(health + amount, 100);
+		health = Mathf.Min(health + amount, maxHealth);
         healthChanged.Invoke(health);
     }
 
@@ -31,6 +35,18 @@ public class Knight : MonoBehaviour {
         }
         healthChanged.Invoke(health);
     }
+
+	public void AddEnergy(int amount)
+	{
+		energy = Mathf.Min(energy + amount, maxEnergy);
+		energyChanged.Invoke(energy);
+	}
+
+	public void RemoveEnergy(int amount)
+	{
+		energy -= Mathf.Abs(amount);
+		energyChanged.Invoke(energy);
+	}
 
 	public void Equip(Equipment equipment)
 	{
@@ -67,8 +83,11 @@ public class Knight : MonoBehaviour {
 	}
 
 	[System.Serializable]
-	public class ValueChanged : UnityEvent<float> { }
+	public class HealthChanged : UnityEvent<float> { }
 
-    [System.Serializable]
+	[System.Serializable]
+	public class EnergyChanged : UnityEvent<float> { }
+
+	[System.Serializable]
     public class EquipmentChanged : UnityEvent<Equipment> { }
 }

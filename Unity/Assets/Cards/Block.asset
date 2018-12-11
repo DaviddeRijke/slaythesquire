@@ -14,7 +14,7 @@ MonoBehaviour:
   id: 0
   name: Block
   description: Your knight blocks incomming damage.
-  cost: 0
+  cost: 1
   tags: []
   effects: []
   OnEnable:
