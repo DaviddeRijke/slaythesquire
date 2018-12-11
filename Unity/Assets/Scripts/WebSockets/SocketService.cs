@@ -40,6 +40,13 @@ public class SocketService : MonoBehaviour {
         handler.Subscribe("MATCHVOID", MatchVoid());
     }
 
+    public void SendConfirmMatch()
+    {
+        Packet packet = new Packet() { Action = "CONFIRMMATCH" };
+
+        handler.SendPacket(packet);
+    }
+
     public void SendPlayedCard(Card card)
     {
         playedCards.Add(card);

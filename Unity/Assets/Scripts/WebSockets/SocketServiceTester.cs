@@ -35,6 +35,11 @@ public class SocketServiceTester : MonoBehaviour {
         }
     }
 
+    public void SendConfirmMatch()
+    {
+        ss.SendConfirmMatch();
+    }
+
     public void SendEndTurn()
     {
         ss.SendEndTurn();
