@@ -75,8 +75,10 @@ namespace DefaultNamespace.Hand
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, 1 << 9))
             {
                 var dropZone = hit.transform.GetComponent<DropZone>();
-                //Debug.Log(dropZone.name);
-                dropZone.DropCard(cv3d);
+				//Debug.Log(dropZone.name);
+				cv3d.transform.position = _ogPosition;
+				cv3d.transform.rotation = _ogRotation;
+				dropZone.DropCard(cv3d);
             }
             else
             {

@@ -11,9 +11,9 @@ public class KnightUI : MonoBehaviour {
     public Text nameText;
     public Text healthText;
     public Image healthBar;
-    public Gradient healthTextColor;
+	public Gradient healthTextColor;
     public Gradient healthBarColor;
-    public Button equipmentButton;
+	public Button equipmentButton;
     public GameObject equipmentPanel;
     public EquipmentSlotUI[] equipment;
     public Text totalDamageText;
@@ -33,7 +33,7 @@ public class KnightUI : MonoBehaviour {
         SetHealth(hp);
         initialHp = hp;
 
-        SetTotalsUI();
+		SetTotalsUI();
 
         collapse = false;
         ani = equipmentPanel.GetComponent<Animator>();
@@ -59,7 +59,7 @@ public class KnightUI : MonoBehaviour {
         healthBar.color = healthBarColor.Evaluate(1 - relative);
     }
 
-    private void SetTotalsUI()
+	private void SetTotalsUI()
     {
 		totalArmor = knight.GetArmor();
 		totalDamage = knight.GetDamage();

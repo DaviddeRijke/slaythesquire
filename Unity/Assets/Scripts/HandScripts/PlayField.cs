@@ -10,10 +10,8 @@ namespace DefaultNamespace.Hand
         private DropZone _dropZone;
         private List<Card> CardsInField;
 
-		//temp demo code
 		public Knight self;
 		public Knight opponent;
-		//---
 
         public CardEvent OnCardReceived = new CardEvent();
 
@@ -34,15 +32,20 @@ namespace DefaultNamespace.Hand
         {
             if (IsValidOperation(c))
             {
-
-				//temp demo code
-				c.Activate(self, opponent);
-				//Debug.Log("activated!");
-				//---
-
-                Debug.Log("receiving card");
-                CardsInField.Add(c);
-                OnCardReceived.Invoke(c);
+				Debug.Log("receiving card");
+				if (self.energy >= c.cost)
+				{
+					//temp demo code
+					c.Activate(self, opponent);
+					//---
+					self.RemoveEnergy(c.cost);
+					CardsInField.Add(c);
+					OnCardReceived.Invoke(c);
+				}
+				else
+				{
+					Debug.Log("Out of energy, can't play card!");
+				}
             }
         }
 
