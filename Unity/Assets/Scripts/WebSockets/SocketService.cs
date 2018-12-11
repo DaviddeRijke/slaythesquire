@@ -23,8 +23,8 @@ public class SocketService : MonoBehaviour {
         if (Instance != null)
         {
             Destroy(Instance);
-            Instance = this;
         }
+        Instance = this;
 
         handler = GetComponent<MessageHandler>();
         playedCards = new List<Card>();
