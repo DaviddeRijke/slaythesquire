@@ -93,6 +93,7 @@ public class SocketService : MonoBehaviour {
     {
         return p =>
         {
+            Debug.Log("Ending turn...");
             OnEndTurn.Invoke();
         };
     }

@@ -35,6 +35,11 @@ public class SocketServiceTester : MonoBehaviour {
         }
     }
 
+    public void SendEndTurn()
+    {
+        ss.SendEndTurn();
+    }
+
     public void SendPlayedCards()
     {
         ss.SendCardsPlayed(ss.playedCards);
