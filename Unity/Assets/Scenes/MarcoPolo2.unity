@@ -1410,7 +1410,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f5eb0be346879b4d9c6ff0453ab630d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 20
+  duration: 4
   timerVisuals: {fileID: 471700862}
   timerText: {fileID: 386231784}
   newColor:

@@ -71,8 +71,9 @@ public class KnightMovement : MonoBehaviour {
         float z = this.gameObject.transform.position.z;
         int direction = Mathf.RoundToInt(x / Mathf.Abs(x));
         Vector3 pos = new Vector3(x + (direction * 0.66f), 1.75f, z - 0.5f);
-        vfx.PlayEffect(visualEffectNames.bloodExplosion, pos);
-        vfx.PlayEffect(visualEffectNames.bloodAndGutsExplosion, pos);
+        //vfx.PlayEffect(visualEffectNames.bloodExplosion, pos);
+        //vfx.PlayEffect(visualEffectNames.bloodAndGutsExplosion, pos);
+        vfx.PlayEffect(visualEffectNames.bloodFountain, pos);
     }
 
     private void PlayHealVisualEffects()
