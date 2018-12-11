@@ -10,6 +10,7 @@ public class EffectHeal : Effect, INoInteraction {
 
 	public override void Activate(Knight self, Knight opponent)
 	{
-		self.AddHealth(amount);
+        self.gameObject.GetComponent<KnightMovement>().PlayHealAnimation(amount);
+        self.AddHealth(amount);
 	}
 }

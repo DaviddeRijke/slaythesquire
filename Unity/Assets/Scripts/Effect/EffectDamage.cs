@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using DefaultNamespace.Resolve;
+using Resolve;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "EffectDamage", menuName = "Effects/Damage")]
@@ -20,11 +20,21 @@ public class EffectDamage : Effect, IBlockable {
 		{
 			totalArmor += equipment.armor;
 		}
-		opponent.RemoveHealth( Mathf.RoundToInt(((amount + totalDamage) / 100f) * (100f - totalArmor)) );
+
+        self.gameObject.GetComponent<KnightMovement>().PlayAttackAnimation(amount);
+        if (amount > 0)
+        {
+            opponent.RemoveHealth(Mathf.RoundToInt(((amount + totalDamage) / 100f) * (100f - totalArmor)));
+        }
+        else
+        {
+            //Blocked
+        }
+		opponent.RemoveHealth( Mathf.RoundToInt(((amount + self.GetDamage()) / 100f) * (100f - opponent.GetArmor())) );
 	}
 
 	public void Block()
 	{
-		throw new System.NotImplementedException();
+        this.amount = 0;
 	}
 }

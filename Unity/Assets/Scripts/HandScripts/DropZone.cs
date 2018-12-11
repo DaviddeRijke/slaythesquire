@@ -8,6 +8,7 @@ using Utils;
 public class DropZone : MonoBehaviour
 {
     public CardEvent OnDrop = new CardEvent();
+	public List<GameObject> playedCards = new List<GameObject>();
 
     /// <summary>
     /// This method is invoked by the (currently Temporary)Draggable script, whenever a draggable objects is dropped
@@ -17,6 +18,7 @@ public class DropZone : MonoBehaviour
     /// <param name="cardView"></param>
     public void DropCard(CardView3D cardView)
     {
-        OnDrop.Invoke(cardView.card);
+		playedCards.Add(cardView.transform.parent.gameObject);
+		OnDrop.Invoke(cardView.card);
     }
 }

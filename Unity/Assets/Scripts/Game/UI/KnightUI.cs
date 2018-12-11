@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class KnightUI : MonoBehaviour {
-    public string knightName;
+	public Knight knight;
+	public string knightName;
     public float hp = 100;
     private float initialHp;
     public Text nameText;
@@ -32,8 +33,6 @@ public class KnightUI : MonoBehaviour {
         SetHealth(hp);
         initialHp = hp;
 
-        totalDamage = 0;
-        totalArmor = 0;
         SetTotalsUI();
 
         collapse = false;
@@ -62,7 +61,9 @@ public class KnightUI : MonoBehaviour {
 
     private void SetTotalsUI()
     {
-        totalDamageText.text = "+" + totalDamage.ToString();
+		totalArmor = knight.GetArmor();
+		totalDamage = knight.GetDamage();
+		totalDamageText.text = "+" + totalDamage.ToString();
         totalArmorText.text = totalArmor.ToString() + "%";
     }
 
@@ -83,9 +84,7 @@ public class KnightUI : MonoBehaviour {
 
     public void EquipItem(Equipment item)
     {
-        equipment[((int)item.equipmentSlot)].SetData(item);
-        totalArmor += item.armor;
-        totalDamage += item.damage;
+		equipment[((int)item.equipmentSlot)].SetData(item);
         SetTotalsUI();
     }
 
