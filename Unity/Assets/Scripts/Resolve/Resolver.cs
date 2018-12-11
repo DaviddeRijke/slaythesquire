@@ -33,6 +33,7 @@ namespace DefaultNamespace
         /// </summary>
         public void OpponentPlayedCard()
         {
+            Debug.Log("Resolver got OpponentPlayedCard");
         }
 
         public void Resolve(List<Card> other)
