@@ -7,37 +7,90 @@ using UnityEngine.Events;
 public class SocketService : MonoBehaviour {
 
     private MessageHandler handler;
-    public List<Card> playedCards;
 
+    /*
     public UnityEvent OnOpponentCardPlayed;
     public UnityIntEvent OnPlayPhase = new UnityIntEvent();
     public UnityCardListEvent OnResolvePhase = new UnityCardListEvent();
     public UnityIntEvent OnWinner = new UnityIntEvent();
     public UnityEvent OnMatchVoid;
     public UnityEvent OnEndTurn;
-    
-    public static SocketService Instance;
+    */
+
+    public PacketEvent OnJoinedMatchmaking = new PacketEvent();
+    public PacketEvent OnMatchedWithPlayer = new PacketEvent();
+
+    public PacketEvent OnPlayPhase = new PacketEvent();
+    public PacketEvent OnCardPlayed = new PacketEvent();
+    public PacketEvent OnEndTurn = new PacketEvent();
+    public PacketEvent OnResolvePhase = new PacketEvent();
+    public PacketEvent OnWinner = new PacketEvent();
+    public PacketEvent OnMatchVoid = new PacketEvent();
+
+    public UnityEvent OnConnected = new UnityEvent();
+
+    //public static SocketService Instance;
 
     private void Awake()
     {
-        if (Instance != null)
-        {
-            Destroy(Instance);
-        }
-        Instance = this;
+        //if (Instance != null)
+        //{
+        //    Destroy(Instance);
+        //}
+        //Instance = this;
 
         handler = GetComponent<MessageHandler>();
-        playedCards = new List<Card>();
+        //playedCards = new List<Card>();
     }
 
     private void Start()
     {
-        handler.Subscribe("PLAYEDCARD", CardPlayed());
-        handler.Subscribe("ENDTURN", EndTurn());
-        handler.Subscribe("PLAYPHASE", PlayPhase());
-        handler.Subscribe("RESOLVEPHASE", ResolvePhase());
-        handler.Subscribe("WINNER", Winner());
-        handler.Subscribe("MATCHVOID", MatchVoid());
+        //handler.Subscribe("PLAYEDCARD", CardPlayed());
+        //handler.Subscribe("ENDTURN", EndTurn());
+        //handler.Subscribe("PLAYPHASE", PlayPhase());
+        //handler.Subscribe("RESOLVEPHASE", ResolvePhase());
+        //handler.Subscribe("WINNER", Winner());
+        //handler.Subscribe("MATCHVOID", MatchVoid());
+    }
+
+    public void ConnectToServer(int playerId)
+    {
+        handler.OnConnectedEvent.AddListener(Connected);
+        handler.Connect(playerId);
+    }
+
+    private void Connected(Packet p)
+    {
+        OnConnected.Invoke();
+    }
+
+    public void StartMatchmaking()
+    {
+
+        handler.Subscribe("JOINEDMATCHMAKING", p => 
+        {
+            handler.Subscribe("MATCHED", p2 => OnMatchedWithPlayer.Invoke(p2));
+
+            SubscribeToGameMessages();
+
+            OnJoinedMatchmaking.Invoke(p);
+        });
+
+
+        Packet packet = new Packet() { Action = "JOINMATCHMAKING" };
+
+        handler.SendPacket(packet);
+
+    }
+
+    private void SubscribeToGameMessages()
+    {
+        handler.Subscribe("PLAYPHASE",      p => OnPlayPhase.Invoke(p));
+        handler.Subscribe("PLAYEDCARD",     p => OnCardPlayed.Invoke(p));
+        handler.Subscribe("ENDTURN",        p => OnEndTurn.Invoke(p));
+        handler.Subscribe("RESOLVEPHASE",   p => OnResolvePhase.Invoke(p));
+        handler.Subscribe("WINNER",         p => OnWinner.Invoke(p));
+        handler.Subscribe("MATCHVOID",      p => OnMatchVoid.Invoke(p));
     }
 
     public void SendConfirmMatch()
@@ -49,7 +102,6 @@ public class SocketService : MonoBehaviour {
 
     public void SendPlayedCard(Card card)
     {
-        playedCards.Add(card);
 
         Packet packet = new Packet() { Action = "PLAYEDCARD" };
         packet.AddProperty("card", card.id);
@@ -84,10 +136,11 @@ public class SocketService : MonoBehaviour {
         packet.AddProperty("winner", winnerId);
         packet.AddProperty("data", status);
 
-        Debug.Log("Sending status...");
+        //Debug.Log("Sending status...");
         handler.SendPacket(packet);
     }
     
+    /*
     private Action<Packet> CardPlayed()
     {
         return p => {
@@ -156,4 +209,5 @@ public class SocketService : MonoBehaviour {
             OnMatchVoid.Invoke();
         };
     }
+    */
 }

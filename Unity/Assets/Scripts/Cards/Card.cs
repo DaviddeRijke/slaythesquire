@@ -5,7 +5,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 
-[Serializable]
+[System.Serializable]
 [CreateAssetMenu(fileName = "Card", menuName = "Card")]
 public class Card : ScriptableObject{
     public int id;

@@ -12,32 +12,37 @@ public class MessageHandler : MonoBehaviour {
     public int ServerPort = 4343;
     private IPEndPoint serverAddress;
 
-    public int playerId = 1;
-    public bool IsConnected = false;
-
     private Socket socket;
+
+    private bool isConnected;
 
     private Dictionary<string, List<Action<Packet>>> topics;
 
+    public PacketEvent OnReadyToConnectEvent = new PacketEvent();
+    public PacketEvent OnConnectedEvent = new PacketEvent();
+
+    public PacketEvent OnMessageRecievedEvent = new PacketEvent();
+    public PacketEvent OnMessageSentEvent = new PacketEvent();
+
     void Awake()
     {
-        // TODO: Get player from somewhere else
+
         topics = new Dictionary<string, List<Action<Packet>>>();
 
         DontDestroyOnLoad(gameObject);
     }
 
-    public void Connect()
+    public void Connect(int playerId)
     {
-        if (IsConnected)
+        if (isConnected)
             return;
 
         serverAddress = new IPEndPoint(IPAddress.Parse(ServerIp), ServerPort);
 
-        ConnectToServer();
+        ConnectToServer(playerId);
     }
 
-    private void ConnectToServer()
+    private void ConnectToServer(int playerId)
     {
         if (socket != null)
             return;
@@ -45,23 +50,30 @@ public class MessageHandler : MonoBehaviour {
         socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
         Subscribe("READYTOCONNECT", p => {
+
             Subscribe("CONNECTED", p2 => {
-                IsConnected = true;
-                Debug.Log("Connected with player id " + playerId);
+                isConnected = true;
+                OnConnectedEvent.Invoke(p2);
             });
 
             Packet packet = new Packet() { Action = "CONNECT" };
             packet.AddProperty("playerId", playerId.ToString());
 
             SendPacket(packet);
+
+            OnReadyToConnectEvent.Invoke(p);
+
         });
 
         try
         {
             socket.Connect(serverAddress);
 
-            Thread listenerThread = new Thread(new ThreadStart(ListenSocket));
-            listenerThread.IsBackground = true;
+            Thread listenerThread = new Thread(new ThreadStart(ListenSocket))
+            {
+                IsBackground = true
+            };
+
             listenerThread.Start();
 
         } catch (SocketException e)
@@ -88,6 +100,7 @@ public class MessageHandler : MonoBehaviour {
             string message = System.Text.Encoding.ASCII.GetString(recievePacket, 0, count);
             Packet packet = new Packet(message);
 
+            OnMessageRecievedEvent.Invoke(packet);
             HandleMessage(packet);
         }
     }
@@ -120,7 +133,7 @@ public class MessageHandler : MonoBehaviour {
 
     public void SendPacket(Packet packet)
     {
-        Debug.Log("Sending message: " + packet.Message);
+        OnMessageSentEvent.Invoke(packet);
         byte[] toSendBytes = System.Text.Encoding.ASCII.GetBytes(packet.Message);
         try
         {
@@ -129,7 +142,7 @@ public class MessageHandler : MonoBehaviour {
         }
         catch (SocketException e)
         {
-            IsConnected = false;
+            isConnected = false;
             DisconnectFromServer();
         }
     }
@@ -138,12 +151,12 @@ public class MessageHandler : MonoBehaviour {
     {
         Debug.Log("terminate");
 
-        if (IsConnected)
+        if (isConnected)
         {
             Packet packet = new Packet() { Action = "DISCONNECT" };
 
             SendPacket(packet);
-            IsConnected = false;
+            isConnected = false;
         }
 
         topics.Clear();
