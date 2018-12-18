@@ -41,7 +41,7 @@ public class ClientManager {
                     Packet alreadyConnectedPacket = new Packet();
                     alreadyConnectedPacket.setAction("ALREADYCONNECTED");
                     messageHandler.sendPacket(alreadyConnectedPacket);
-                    System.out.println("Player " + player.getUsername() + "was already connected, could not connect again...");
+                    System.out.println("Player " + player.getUsername() + " was already connected, could not connect again...");
                     return;
                 }
             } catch (InterruptedException e) {
@@ -50,6 +50,7 @@ public class ClientManager {
 
             messageHandler.subscribe("DISCONNECT", p2 -> {
                 try {
+                    System.out.println("Player disconnected: " + player.getUsername());
                     removePlayer(player);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -83,7 +84,7 @@ public class ClientManager {
 
         connectedPlayers.add(player);
 
-        playersMonitor.exitReader();
+        playersMonitor.exitWriter();
     }
 
     private void removePlayer(Player player) throws InterruptedException {
@@ -92,7 +93,7 @@ public class ClientManager {
         Player playerToRemove = connectedPlayers.stream().filter(p -> player.getId() == p.getId()).findFirst().orElse(null);
         connectedPlayers.remove(playerToRemove);
 
-        playersMonitor.exitReader();
+        playersMonitor.exitWriter();
     }
 
     private boolean isPlayerAlreadyConnected(Player player) throws InterruptedException {
