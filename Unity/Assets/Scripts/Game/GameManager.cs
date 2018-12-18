@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +9,9 @@ namespace Game
     /// </summary>
     public class GameManager : MonoBehaviour
     {
+        private GameCommunicator gameCommunicator;
+
+        private int round;
         public Player player;
         public IngameDeck deck;
 
@@ -21,15 +25,37 @@ namespace Game
             deck.Init(player.decks[0]);
             _instance = this;
             turnManager = GetComponent<Turn>();
-        }
-        
-        void Update () {
-            turnManager.Execute();
+            gameCommunicator = DDOLAccesser.GetObject().GetComponent<GameCommunicator>();
+            gameCommunicator.OnPlayPhase.AddListener(OnPlayPhase);
+            gameCommunicator.OnResolvePhase.AddListener(OnResolvePhase);
         }
 
         public void SetPhaseText(string phaseText)
         {
             PhaseText.text = phaseText;
+        }
+
+        public void EndTurn()
+        {
+            gameCommunicator.EndTurn();
+        }
+
+        private void OnPlayPhase(int turnId)
+        {
+            AcceptCardInput = true;
+
+            round = turnId;
+            Splash.instance.SetRoundNumber(round);
+            Splash.instance.StartSplash();
+
+            SetPhaseText("Play Phase");
+        }
+
+        private void OnResolvePhase(List<Card> cards)
+        {
+            AcceptCardInput = false;
+
+            SetPhaseText("Resolve Phase");
         }
     }
 }

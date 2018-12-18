@@ -7647,11 +7647,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 815041402}
+  - component: {fileID: 815041409}
   - component: {fileID: 815041405}
   - component: {fileID: 815041404}
   - component: {fileID: 815041403}
   - component: {fileID: 815041407}
   - component: {fileID: 815041406}
+  - component: {fileID: 815041408}
   m_Layer: 0
   m_Name: SocketService
   m_TagString: Untagged
@@ -7713,7 +7715,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  CardContainer: {fileID: 0}
+  CardContainer: {fileID: 11400000, guid: 0ee3d93935e317848ba1de25038cf9c0, type: 2}
 --- !u!114 &815041404
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7823,6 +7825,31 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityIntEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
+--- !u!114 &815041408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 815041401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d15325d067510b44bb590663ceef9d4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PrintMessageDebug: 1
+  PrintRecieveMessageDebug: 1
+  PrintSentMessageDebug: 1
+--- !u!114 &815041409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 815041401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d480a561fd889de4eb862ec220803c89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &857897439
 GameObject:
   m_ObjectHideFlags: 0
@@ -8369,7 +8396,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cbe7ab257a14434ab18f516963874fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerId: 1
+  playerId: 2
 --- !u!114 &1117240007
 MonoBehaviour:
   m_ObjectHideFlags: 0

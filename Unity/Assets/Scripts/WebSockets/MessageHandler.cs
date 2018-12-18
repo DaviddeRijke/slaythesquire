@@ -6,6 +6,7 @@ using System.Net.Sockets;
 using System.Threading;
 using UnityEngine;
 
+[RequireComponent(typeof(DoOnMainThread))]
 public class MessageHandler : MonoBehaviour {
 
     public string ServerIp = "127.0.0.1";

@@ -9,7 +9,10 @@ using Utils;
 namespace DefaultNamespace
 {
     public class Resolver : MonoBehaviour
-    {      
+    {
+        private GameCommunicator gameCommunicator;
+        private StatusEvent OnResolved = new StatusEvent();
+
         private List<Card> _own;
         private List<Effect> _effects;
         
@@ -18,8 +21,10 @@ namespace DefaultNamespace
 
         private void Start()
         {
-            //SocketService.Instance.OnOpponentCardPlayed.AddListener(OpponentPlayedCard);
-            //SocketService.Instance.OnResolvePhase.AddListener(Resolve);
+            gameCommunicator = DDOLAccesser.GetObject().GetComponent<GameCommunicator>();
+            gameCommunicator.OnOpponentCardPlayed.AddListener(OpponentPlayedCard);
+            gameCommunicator.OnResolvePhase.AddListener(Resolve);
+            OnResolved.AddListener(gameCommunicator.SendStatus);
         }
 
         public void SetOwnCards(List<Card> cards)
@@ -46,6 +51,7 @@ namespace DefaultNamespace
             }
             //Send status (preferably through event)
             //Animator should send status too!
+            OnResolved.Invoke("get status", 0);
         }
 
         private void ResolveCards(Card ownCard, Card otherCard)
