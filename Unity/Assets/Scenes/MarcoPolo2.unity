@@ -1735,7 +1735,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 148022290}
   m_LocalRotation: {x: 0, y: 0.7071068, z: -0, w: -0.7071068}
-  m_LocalPosition: {x: 3.8, y: 0, z: 6.48}
+  m_LocalPosition: {x: 4, y: 0, z: 6.48}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1087977408}
@@ -7865,6 +7865,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30bd775c0102495dafd9313b921163eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Resolver: {fileID: 0}
   self: {fileID: 1962762458}
   opponent: {fileID: 148022294}
 --- !u!4 &608042519 stripped
@@ -22677,7 +22678,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4405689217792738, guid: 5191e5534135372478b1d06cfdd16f13, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5191e5534135372478b1d06cfdd16f13, type: 2}
@@ -22855,11 +22856,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1e05e0dd55ff5c489cae7f0b32ac9af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  started:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
 --- !u!114 &1446281303
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32790,7 +32786,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: a40081fa29c3261489055676bb2b83db, type: 3}
+  m_Sprite: {fileID: 21300000, guid: eb9f306909569cf4d9d1d672b25eda89, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -33302,7 +33298,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1962762454}
   m_LocalRotation: {x: -0, y: 0.70710576, z: -0, w: 0.70710784}
-  m_LocalPosition: {x: -4.16, y: 0, z: 6.48}
+  m_LocalPosition: {x: -4, y: 0, z: 6.48}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 697221978}
