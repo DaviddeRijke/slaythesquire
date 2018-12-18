@@ -114,7 +114,7 @@ namespace HandScripts
 
 		public void DrawForEnergy(int amount)
 		{
-			if (capacity <= 0) return;
+			if (Capacity <= 0) return;
 			if (PlayField.self.energy >= 1)
 			{
 				Draw(amount);
