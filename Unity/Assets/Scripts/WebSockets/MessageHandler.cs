@@ -43,7 +43,7 @@ public class MessageHandler : MonoBehaviour {
     private void ConnectToServer(int playerId)
     {
         if (socket != null)
-            return;
+            DisconnectFromServer();
 
         socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
