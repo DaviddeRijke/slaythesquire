@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c9728daf0d371a449a22c3b8eaf4932, type: 3}
   m_Name: Stab
   m_EditorClassIdentifier: 
-  id: 0
+  id: 8
   name: Stab
   description: Stabs the enemy knight for 4 damage.
   cost: 0

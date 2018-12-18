@@ -662,9 +662,11 @@ GameObject:
   - component: {fileID: 547234296}
   - component: {fileID: 547234298}
   - component: {fileID: 547234297}
+  - component: {fileID: 547234302}
   - component: {fileID: 547234295}
   - component: {fileID: 547234299}
   - component: {fileID: 547234300}
+  - component: {fileID: 547234301}
   m_Layer: 0
   m_Name: WebSocketTest
   m_TagString: Untagged
@@ -725,7 +727,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3fe49703e9b77d42a1569a9335515a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  socketService: {fileID: 0}
   OnJoinedMatchmaking:
     m_PersistentCalls:
       m_Calls: []
@@ -809,6 +810,63 @@ MonoBehaviour:
   cardIdField: {fileID: 1112166759}
   winnerIdField: {fileID: 1853141982}
   dataStringField: {fileID: 1880320131}
+  PlayerId: 1
+--- !u!114 &547234301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 547234294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d15325d067510b44bb590663ceef9d4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PrintMessageDebug: 1
+  PrintRecieveMessageDebug: 1
+  PrintSentMessageDebug: 1
+--- !u!114 &547234302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 547234294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28fe581f65575d74db55ca1535bb5695, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnOpponentCardPlayed:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  OnPlayPhase:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityIntEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  OnResolvePhase:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityCardListEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  OnWinner:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityIntEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  OnMatchVoid:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  OnEndTurn:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  CardContainer: {fileID: 11400000, guid: 0ee3d93935e317848ba1de25038cf9c0, type: 2}
 --- !u!1 &679516170
 GameObject:
   m_ObjectHideFlags: 0
@@ -1908,7 +1966,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 547234297}
+      - m_Target: {fileID: 547234300}
         m_MethodName: ConnectToServer
         m_Mode: 1
         m_Arguments:
@@ -2713,7 +2771,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2120634904
 RectTransform:
   m_ObjectHideFlags: 0
