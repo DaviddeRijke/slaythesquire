@@ -26,10 +26,7 @@ public class MessageHandler : MonoBehaviour {
 
     void Awake()
     {
-
         topics = new Dictionary<string, List<Action<Packet>>>();
-
-        DontDestroyOnLoad(gameObject);
     }
 
     public void Connect(int playerId)

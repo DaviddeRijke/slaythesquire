@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class MatchmakingCommunicator : MonoBehaviour {
 
-    public SocketService socketService;
+    private SocketService socketService;
 
     public UnityEvent OnJoinedMatchmaking = new UnityEvent();
     public UnityIntEvent OnMatchedWithPlayer = new UnityIntEvent();

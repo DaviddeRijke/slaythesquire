@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public class GameCommunicator : MonoBehaviour {
 
-    public SocketService socketService;
+    private SocketService socketService;
 
     public UnityEvent OnOpponentCardPlayed = new UnityEvent();
     public UnityIntEvent OnPlayPhase = new UnityIntEvent();

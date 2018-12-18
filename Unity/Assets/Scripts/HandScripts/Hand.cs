@@ -8,6 +8,9 @@ namespace HandScripts
 {
     public class Hand : MonoBehaviour
     {
+        //Use this to communicate with the server
+        private GameCommunicator GameCommunicator;
+
         //This is not a list to the gameobjects, but to the script instances! Thus this are the objects you want to work with, if it's not for UI.
         public List<Card> CardsInHand;
         
@@ -40,11 +43,14 @@ namespace HandScripts
             Stash.OnCardReceived.AddListener(Discard);
             PlayField.OnCardReceived.AddListener(Play);
             Deck.OnRequestShuffle.AddListener(Shuffle);
+
+            //TEST
+            GameCommunicator = DDOLAccesser.GetObject().GetComponent<GameCommunicator>();
         }
 
         public void Start()
         {
-            //OnPlay.AddListener(SocketService.Instance.SendPlayedCard);
+            OnPlay.AddListener(GameCommunicator.PlayCard);
             
             //makes sure the game is started with the amount of cards specified in the static GameRules class
             Draw(GameRules.AmountOfStartingCards);

@@ -7,7 +7,6 @@ public class MatchMakerScreen : MonoBehaviour {
     public GameObject[] objectsToHide;
     public GameObject[] objectsToShow;
 
-
     public void StartMatchMaking()
     {
         ToggleUI(true);
