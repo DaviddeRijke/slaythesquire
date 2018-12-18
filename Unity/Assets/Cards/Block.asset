@@ -16,7 +16,8 @@ MonoBehaviour:
   description: Your knight blocks incomming damage.
   cost: 0
   tags: []
-  effects: []
+  effects:
+  - {fileID: 11400000, guid: 65734386a408945408c19f198de4c193, type: 2}
   OnEnable:
     m_PersistentCalls:
       m_Calls: []

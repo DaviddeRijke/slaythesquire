@@ -685,8 +685,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ServerIp: 127.0.0.1
   ServerPort: 4343
-  playerId: 2
-  IsConnected: 0
+  OnReadyToConnectEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: PacketEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  OnConnectedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: PacketEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  OnMessageRecievedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: PacketEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  OnMessageSentEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: PacketEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 --- !u!4 &547234296
 Transform:
   m_ObjectHideFlags: 0
@@ -711,7 +725,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3fe49703e9b77d42a1569a9335515a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  JoinedPool: 0
+  socketService: {fileID: 0}
+  OnJoinedMatchmaking:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  OnMatchedWithPlayer:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityIntEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!114 &547234298
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -734,18 +758,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d2d78359f3355e468e902122b513174, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playedCards: []
-  OnOpponentCardPlayed:
+  OnJoinedMatchmaking:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
+    m_TypeName: PacketEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  OnMatchedWithPlayer:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: PacketEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  OnPlayPhase:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: PacketEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  OnCardPlayed:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: PacketEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  OnEndTurn:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: PacketEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  OnResolvePhase:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: PacketEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  OnWinner:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: PacketEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
   OnMatchVoid:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  OnEndTurn:
+    m_TypeName: PacketEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  OnConnected:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
