@@ -58,6 +58,25 @@ public class MatchmakingPool {
                 e.printStackTrace();
             }
         });
+
+        player.getMessageHandler().subscribe("LEAVEMATCHMAKING", p -> {
+            player.getMessageHandler().unsubscribe("JOINMATCHMAKING");
+            try {
+                removePlayerFromPool(player);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+
+        player.getMessageHandler().subscribe("DISCONNECT", p -> {
+            player.getMessageHandler().unsubscribe("JOINMATCHMAKING");
+            try {
+                removePlayerFromPool(player);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+
     }
 
     public void createMatches() throws InterruptedException {

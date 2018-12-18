@@ -59,6 +59,8 @@ public class Match {
         player.getMessageHandler().subscribe("ENDTURN", playerEndedTurn(player));
         player.getMessageHandler().subscribe("CARDSPLAYED", playerPlayedTurnAction(player));
         player.getMessageHandler().subscribe("STATUS", playerSendsStatus(player));
+        player.getMessageHandler().subscribe("DISCONNECT", playerDisconnected(player));
+        player.getMessageHandler().subscribe("LEAVEMATCH", playerDisconnected(player));
 
     }
 
@@ -81,6 +83,18 @@ public class Match {
 
         turnTimer.schedule(turnTimerTask, turnTime);
 
+    }
+
+    private DelegateAction playerDisconnected(Player player){
+        return p -> {
+
+            player.getMessageHandler().unsubscribe("PLAYEDCARD");
+            player.getMessageHandler().unsubscribe("ENDTURN");
+            player.getMessageHandler().unsubscribe("CARDSPLAYED");
+            player.getMessageHandler().unsubscribe("STATUS");
+
+            declareVoid();
+        };
     }
 
     private DelegateAction playerEndedTurn(Player player){

@@ -1,15 +1,8 @@
 package com.sts.slaythesquire.sockets;
 
-import com.google.gson.Gson;
 import com.sts.slaythesquire.matchmaking.MatchmakingPool;
-import com.sts.slaythesquire.models.Card;
 import com.sts.slaythesquire.models.Player;
 import com.sts.slaythesquire.repos.PlayerRepository;
-
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.swing.*;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 

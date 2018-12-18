@@ -25,6 +25,7 @@ public class MessageHandler {
     }
 
     public void unsubscribe(String topic){
+        topics.remove(topic);
         //TODO:how?
     }
 
