@@ -1,10 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Api;
 using UnityEngine;
 
 public class MatchMakerScreen : MonoBehaviour {
     public GameObject[] objectsToHide;
     public GameObject[] objectsToShow;
+
+    public void StartMatchMaking()
+    {
+        ToggleUI(true);
+    }
+
+    public void CancelMatchMaking()
+    {
+        ToggleUI(false);
+    }
 
     public void ToggleUI(bool showMatchmaking)
     {
@@ -17,7 +28,5 @@ public class MatchMakerScreen : MonoBehaviour {
         {
             obj.SetActive(showMatchmaking);
         }
-
-
     }
 }

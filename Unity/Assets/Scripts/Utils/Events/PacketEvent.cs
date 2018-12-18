@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class UnityIntEvent : UnityEvent<int> {
+[System.Serializable]
+public class PacketEvent : UnityEvent<Packet> {
+
+
 
 }

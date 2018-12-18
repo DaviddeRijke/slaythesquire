@@ -773,11 +773,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -7639,6 +7639,190 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 749452c483f72ef47acbba156497acfa,
     type: 3}
   m_PrefabInternal: {fileID: 796000344}
+--- !u!1 &815041401
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 815041402}
+  - component: {fileID: 815041405}
+  - component: {fileID: 815041404}
+  - component: {fileID: 815041403}
+  - component: {fileID: 815041407}
+  - component: {fileID: 815041406}
+  m_Layer: 0
+  m_Name: SocketService
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &815041402
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 815041401}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 946.2436, y: 360.19016, z: -4.125}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &815041403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 815041401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28fe581f65575d74db55ca1535bb5695, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnOpponentCardPlayed:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  OnPlayPhase:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityIntEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  OnResolvePhase:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityCardListEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  OnWinner:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityIntEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  OnMatchVoid:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  OnEndTurn:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  CardContainer: {fileID: 0}
+--- !u!114 &815041404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 815041401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d2d78359f3355e468e902122b513174, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnJoinedMatchmaking:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: PacketEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  OnMatchedWithPlayer:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: PacketEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  OnPlayPhase:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: PacketEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  OnCardPlayed:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: PacketEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  OnEndTurn:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: PacketEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  OnResolvePhase:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: PacketEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  OnWinner:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: PacketEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  OnMatchVoid:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: PacketEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  OnConnected:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+--- !u!114 &815041405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 815041401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ba82056feb7d8e4298b5dd0dc692c55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ServerIp: 127.0.0.1
+  ServerPort: 4343
+  OnReadyToConnectEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: PacketEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  OnConnectedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: PacketEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  OnMessageRecievedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: PacketEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  OnMessageSentEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: PacketEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+--- !u!114 &815041406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 815041401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecc95333f2674c44da8481f1ee090114, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &815041407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 815041401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3fe49703e9b77d42a1569a9335515a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnJoinedMatchmaking:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  OnMatchedWithPlayer:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityIntEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!1 &857897439
 GameObject:
   m_ObjectHideFlags: 0
@@ -7728,7 +7912,7 @@ RectTransform:
   - {fileID: 2121358116}
   m_Father: {fileID: 0}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0.143}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -8118,8 +8302,8 @@ GameObject:
   - component: {fileID: 1117240002}
   - component: {fileID: 1117240005}
   - component: {fileID: 1117240004}
-  - component: {fileID: 1117240006}
   - component: {fileID: 1117240007}
+  - component: {fileID: 1117240006}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -8174,22 +8358,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1e05e0dd55ff5c489cae7f0b32ac9af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  started:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1117240004}
-        m_MethodName: GetPlayer
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
 --- !u!114 &1117240006
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8198,9 +8366,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1117240001}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 557e65053c65af14da336a117d7e5e80, type: 3}
+  m_Script: {fileID: 11500000, guid: 3cbe7ab257a14434ab18f516963874fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerId: 1
 --- !u!114 &1117240007
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13498,8 +13667,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1117240007}
-        m_MethodName: ToggleUI
-        m_Mode: 6
+        m_MethodName: CancelMatchMaking
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -13991,9 +14160,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1117240007}
-        m_MethodName: ToggleUI
-        m_Mode: 6
+      - m_Target: {fileID: 1117240006}
+        m_MethodName: ConnectToServer
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

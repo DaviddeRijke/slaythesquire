@@ -4,8 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public class Effect : ScriptableObject
+public abstract class Effect : ScriptableObject
 {
+
+    public int Id;
+
     // Called on phases
     public virtual void BeforeTurn() { }
     public virtual void OnStartTurn() { }

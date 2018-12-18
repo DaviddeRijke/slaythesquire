@@ -10,19 +10,39 @@ public class SocketServiceTester : MonoBehaviour {
     public InputField winnerIdField;
     public InputField dataStringField;
 
-    private SocketService ss;
+    public int PlayerId = 1;
+
+    private MatchmakingCommunicator matchmakingCommunicator;
+    private GameCommunicator gameCommunicator;
+
+    private List<Card> playedCards = new List<Card>();
     
 	void Awake () {
-        ss = GetComponent<SocketService>();
+
+        matchmakingCommunicator = GetComponent<MatchmakingCommunicator>();
+        gameCommunicator = GetComponent<GameCommunicator>();
+
+        if (matchmakingCommunicator == null || gameCommunicator == null)
+        {
+            Debug.Log("No Communicators, terminating...");
+            Destroy(this);
+        }
+
+        //ss = GetComponent<SocketService>();
 	}
 
     void Start()
     {
-        ss.OnOpponentCardPlayed.AddListener(OnOpponentCardPlayed);
-        ss.OnPlayPhase.AddListener(OnPlayPhase);
-        ss.OnResolvePhase.AddListener(OnResolvePhase);
-        ss.OnWinner.AddListener(OnWinner);
-        ss.OnMatchVoid.AddListener(OnMatchVoid);
+        gameCommunicator.OnOpponentCardPlayed.AddListener(OnOpponentCardPlayed);
+        gameCommunicator.OnPlayPhase.AddListener(OnPlayPhase);
+        gameCommunicator.OnResolvePhase.AddListener(OnResolvePhase);
+        gameCommunicator.OnWinner.AddListener(OnWinner);
+        gameCommunicator.OnMatchVoid.AddListener(OnMatchVoid);
+    }
+
+    public void ConnectToServer()
+    {
+        matchmakingCommunicator.ConnectToServer(PlayerId);
     }
 
     public void PlayedCard()
@@ -31,14 +51,25 @@ public class SocketServiceTester : MonoBehaviour {
         if (cardIdField != null && int.TryParse(cardIdField.text, out cardId))
         {
             Card card = new Card() { id = cardId };
-            ss.SendPlayedCard(card);
+            playedCards.Add(card);
+            gameCommunicator.PlayCard(card);
         }
+    }
+
+    public void SendConfirmMatch()
+    {
+        matchmakingCommunicator.ConfirmMatch();
+    }
+
+    public void SendEndTurn()
+    {
+        gameCommunicator.EndTurn();
     }
 
     public void SendPlayedCards()
     {
-        ss.SendCardsPlayed(ss.playedCards);
-        ss.playedCards.Clear();
+        gameCommunicator.SendCardsPlayed(playedCards);
+        playedCards.Clear();
     }
 
     public void SendStatus()
@@ -47,7 +78,7 @@ public class SocketServiceTester : MonoBehaviour {
         if (winnerIdField != null && int.TryParse(winnerIdField.text, out winner)
             && dataStringField != null)
         {
-            ss.SendStatus(dataStringField.text, winner);
+            gameCommunicator.SendStatus(dataStringField.text, winner);
         }
     }
 

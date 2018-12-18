@@ -3,6 +3,9 @@ package com.sts.slaythesquire.models;
 import com.sts.slaythesquire.sockets.DelegateAction;
 import com.sts.slaythesquire.sockets.Packet;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class Match {
 
     private Player firstPlayer;
@@ -11,17 +14,27 @@ public class Match {
     private boolean firstPlayerConfirmed = false;
     private boolean secondPlayerConfirmed = false;
 
+    private boolean firstPlayerEndedTurn = false;
+    private boolean secondPlayerEndedTurn = false;
+
     private int turnCount = 0;
 
-    Packet firstPlayerResolvePacket = null;
-    Packet secondPlayerResolvePacket = null;
+    private Packet firstPlayerResolvePacket = null;
+    private Packet secondPlayerResolvePacket = null;
 
-    Packet firstPlayerStatusPacket = null;
-    Packet secondPlayerStatusPacket = null;
+    private Packet firstPlayerStatusPacket = null;
+    private Packet secondPlayerStatusPacket = null;
+
+    private TimerTask turnTimerTask;
+    private Timer turnTimer;
+
+    private Long turnTime = 30000L;
 
     public Match(Player firstPlayer, Player secondPlayer) {
         this.firstPlayer = firstPlayer;
         this.secondPlayer = secondPlayer;
+
+        turnTimer = new Timer();
 
         preMatchPreparation(this.firstPlayer);
         preMatchPreparation(this.secondPlayer);
@@ -43,8 +56,11 @@ public class Match {
         });
 
         player.getMessageHandler().subscribe("PLAYEDCARD", playerPlayedCardAction(player));
+        player.getMessageHandler().subscribe("ENDTURN", playerEndedTurn(player));
         player.getMessageHandler().subscribe("CARDSPLAYED", playerPlayedTurnAction(player));
         player.getMessageHandler().subscribe("STATUS", playerSendsStatus(player));
+        player.getMessageHandler().subscribe("DISCONNECT", playerDisconnected(player));
+        player.getMessageHandler().subscribe("LEAVEMATCH", playerDisconnected(player));
 
     }
 
@@ -54,6 +70,67 @@ public class Match {
         packet.addProperty("turnCount", Integer.toString(turnCount));
 
         sendToBoth(packet);
+
+        System.out.println("Started new round, starting timer...");
+
+        turnTimerTask = new TimerTask() {
+            @Override
+            public void run() {
+                System.out.println("Ending turn...");
+                playersEndedTurn();
+            }
+        };
+
+        turnTimer.schedule(turnTimerTask, turnTime);
+
+    }
+
+    private DelegateAction playerDisconnected(Player player){
+        return p -> {
+
+            player.getMessageHandler().unsubscribe("PLAYEDCARD");
+            player.getMessageHandler().unsubscribe("ENDTURN");
+            player.getMessageHandler().unsubscribe("CARDSPLAYED");
+            player.getMessageHandler().unsubscribe("STATUS");
+
+            declareVoid();
+        };
+    }
+
+    private DelegateAction playerEndedTurn(Player player){
+        return p -> {
+            if (player.getId() == firstPlayer.getId()){
+                firstPlayerEndedTurn = true;
+            }
+
+            if (player.getId() == secondPlayer.getId()){
+                secondPlayerEndedTurn = true;
+            }
+
+            if (firstPlayerEndedTurn && secondPlayerEndedTurn){
+
+                playersEndedTurn();
+
+            }
+
+        };
+    }
+
+    private synchronized void playersEndedTurn(){
+
+        if (turnTimerTask != null){
+            turnTimerTask.cancel();
+            turnTimerTask =null;
+        }
+
+        Packet p = new Packet();
+        p.setAction("ENDTURN");
+
+        sendToBoth(p);
+
+        firstPlayerEndedTurn = false;
+        secondPlayerEndedTurn = false;
+
     }
 
     private DelegateAction playerPlayedCardAction(Player player){
@@ -145,6 +222,7 @@ public class Match {
         }
 
         if (winnerId == 0){
+            turnCount++;
             startNewRound();
         } else{
             declareWinner(winnerId);

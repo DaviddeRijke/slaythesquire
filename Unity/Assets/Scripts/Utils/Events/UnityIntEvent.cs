@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class UnityCardListEvent : UnityEvent<List<Card>> {
+[System.Serializable]
+public class UnityIntEvent : UnityEvent<int> {
 
 }

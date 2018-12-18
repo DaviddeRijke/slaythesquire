@@ -6,7 +6,7 @@ using UnityEngine;
 public class DoOnMainThread : MonoBehaviour
 {
 
-    public readonly static Queue<Action> ExecuteOnMainThread = new Queue<Action>();
+    public static readonly Queue<Action> ExecuteOnMainThread = new Queue<Action>();
 
     public virtual void Update()
     {

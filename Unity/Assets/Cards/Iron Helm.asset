@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c9728daf0d371a449a22c3b8eaf4932, type: 3}
   m_Name: Iron Helm
   m_EditorClassIdentifier: 
-  id: 0
+  id: 2
   name: Iron Helm
   description: Equip an Iron Helm with 5 armor.
   cost: 2
