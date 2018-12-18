@@ -28,12 +28,12 @@ namespace DefaultNamespace.Hand
 
         private void Start()
         {
-            SocketService.Instance.OnEndTurn.AddListener(SendCards);
+            //SocketService.Instance.OnEndTurn.AddListener(SendCards);
         }
 
         private void SendCards()
         {
-            SocketService.Instance.SendCardsPlayed(CardsInField);
+            //SocketService.Instance.SendCardsPlayed(CardsInField);
             Resolver.SetOwnCards(CardsInField);
         }
 

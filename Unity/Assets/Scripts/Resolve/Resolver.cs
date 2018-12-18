@@ -18,8 +18,8 @@ namespace DefaultNamespace
 
         private void Start()
         {
-            SocketService.Instance.OnOpponentCardPlayed.AddListener(OpponentPlayedCard);
-            SocketService.Instance.OnResolvePhase.AddListener(Resolve);
+            //SocketService.Instance.OnOpponentCardPlayed.AddListener(OpponentPlayedCard);
+            //SocketService.Instance.OnResolvePhase.AddListener(Resolve);
         }
 
         public void SetOwnCards(List<Card> cards)

@@ -31,7 +31,7 @@ public class MatchmakingCommunicator : MonoBehaviour {
         socketService.ConnectToServer(playerId);
     }
 
-    public void StartMatchmaking()
+    private void StartMatchmaking()
     {
         socketService.OnJoinedMatchmaking.AddListener(JoinedMatchmaking);
         socketService.OnMatchedWithPlayer.AddListener(MatchedWithPlayer);

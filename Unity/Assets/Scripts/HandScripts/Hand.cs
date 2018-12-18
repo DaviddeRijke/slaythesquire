@@ -44,7 +44,7 @@ namespace HandScripts
 
         public void Start()
         {
-            OnPlay.AddListener(SocketService.Instance.SendPlayedCard);
+            //OnPlay.AddListener(SocketService.Instance.SendPlayedCard);
             
             //makes sure the game is started with the amount of cards specified in the static GameRules class
             Draw(GameRules.AmountOfStartingCards);

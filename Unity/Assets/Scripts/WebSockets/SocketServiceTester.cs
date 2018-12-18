@@ -18,11 +18,11 @@ public class SocketServiceTester : MonoBehaviour {
 
     void Start()
     {
-        ss.OnOpponentCardPlayed.AddListener(OnOpponentCardPlayed);
-        ss.OnPlayPhase.AddListener(OnPlayPhase);
-        ss.OnResolvePhase.AddListener(OnResolvePhase);
-        ss.OnWinner.AddListener(OnWinner);
-        ss.OnMatchVoid.AddListener(OnMatchVoid);
+        //ss.OnOpponentCardPlayed.AddListener(OnOpponentCardPlayed);
+        //ss.OnPlayPhase.AddListener(OnPlayPhase);
+        //ss.OnResolvePhase.AddListener(OnResolvePhase);
+        //ss.OnWinner.AddListener(OnWinner);
+        //ss.OnMatchVoid.AddListener(OnMatchVoid);
     }
 
     public void PlayedCard()
@@ -47,8 +47,8 @@ public class SocketServiceTester : MonoBehaviour {
 
     public void SendPlayedCards()
     {
-        ss.SendCardsPlayed(ss.playedCards);
-        ss.playedCards.Clear();
+        //ss.SendCardsPlayed(ss.playedCards);
+        //ss.playedCards.Clear();
     }
 
     public void SendStatus()
