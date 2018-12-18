@@ -14,6 +14,7 @@ public class GameCommunicator : MonoBehaviour {
     public UnityEvent OnMatchVoid = new UnityEvent();
     public UnityEvent OnEndTurn = new UnityEvent();
 
+    public CardContainer CardContainer;
 
     void Awake()
     {
@@ -90,8 +91,7 @@ public class GameCommunicator : MonoBehaviour {
             cardIds[i] = int.Parse(jsonCards[i]);
         }
         List<Card> opponentCards = new List<Card>();
-        //TODO: opponentCards = getCardsWithCardIds(cardIds);
-        Debug.Log("TODO: Get cards from cardIds");
+        opponentCards = CardContainer.GetCards(cardIds);
 
         OnResolvePhase.Invoke(opponentCards);
     }
