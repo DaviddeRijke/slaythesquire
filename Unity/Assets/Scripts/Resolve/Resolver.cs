@@ -100,10 +100,15 @@ namespace DefaultNamespace
 
             Debug.Log(debugMessage);
 
-            if (forAnimator == null) return;
+            if (forAnimator == null)
+            {
+                Debug.Log("forAnimator is null");
+                return;
+            }
             // ----(((((( cob = code execution block ))))))----
             for (int i = 0; i < forAnimator.Count; i++)
             {
+                Debug.Log("Looping forAnimator...");
                 //Grab first effect and look at the second
                 EffectData e1 = forAnimator.Dequeue();
                 bool isLast = forAnimator.Count <= 0;
