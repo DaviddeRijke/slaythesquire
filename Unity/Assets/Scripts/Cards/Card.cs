@@ -12,6 +12,7 @@ public class Card : ScriptableObject{
     public string name;
     public string description;
     public int cost;
+	public Material picture;
     public Tag[] tags;
     public Effect[] effects;
     public EndTurnAction endTurnAction;
