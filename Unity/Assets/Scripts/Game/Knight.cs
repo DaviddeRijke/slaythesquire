@@ -14,12 +14,14 @@ public class Knight : MonoBehaviour {
     public UnityEvent death;
     public EquipmentChanged equipChanged;
 
-    private void Start()
+	private void Start()
     {
 		maxHealth = health;
 		maxEnergy = energy;
         equipped = new List<Equipment>();
-    }
+		GameCommunicator gameCommunicator = DDOLAccesser.GetObject().GetComponent<GameCommunicator>();
+		gameCommunicator.OnPlayPhase.AddListener(RenewEnergy);
+	}
 
     public void AddHealth(int amount)
     {
@@ -50,7 +52,7 @@ public class Knight : MonoBehaviour {
 		energyChanged.Invoke(energy);
 	}
 
-	public void RenewEnergy()
+	public void RenewEnergy(int x)
 	{
 		energy = maxEnergy;
 		energyChanged.Invoke(energy);

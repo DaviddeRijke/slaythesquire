@@ -15,6 +15,7 @@ MonoBehaviour:
   name: Iron Helm
   description: Equip an Iron Helm with 5 armor.
   cost: 2
+  picture: {fileID: 2100000, guid: bea412d45a9b8dd419833a328563afcc, type: 2}
   tags: []
   effects:
   - {fileID: 11400000, guid: f8e653350ebe7c342b3b8e22297aaef4, type: 2}

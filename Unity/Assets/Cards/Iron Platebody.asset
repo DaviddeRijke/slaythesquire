@@ -15,6 +15,7 @@ MonoBehaviour:
   name: Iron Platebody
   description: Equip an Iron Patebody with 5 armor.
   cost: 2
+  picture: {fileID: 2100000, guid: 9b9adc10b6d138a4f9fd56fa8f7af22b, type: 2}
   tags: []
   effects:
   - {fileID: 11400000, guid: a40938375ca4626409702b6e2d28cf39, type: 2}

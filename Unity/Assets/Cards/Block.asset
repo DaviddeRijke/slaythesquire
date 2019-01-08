@@ -15,6 +15,7 @@ MonoBehaviour:
   name: Block
   description: Your knight blocks incomming damage.
   cost: 1
+  picture: {fileID: 2100000, guid: f6837dc4e1f91db48ae4c2bdf211c6d2, type: 2}
   tags: []
   effects:
   - {fileID: 11400000, guid: 65734386a408945408c19f198de4c193, type: 2}

@@ -15,6 +15,7 @@ MonoBehaviour:
   name: Iron Platelegs
   description: Equip Iron Platelegs with 5 armor.
   cost: 2
+  picture: {fileID: 2100000, guid: a4dbca2a0ebc9024189fe6d231bf56c4, type: 2}
   tags: []
   effects:
   - {fileID: 11400000, guid: 829f9d3b4b5ff2a4089b2590021cd0f4, type: 2}

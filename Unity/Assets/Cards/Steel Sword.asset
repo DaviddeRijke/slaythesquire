@@ -15,6 +15,7 @@ MonoBehaviour:
   name: Steel Sword
   description: Equip a Steel Sword with 5 bonus damage
   cost: 4
+  picture: {fileID: 2100000, guid: 16324a5e2af6b934b99fcab34f8525e4, type: 2}
   tags: []
   effects:
   - {fileID: 11400000, guid: 36441c489b1e57a419a37d8dd0007ad0, type: 2}

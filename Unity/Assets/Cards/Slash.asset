@@ -15,6 +15,7 @@ MonoBehaviour:
   name: Slash
   description: Slashes the enemy knight for 7 damage.
   cost: 2
+  picture: {fileID: 2100000, guid: 46e763aa757133d4994010fe97800875, type: 2}
   tags: []
   effects:
   - {fileID: 11400000, guid: 9dd1ce6fe5429204a8d577f721596b05, type: 2}

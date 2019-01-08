@@ -15,6 +15,7 @@ MonoBehaviour:
   name: Stab
   description: Stabs the enemy knight for 4 damage.
   cost: 1
+  picture: {fileID: 2100000, guid: 00ddc10b37ee37f46a8fd4046cb38930, type: 2}
   tags: []
   effects:
   - {fileID: 11400000, guid: 59e6737d28d49b14e8a2f08b443ba311, type: 2}

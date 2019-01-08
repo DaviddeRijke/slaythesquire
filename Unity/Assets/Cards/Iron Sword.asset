@@ -15,6 +15,7 @@ MonoBehaviour:
   name: Iron Sword
   description: Equip an Iron Sword with 2 bonus damage.
   cost: 2
+  picture: {fileID: 2100000, guid: 74a7ac935a0009141a0315dcd2210c37, type: 2}
   tags: []
   effects:
   - {fileID: 11400000, guid: ec3608ae9ac17f04e9c03311fc31508e, type: 2}
