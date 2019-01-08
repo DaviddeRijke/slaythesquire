@@ -50,8 +50,13 @@ namespace DefaultNamespace
 
         private void ResolveCards(Card ownCard, Card otherCard)
         {
-            var forAnimator = ownCard.effects.ToList().ToSortedQueue(otherCard.effects.ToList(), OwnKnight, OtherKnight);
+            List<Effect> ownCardEffects = ownCard == null ? new List<Effect>() : ownCard.effects.ToList();
+            List<Effect> otherCardEffects = otherCard == null ? new List<Effect>() : otherCard.effects.ToList();
+            
+            
+            var forAnimator = ownCardEffects.ToSortedQueue(otherCardEffects, OwnKnight, OtherKnight);
 
+            if (forAnimator == null) return;
             // ----(((((( cob = code execution block ))))))----
             for (int i = 0; i < forAnimator.Count; i++)
             {

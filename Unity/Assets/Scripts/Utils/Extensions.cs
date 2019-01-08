@@ -129,11 +129,11 @@ public static class Extensions
 
     private static List<Effect> SortOnBlockable(this List<Effect> list)
     {
-        return list.FindAll(e => e is IBlockable);
+        return list.Where(e => e is IBlockable).ToList();
     }
 
     private static List<Effect> SortOnInteraction(this List<Effect> list)
     {       
-        return list.FindAll(e => e is INoInteraction);
+        return list.Where(e => e is INoInteraction).ToList();
     }
 }
