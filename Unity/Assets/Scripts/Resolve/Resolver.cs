@@ -30,6 +30,18 @@ namespace DefaultNamespace
         public void SetOwnCards(List<Card> cards)
         {
             _own = cards;
+            /*
+            string debugMessage = "setting own cards..." + System.Environment.NewLine;
+            debugMessage += "own cards:" + System.Environment.NewLine;
+
+            foreach (Card c in _own)
+            {
+                debugMessage += "card id: " + c.id + System.Environment.NewLine;
+            }
+
+
+            Debug.Log(debugMessage);
+            */
         }
 
 
@@ -43,6 +55,25 @@ namespace DefaultNamespace
 
         public void Resolve(List<Card> other)
         {
+            /*
+            string debugMessage = "resolving..." + System.Environment.NewLine;
+            debugMessage += "own cards:" + System.Environment.NewLine;
+
+            foreach (Card c in _own)
+            {
+                debugMessage += "card id: " + c.id + System.Environment.NewLine;
+            }
+
+            debugMessage += "opponent's cards:" + System.Environment.NewLine;
+
+            foreach (Card c in other)
+            {
+                debugMessage += "card id: " + c.id + System.Environment.NewLine;
+            }
+
+            Debug.Log(debugMessage);
+            */
+
             for (int i = 0; i < Mathf.Max(_own.Count, other.Count); i++)
             {
                 var ownCard = i < _own.Count ? _own[i] : null;
@@ -62,18 +93,39 @@ namespace DefaultNamespace
             
             var forAnimator = ownCardEffects.ToSortedQueue(otherCardEffects, OwnKnight, OtherKnight);
 
-            if (forAnimator == null) return;
+            /*
+            string debugMessage = "forAnimator..." + System.Environment.NewLine;
+            debugMessage += "effects:" + System.Environment.NewLine;
+
+            foreach (var item in forAnimator)
+            {
+                debugMessage += "caster: " + item.Caster.name + " Effect: " + item.Effect.name + System.Environment.NewLine;
+            }
+
+
+            Debug.Log(debugMessage);
+            */
+
+            if (forAnimator == null)
+            {
+                //Debug.Log("forAnimator is null");
+                return;
+            }
             // ----(((((( cob = code execution block ))))))----
             for (int i = 0; i < forAnimator.Count; i++)
             {
+                //Debug.Log("Looping forAnimator...");
                 //Grab first effect and look at the second
                 EffectData e1 = forAnimator.Dequeue();
-                EffectData e2 = forAnimator.Peek();
+                bool isLast = forAnimator.Count <= 0;
+                EffectData e2 = isLast ? new EffectData() : forAnimator.Peek();
 
                 if (e1.Effect is INoInteraction) //Within cob 1
                 {
+                    //Debug.Log("forAnimator No Interaction");
+
                     e1.Effect.Activate(e1.Caster, GetOtherKnight(e1.Caster));
-                    if (e2.Effect is INoInteraction && !e2.Caster.Equals(e1.Caster)) //Two can play at once
+                    if (!isLast && e2.Effect is INoInteraction && !e2.Caster.Equals(e1.Caster)) //Two can play at once
                     {
                         e2 = forAnimator.Dequeue();
                         e2.Effect.Activate(e2.Caster, GetOtherKnight(e2.Caster));
@@ -82,14 +134,17 @@ namespace DefaultNamespace
                 }
                 else if (e1.Effect is IBlock)
                 {
-                    if (e2.Effect is IBlockable && !e2.Caster.Equals(e1.Caster)) //Within cob 2 with block
+
+                    //Debug.Log("forAnimator Block");
+
+                    if (!isLast && e2.Effect is IBlockable && !e2.Caster.Equals(e1.Caster)) //Within cob 2 with block
                     {
                         StartCoroutine(PlayEffectAfterTime(e1, 1.5f));
                         e2 = forAnimator.Dequeue();
                         e2.Effect.Activate(e2.Caster, GetOtherKnight(e2.Caster));
                         i++;
                     }
-                    else if (e2.Effect is IBlock && !e2.Caster.Equals(e1.Caster)) //Within cob 3 (Play two)
+                    else if (!isLast && e2.Effect is IBlock && !e2.Caster.Equals(e1.Caster)) //Within cob 3 (Play two)
                     {
                         e1.Effect.Activate(e1.Caster, GetOtherKnight(e1.Caster));
                         e2 = forAnimator.Dequeue();
@@ -103,8 +158,14 @@ namespace DefaultNamespace
                 }
                 else if (e1.Effect is IBlockable) //Within cob 2 without block
                 {
+
+                    //Debug.Log("forAnimator Blockable");
+
                     e1.Effect.Activate(e1.Caster, GetOtherKnight(e1.Caster));
                 }
+
+
+                //Debug.Log("Looping forAnimator done");
             }
         }
 

@@ -93,6 +93,26 @@ public class GameCommunicator : MonoBehaviour {
         List<Card> opponentCards = new List<Card>();
         opponentCards = CardContainer.GetCards(cardIds);
 
+        /*
+        string debugMessage = "getting opponent's cards from ids..." + System.Environment.NewLine;
+        debugMessage += "ids:" + System.Environment.NewLine;
+
+        foreach (int i in cardIds)
+        {
+            debugMessage += "card id: " + i + System.Environment.NewLine;
+        }
+
+        debugMessage += "recieved cards:" + System.Environment.NewLine;
+
+        foreach (Card c in opponentCards)
+        {
+            debugMessage += "card name: " + c.name + " with id: " + c.id + System.Environment.NewLine;
+        }
+
+
+        Debug.Log(debugMessage);
+        */
+
         OnResolvePhase.Invoke(opponentCards);
     }
 
