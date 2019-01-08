@@ -17,7 +17,7 @@ MonoBehaviour:
   cost: 2
   tags: []
   effects:
-  - {fileID: 11400000, guid: 02323f86b5eaaf647bbfc3ebff149040, type: 2}
+  - {fileID: 11400000, guid: 9dd1ce6fe5429204a8d577f721596b05, type: 2}
   OnEnable:
     m_PersistentCalls:
       m_Calls: []
