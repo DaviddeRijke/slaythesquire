@@ -30,6 +30,16 @@ namespace DefaultNamespace
         public void SetOwnCards(List<Card> cards)
         {
             _own = cards;
+            string debugMessage = "setting own cards..." + System.Environment.NewLine;
+            debugMessage += "own cards:" + System.Environment.NewLine;
+
+            foreach (Card c in _own)
+            {
+                debugMessage += "card id: " + c.id + System.Environment.NewLine;
+            }
+
+
+            Debug.Log(debugMessage);
         }
 
 
@@ -50,6 +60,8 @@ namespace DefaultNamespace
             {
                 debugMessage += "card id: " + c.id + System.Environment.NewLine;
             }
+
+            debugMessage += "opponent's cards:" + System.Environment.NewLine;
 
             foreach (Card c in other)
             {
@@ -76,6 +88,17 @@ namespace DefaultNamespace
             
             
             var forAnimator = ownCardEffects.ToSortedQueue(otherCardEffects, OwnKnight, OtherKnight);
+
+            string debugMessage = "forAnimator..." + System.Environment.NewLine;
+            debugMessage += "effects:" + System.Environment.NewLine;
+
+            foreach (var item in forAnimator)
+            {
+                debugMessage += "caster: " + item.Caster.name + " Effect: " + item.Effect.name + System.Environment.NewLine;
+            }
+
+
+            Debug.Log(debugMessage);
 
             if (forAnimator == null) return;
             // ----(((((( cob = code execution block ))))))----
