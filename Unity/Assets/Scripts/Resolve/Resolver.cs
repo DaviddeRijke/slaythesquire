@@ -106,14 +106,15 @@ namespace DefaultNamespace
             {
                 //Grab first effect and look at the second
                 EffectData e1 = forAnimator.Dequeue();
-                EffectData e2 = forAnimator.Peek();
+                bool isLast = forAnimator.Count <= 0;
+                EffectData e2 = isLast ? new EffectData() : forAnimator.Peek();
 
                 Debug.Log("BLA!!!!!!!");
 
                 if (e1.Effect is INoInteraction) //Within cob 1
                 {
                     e1.Effect.Activate(e1.Caster, GetOtherKnight(e1.Caster));
-                    if (e2.Effect is INoInteraction && !e2.Caster.Equals(e1.Caster)) //Two can play at once
+                    if (!isLast && e2.Effect is INoInteraction && !e2.Caster.Equals(e1.Caster)) //Two can play at once
                     {
                         e2 = forAnimator.Dequeue();
                         e2.Effect.Activate(e2.Caster, GetOtherKnight(e2.Caster));
@@ -122,14 +123,14 @@ namespace DefaultNamespace
                 }
                 else if (e1.Effect is IBlock)
                 {
-                    if (e2.Effect is IBlockable && !e2.Caster.Equals(e1.Caster)) //Within cob 2 with block
+                    if (!isLast && e2.Effect is IBlockable && !e2.Caster.Equals(e1.Caster)) //Within cob 2 with block
                     {
                         StartCoroutine(PlayEffectAfterTime(e1, 1.5f));
                         e2 = forAnimator.Dequeue();
                         e2.Effect.Activate(e2.Caster, GetOtherKnight(e2.Caster));
                         i++;
                     }
-                    else if (e2.Effect is IBlock && !e2.Caster.Equals(e1.Caster)) //Within cob 3 (Play two)
+                    else if (!isLast && e2.Effect is IBlock && !e2.Caster.Equals(e1.Caster)) //Within cob 3 (Play two)
                     {
                         e1.Effect.Activate(e1.Caster, GetOtherKnight(e1.Caster));
                         e2 = forAnimator.Dequeue();
