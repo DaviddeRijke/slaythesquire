@@ -108,6 +108,8 @@ namespace DefaultNamespace
                 EffectData e1 = forAnimator.Dequeue();
                 EffectData e2 = forAnimator.Peek();
 
+                Debug.Log("BLA!!!!!!!");
+
                 if (e1.Effect is INoInteraction) //Within cob 1
                 {
                     e1.Effect.Activate(e1.Caster, GetOtherKnight(e1.Caster));
