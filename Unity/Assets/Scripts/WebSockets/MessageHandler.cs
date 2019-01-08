@@ -6,6 +6,7 @@ using System.Net.Sockets;
 using System.Threading;
 using UnityEngine;
 
+[RequireComponent(typeof(DoOnMainThread))]
 public class MessageHandler : MonoBehaviour {
 
     public string ServerIp = "127.0.0.1";
@@ -42,7 +43,7 @@ public class MessageHandler : MonoBehaviour {
     private void ConnectToServer(int playerId)
     {
         if (socket != null)
-            return;
+            DisconnectFromServer();
 
         socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 

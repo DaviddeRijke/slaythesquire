@@ -1410,7 +1410,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f5eb0be346879b4d9c6ff0453ab630d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 20
+  duration: 30
   timerVisuals: {fileID: 471700862}
   timerText: {fileID: 386231784}
   newColor:
@@ -7625,6 +7625,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d69a473ff50a2db40a0c240911374d34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playedCards: []
 --- !u!64 &599836900
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -7692,6 +7693,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30bd775c0102495dafd9313b921163eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Resolver: {fileID: 1446281298}
   self: {fileID: 1962762458}
   opponent: {fileID: 148022294}
 --- !u!4 &608042519 stripped
@@ -9606,6 +9608,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d69a473ff50a2db40a0c240911374d34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playedCards: []
 --- !u!64 &785936200
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -22246,7 +22249,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1446281297}
-  - component: {fileID: 1446281296}
   - component: {fileID: 1446281302}
   - component: {fileID: 1446281301}
   - component: {fileID: 1446281299}
@@ -22260,22 +22262,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1446281296
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1446281295}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8bb8990d8d0aa6548bc365de8f63249a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  phases:
-  - {fileID: 11400000, guid: 4307d2c652ecf714b8fcf78a77b18c84, type: 2}
-  - {fileID: 11400000, guid: 4a1a06abd571c3146987be99b9514554, type: 2}
-  index: 0
-  turnCount: 0
 --- !u!4 &1446281297
 Transform:
   m_ObjectHideFlags: 0
@@ -22399,11 +22385,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1e05e0dd55ff5c489cae7f0b32ac9af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  started:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
 --- !u!114 &1446281303
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22501,8 +22482,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1446281296}
-        m_MethodName: ForcePhaseExit
+      - m_Target: {fileID: 1446281303}
+        m_MethodName: EndTurn
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

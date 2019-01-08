@@ -3,6 +3,9 @@ package com.sts.slaythesquire.sockets;
 import com.sts.slaythesquire.matchmaking.MatchmakingPool;
 import com.sts.slaythesquire.models.Player;
 import com.sts.slaythesquire.repos.PlayerRepository;
+import com.sts.slaythesquire.utils.threading.ReadWriteMonitor;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -11,6 +14,9 @@ public class ClientManager {
     private MatchmakingPool matchmakingPool;
 
     private PlayerRepository playerRepository;
+
+    private List<Player> connectedPlayers = new LinkedList<>();
+    private ReadWriteMonitor playersMonitor = new ReadWriteMonitor();
 
     public ClientManager(PlayerRepository playerRepository, MatchmakingPool matchmakingPool) {
         //startHeartbeatTimerTask(2000);
@@ -29,8 +35,36 @@ public class ClientManager {
                 System.out.println("Player not found... :(");
                 return;
             }
+
+            try {
+                if (isPlayerAlreadyConnected(player)){
+                    Packet alreadyConnectedPacket = new Packet();
+                    alreadyConnectedPacket.setAction("ALREADYCONNECTED");
+                    messageHandler.sendPacket(alreadyConnectedPacket);
+                    System.out.println("Player " + player.getUsername() + " was already connected, could not connect again...");
+                    return;
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            messageHandler.subscribe("DISCONNECT", p2 -> {
+                try {
+                    System.out.println("Player disconnected: " + player.getUsername());
+                    removePlayer(player);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            });
+
             player.setMessageHandler(messageHandler);
             matchmakingPool.initializePlayerForMatchmaking(player);
+
+            try {
+                addPlayer(player);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
 
             Packet packet = new Packet();
             packet.setAction("CONNECTED");
@@ -43,6 +77,36 @@ public class ClientManager {
         Packet packet = new Packet();
         packet.setAction("READYTOCONNECT");
         messageHandler.sendPacket(packet);
+    }
+
+    private void addPlayer(Player player) throws InterruptedException {
+        playersMonitor.enterWriter();
+
+        connectedPlayers.add(player);
+
+        playersMonitor.exitWriter();
+    }
+
+    private void removePlayer(Player player) throws InterruptedException {
+        playersMonitor.enterWriter();
+
+        Player playerToRemove = connectedPlayers.stream().filter(p -> player.getId() == p.getId()).findFirst().orElse(null);
+        connectedPlayers.remove(playerToRemove);
+
+        playersMonitor.exitWriter();
+    }
+
+    private boolean isPlayerAlreadyConnected(Player player) throws InterruptedException {
+
+        boolean connected = false;
+
+        playersMonitor.enterReader();
+
+        connected = connectedPlayers.stream().anyMatch(p -> p.getId() == player.getId());
+
+        playersMonitor.exitReader();
+
+        return connected;
     }
 
     private synchronized Player getPlayerFromPacket(Packet packet){

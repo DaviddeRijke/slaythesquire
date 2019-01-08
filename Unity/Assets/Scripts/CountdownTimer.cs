@@ -16,9 +16,17 @@ public class CountdownTimer : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        GameCommunicator gc = DDOLAccesser.GetObject().GetComponent<GameCommunicator>();
+        if (gc != null)
+            gc.OnPlayPhase.AddListener(Reset);
+    }
+
+    void Reset(int turn)
+    {
+        CancelInvoke();
         countdown = duration;
         InvokeRepeating("CountDown", 0, 0.1f);
-	}
+    }
 	
 	private void CountDown()
     {
