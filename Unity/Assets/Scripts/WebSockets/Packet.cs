@@ -141,6 +141,7 @@ public class Packet
             foreach (JToken token in array.Children())
             {
                 string json = token.ToString();
+                list.Add(json);
                 //Debug.Log(json);
             }
 
