@@ -114,10 +114,10 @@ namespace DefaultNamespace
                 bool isLast = forAnimator.Count <= 0;
                 EffectData e2 = isLast ? new EffectData() : forAnimator.Peek();
 
-                Debug.Log("BLA!!!!!!!");
-
                 if (e1.Effect is INoInteraction) //Within cob 1
                 {
+                    Debug.Log("forAnimator No Interaction");
+
                     e1.Effect.Activate(e1.Caster, GetOtherKnight(e1.Caster));
                     if (!isLast && e2.Effect is INoInteraction && !e2.Caster.Equals(e1.Caster)) //Two can play at once
                     {
@@ -128,6 +128,9 @@ namespace DefaultNamespace
                 }
                 else if (e1.Effect is IBlock)
                 {
+
+                    Debug.Log("forAnimator Block");
+
                     if (!isLast && e2.Effect is IBlockable && !e2.Caster.Equals(e1.Caster)) //Within cob 2 with block
                     {
                         StartCoroutine(PlayEffectAfterTime(e1, 1.5f));
@@ -149,8 +152,14 @@ namespace DefaultNamespace
                 }
                 else if (e1.Effect is IBlockable) //Within cob 2 without block
                 {
+
+                    Debug.Log("forAnimator Blockable");
+
                     e1.Effect.Activate(e1.Caster, GetOtherKnight(e1.Caster));
                 }
+
+
+                Debug.Log("Looping forAnimator done");
             }
         }
 
