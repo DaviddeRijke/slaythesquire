@@ -53,7 +53,7 @@ namespace DefaultNamespace.Hand
 				if (self.energy >= c.cost)
 				{
 					//temp demo code
-					c.Activate(self, opponent);
+					//c.Activate(self, opponent);
 					//---
 					self.RemoveEnergy(c.cost);
 					CardsInField.Add(c);
