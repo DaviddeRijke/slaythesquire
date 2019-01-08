@@ -27,5 +27,6 @@ public class CardView3D : MonoBehaviour {
         this.cost.SetText(card.cost.ToString());
         this.title.SetText(card.name);
         this.description.SetText(card.description);
+		this.picture.material = card.picture;
     }
 }
