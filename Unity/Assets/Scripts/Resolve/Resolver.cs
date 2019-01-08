@@ -43,6 +43,21 @@ namespace DefaultNamespace
 
         public void Resolve(List<Card> other)
         {
+            string debugMessage = "resolving..." + System.Environment.NewLine;
+            debugMessage += "own cards:" + System.Environment.NewLine;
+
+            foreach (Card c in _own)
+            {
+                debugMessage += "card id: " + c.id + System.Environment.NewLine;
+            }
+
+            foreach (Card c in other)
+            {
+                debugMessage += "card id: " + c.id + System.Environment.NewLine;
+            }
+
+            Debug.Log(debugMessage);
+
             for (int i = 0; i < Mathf.Max(_own.Count, other.Count); i++)
             {
                 var ownCard = i < _own.Count ? _own[i] : null;
