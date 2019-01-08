@@ -35,8 +35,8 @@ namespace DefaultNamespace.Hand
 
         private void SendCards()
         {
-            GameCommunicator.SendCardsPlayed(CardsInField);
             Resolver.SetOwnCards(CardsInField);
+            GameCommunicator.SendCardsPlayed(CardsInField);
         }
 
         /// <summary>
