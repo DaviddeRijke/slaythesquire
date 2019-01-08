@@ -30,6 +30,7 @@ namespace DefaultNamespace
         public void SetOwnCards(List<Card> cards)
         {
             _own = cards;
+            /*
             string debugMessage = "setting own cards..." + System.Environment.NewLine;
             debugMessage += "own cards:" + System.Environment.NewLine;
 
@@ -40,6 +41,7 @@ namespace DefaultNamespace
 
 
             Debug.Log(debugMessage);
+            */
         }
 
 
@@ -53,6 +55,7 @@ namespace DefaultNamespace
 
         public void Resolve(List<Card> other)
         {
+            /*
             string debugMessage = "resolving..." + System.Environment.NewLine;
             debugMessage += "own cards:" + System.Environment.NewLine;
 
@@ -69,6 +72,7 @@ namespace DefaultNamespace
             }
 
             Debug.Log(debugMessage);
+            */
 
             for (int i = 0; i < Mathf.Max(_own.Count, other.Count); i++)
             {
@@ -89,6 +93,7 @@ namespace DefaultNamespace
             
             var forAnimator = ownCardEffects.ToSortedQueue(otherCardEffects, OwnKnight, OtherKnight);
 
+            /*
             string debugMessage = "forAnimator..." + System.Environment.NewLine;
             debugMessage += "effects:" + System.Environment.NewLine;
 
@@ -99,16 +104,17 @@ namespace DefaultNamespace
 
 
             Debug.Log(debugMessage);
+            */
 
             if (forAnimator == null)
             {
-                Debug.Log("forAnimator is null");
+                //Debug.Log("forAnimator is null");
                 return;
             }
             // ----(((((( cob = code execution block ))))))----
             for (int i = 0; i < forAnimator.Count; i++)
             {
-                Debug.Log("Looping forAnimator...");
+                //Debug.Log("Looping forAnimator...");
                 //Grab first effect and look at the second
                 EffectData e1 = forAnimator.Dequeue();
                 bool isLast = forAnimator.Count <= 0;
@@ -116,7 +122,7 @@ namespace DefaultNamespace
 
                 if (e1.Effect is INoInteraction) //Within cob 1
                 {
-                    Debug.Log("forAnimator No Interaction");
+                    //Debug.Log("forAnimator No Interaction");
 
                     e1.Effect.Activate(e1.Caster, GetOtherKnight(e1.Caster));
                     if (!isLast && e2.Effect is INoInteraction && !e2.Caster.Equals(e1.Caster)) //Two can play at once
@@ -129,7 +135,7 @@ namespace DefaultNamespace
                 else if (e1.Effect is IBlock)
                 {
 
-                    Debug.Log("forAnimator Block");
+                    //Debug.Log("forAnimator Block");
 
                     if (!isLast && e2.Effect is IBlockable && !e2.Caster.Equals(e1.Caster)) //Within cob 2 with block
                     {
@@ -153,13 +159,13 @@ namespace DefaultNamespace
                 else if (e1.Effect is IBlockable) //Within cob 2 without block
                 {
 
-                    Debug.Log("forAnimator Blockable");
+                    //Debug.Log("forAnimator Blockable");
 
                     e1.Effect.Activate(e1.Caster, GetOtherKnight(e1.Caster));
                 }
 
 
-                Debug.Log("Looping forAnimator done");
+                //Debug.Log("Looping forAnimator done");
             }
         }
 

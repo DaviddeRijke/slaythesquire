@@ -93,6 +93,7 @@ public class GameCommunicator : MonoBehaviour {
         List<Card> opponentCards = new List<Card>();
         opponentCards = CardContainer.GetCards(cardIds);
 
+        /*
         string debugMessage = "getting opponent's cards from ids..." + System.Environment.NewLine;
         debugMessage += "ids:" + System.Environment.NewLine;
 
@@ -110,6 +111,7 @@ public class GameCommunicator : MonoBehaviour {
 
 
         Debug.Log(debugMessage);
+        */
 
         OnResolvePhase.Invoke(opponentCards);
     }
