@@ -31,7 +31,7 @@ namespace DefaultNamespace
 
         public void SetOwnCards(List<Card> cards)
         {
-            _own = cards;
+            _own = new List<Card>(cards);
         }
 
         private bool _startResolve;
