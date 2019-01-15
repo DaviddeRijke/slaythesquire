@@ -36,6 +36,7 @@ namespace DefaultNamespace.Hand
         {
             Resolver.SetOwnCards(CardsInField);
             GameCommunicator.SendCardsPlayed(CardsInField);
+	        CardsInField.Clear();
         }
 
         /// <summary>
