@@ -72,7 +72,7 @@ namespace DefaultNamespace
                 var otherCard = i < _other.Count ? _other[i] : null;
                 yield return StartCoroutine(AnotherResolve(GetEffects(ownCard, otherCard)));
             }
-            OnResolved.Invoke("get status", 0);
+            OnResolved.Invoke("get status", CheckForWinner());
         }
 
         private Queue<EffectData> GetEffects(Card ownCard, Card otherCard)
@@ -146,21 +146,6 @@ namespace DefaultNamespace
             }
             return null;
         }
-
-        private IEnumerator PlayEffectAfterTime(EffectData e, float delay)
-        {
-            yield return new WaitForSeconds(delay);
-            e.Effect.Activate(e.Caster, GetOtherKnight(e.Caster));
-        }
-
-        //Hand.OnPlay invokes SocketService.PlayCard
-        //xxxx listens to (void)SocketService.OpponentPlaysCard
-        //EndTurn invokes SocketService.EndTurn(list<Card>)
-        //EndTurn adds list<card> to Resolver
-        
-        //Resolver listens to (List<Card>)SocketService.EndTurn
-        //Resolver resolves cards
-        //Resolver invokes SocketService.SendStatus(status)
 
         private int CheckForWinner()
         {
