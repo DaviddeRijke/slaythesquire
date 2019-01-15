@@ -199,5 +199,19 @@ namespace DefaultNamespace
         //Resolver resolves cards
         //Resolver invokes SocketService.SendStatus(status)
 
+        private int CheckForWinner()
+        {
+            if (OwnKnight.health <= 0)
+            {
+                return gameCommunicator.OpponentPlayerId;
+            }
+            if (OtherKnight.health <= 0)
+            {
+                return gameCommunicator.OwnPlayerId;
+            }
+
+            return 0;
+        }
+
     }
 }
