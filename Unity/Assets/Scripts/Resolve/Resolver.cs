@@ -17,7 +17,6 @@ namespace DefaultNamespace
 
         private List<Card> _own;
         private List<Card> _other;
-        private List<Effect> _effects;
         
         public Knight OwnKnight;
         public Knight OtherKnight;
@@ -83,54 +82,82 @@ namespace DefaultNamespace
         }
 
         private IEnumerator AnotherResolve(Queue<EffectData> effects)
-        {                    
-            for (int i = 0; i < effects.Count; i++)
+        {
+            for (int i = 0; i < effects.Count; ++i)
             {
-                //Debug.Log("Looping forAnimator...");
-                //Grab first effect and look at the second
+                //Dequeue the next effect
                 EffectData e1 = effects.Dequeue();
-                bool isLast = effects.Count <= 0;
+                //Check if there are more effects
+                bool isLast = effects.Count <= 0;              
+                //If there are more effects, look what kind of effect
                 EffectData e2 = isLast ? new EffectData() : effects.Peek();
-
-                if (e1.Effect is INoInteraction) //Within cob 1
-                {
-                    yield return StartCoroutine(Activate(e1));
-                    if (!isLast && e2.Effect is INoInteraction && !e2.Caster.Equals(e1.Caster)) //Two can play at once
+                
+                //if e2 is enemy NoInteraction, perform both. Otherwise, only self.
+                if (e1.Effect is INoInteraction)
+                {   
+                    //If e2 is also a no interaction
+                    if (!isLast && e2.Effect is INoInteraction && !e2.Caster == e1.Caster)
                     {
-                        yield return StartCoroutine(Activate(effects.Dequeue()));
-                        i++;
+                        ++i;
+                        yield return StartCoroutine(Activate(e1, effects.Dequeue()));
                     }
-                }
+                    else
+                    {
+                        yield return StartCoroutine(Activate(e1));
+                    }
+                 }
+
+                //if e2 is enemy blockable, block the attack. If e2 is enemy block, both block
                 else if (e1.Effect is IBlock)
                 {
-                    if (!isLast && e2.Effect is IBlockable && !e2.Caster.Equals(e1.Caster)) //Within cob 2 with block
+                    //if e2 is bl
+                    if (!isLast && !e2.Caster.Equals(e1.Caster)) //Within cob 2 with block
                     {
-                        yield return StartCoroutine(Activate(e1));
-                        yield return StartCoroutine(Activate(effects.Dequeue()));
-                        i++;
+                        if (e2.Effect is IBlockable)
+                        {
+                            ++i;
+                            yield return StartCoroutine(ActivateBlockedAttack(e1, effects.Dequeue()));
+                        }
+                        else if (e2.Effect is IBlock)
+                        {
+                            ++i;
+                            yield return StartCoroutine(Activate(e1, effects.Dequeue()));
+                        }
+                        else yield return StartCoroutine(Activate(e1));
                     }
-                    else if (!isLast && e2.Effect is IBlock && !e2.Caster.Equals(e1.Caster)) //Within cob 3 (Play two)
-                    {
-                        yield return StartCoroutine(Activate(e1));
-                        yield return StartCoroutine(Activate(effects.Dequeue()));
-                        i++;
-                    }
-                    else //Within cob 3 (Play one, because the next is from the same knight)
+                    else
                     {
                         yield return StartCoroutine(Activate(e1));
                     }
                 }
-                else if (e1.Effect is IBlockable) //Within cob 2 without block
+                //all blocks should be handled, so this attack can't be blocked. Therefore it can be executed without taking e2 into account
+                else if (e1.Effect is IBlockable)
                 {
                     yield return StartCoroutine(Activate(e1));
                 }
+
             }
+        }
+
+        private IEnumerator ActivateBlockedAttack(EffectData defender, EffectData attacker)
+        {
+            attacker.Effect.Activate(attacker.Caster, GetOtherKnight(attacker.Caster));
+            yield return new WaitForSeconds(attacker.Effect.Duration() - defender.Effect.Duration());
+            defender.Effect.Activate(defender.Caster, GetOtherKnight(defender.Caster));
+            yield return new WaitForSeconds(defender.Effect.Duration());
         }
 
         private IEnumerator Activate(EffectData e)
         {
             e.Effect.Activate(e.Caster, GetOtherKnight(e.Caster));
             yield return new WaitForSeconds(e.Effect.Duration());
+        }
+
+        private IEnumerator Activate(EffectData e1, EffectData e2)
+        {
+            e1.Effect.Activate(e1.Caster, GetOtherKnight(e1.Caster));
+            e2.Effect.Activate(e2.Caster, GetOtherKnight(e2.Caster));
+            yield return new WaitForSeconds(Mathf.Max(e1.Effect.Duration(), e2.Effect.Duration()));
         }
 
 

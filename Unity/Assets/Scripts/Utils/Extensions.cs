@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.NetworkInformation;
@@ -83,7 +84,6 @@ public static class Extensions
                     }
                 }
                 queue.Enqueue(bo1[i].ToData(p1));
-                //bo1[i].Activate(p1, p2);
             }
 
             //Attack wordt uitgevoerd
@@ -101,7 +101,6 @@ public static class Extensions
                     }
                 }
                 queue.Enqueue(bo2[i].ToData(p2));
-                //bo2[i].Activate(p1, p2);
             }
         }
 
@@ -118,8 +117,20 @@ public static class Extensions
             queue.Enqueue(block1.ToData(p1));
             bo1.Remove(block1);
         }
-        
+
+        Debug.Log(queue.AsString());
         return queue;
+    }
+
+    private static string AsString(this Queue<EffectData> queue)
+    {
+        for (int i = 0; i < queue.Count; ++i)
+        {
+            var a = queue.Dequeue();
+            Debug.Log(a.Effect.name);
+            Debug.Log(a.Caster);
+            Debug.Log("---");
+        }
     }
 
     private static Effect GetBlock(this List<Effect> list)

@@ -146,6 +146,7 @@ public class KnightMovement : MonoBehaviour {
         ani.SetBool("Crouch", true);
         yield return new WaitForSeconds(2f);
         ani.SetBool("Crouch", false);
+        yield return new WaitForSeconds(2f);
         isInAction = false;
     }
 
