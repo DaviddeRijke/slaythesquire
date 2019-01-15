@@ -3021,7 +3021,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1046933844}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &280294368
 GameObject:
@@ -7896,11 +7896,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 599836897}
-  m_LocalRotation: {x: -0.095428735, y: -0, z: -0, w: 0.9954363}
-  m_LocalPosition: {x: 35.5, y: -2.7673206, z: 63.027164}
-  m_LocalScale: {x: 28.164907, y: 1.3308018, z: 9.124955}
+  m_LocalRotation: {x: -0.6658816, y: -0, z: -0, w: 0.74605745}
+  m_LocalPosition: {x: 0, y: 3.2039156, z: 5.9891853}
+  m_LocalScale: {x: 2.2531927, y: 1.2880512, z: 1.2968788}
   m_Children: []
-  m_Father: {fileID: 785936203}
+  m_Father: {fileID: 1046933844}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -60, y: 0, z: 0}
 --- !u!114 &599836899
@@ -8329,7 +8329,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1046933844}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &657464377
 MonoBehaviour:
@@ -9462,7 +9462,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1046933844}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: -23.5, y: 0, z: 0}
 --- !u!1 &740999353
 GameObject:
@@ -10082,10 +10082,9 @@ Transform:
   m_LocalRotation: {x: -0.59164745, y: 0, z: 0, w: 0.80619687}
   m_LocalPosition: {x: -2.84, y: -2.58, z: 1.27}
   m_LocalScale: {x: 0.08, y: 1, z: 0.11}
-  m_Children:
-  - {fileID: 599836898}
+  m_Children: []
   m_Father: {fileID: 1046933844}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: -72.548, y: 0, z: 0}
 --- !u!1 &786929640
 GameObject:
@@ -12720,7 +12719,7 @@ Transform:
   m_LocalScale: {x: 0.71804017, y: 0.9999998, z: 0.99999994}
   m_Children: []
   m_Father: {fileID: 1046933844}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: -89.98, y: 0, z: 5.3710003}
 --- !u!199 &1016832194
 ParticleSystemRenderer:
@@ -17511,6 +17510,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 4.36, z: 0.51}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 599836898}
   - {fileID: 785936203}
   - {fileID: 657464376}
   - {fileID: 739869207}
