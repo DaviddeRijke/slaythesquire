@@ -85,7 +85,7 @@ namespace DefaultNamespace
         {
             List<Effect> ownCardEffects = ownCard == null ? new List<Effect>() : ownCard.effects.ToList();
             List<Effect> otherCardEffects = otherCard == null ? new List<Effect>() : otherCard.effects.ToList();        
-           return ownCardEffects.ToSortedQueue(otherCardEffects, OwnKnight, OtherKnight, true);
+           return ownCardEffects.ToSortedQueue(otherCardEffects, OwnKnight, OtherKnight);
         }
 
         private IEnumerator ResolveCurrentCards(Queue<EffectData> effects)

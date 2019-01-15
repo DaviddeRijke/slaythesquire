@@ -42,124 +42,72 @@ public static class Extensions
         return ed;
     }
 
-    public static Queue<EffectData> ToSortedQueue(this List<Effect> own, List<Effect> other, Knight p1, Knight p2,
-        bool overriding)
-    {
-        var queue = new Queue<EffectData>();
-        foreach (var ef in own)
-        {
-            if (ef is INoInteraction)
-            {
-                queue.Enqueue(ef.ToData(p1));
-            }
-        }
-        return queue;
-    }
-
-
     public static Queue<EffectData> ToSortedQueue(this List<Effect> own, List<Effect> other, Knight p1, Knight p2)
-    {   //REMOVED ALL ACTIVATES FROM THIS METHOD TO MOVE THEM TOWARDS RESOLVER!
+    {
         var queue = new Queue<EffectData>();
-        var no1 = own.SortOnInteraction();
-        var no2 = other.SortOnInteraction();
-        for (int i = 0; i < Mathf.Max(no1.Count, no2.Count); i++)
+        for (int i = 0; i < Mathf.Max(own.Count, other.Count); ++i)
         {
-            if (i < no1.Count)
+            if (own.Count > i && own[i] is INoInteraction)
             {
-                queue.Enqueue(no1[i].ToData(p1));
-                //no2[i].Activate(p1, p2);
-                own.Remove(no1[i]);
+                queue.Enqueue(own[i].ToData(p1));
             }
-            if (i < no2.Count)
+            if (other.Count > i && other[i] is INoInteraction)
             {
-                queue.Enqueue(no2[i].ToData(p2));
-                //no2[i].Activate(p1, p2);
-                own.Remove(no2[i]);
+                queue.Enqueue(other[i].ToData(p1));
+            }
+        }
+        
+        for (int i = 0; i < Mathf.Max(own.Count, other.Count); ++i)
+        {
+            if (own.Count > i && own[i] is INoInteraction)
+            {
+                queue.Enqueue(own[i].ToData(p1));
+            }
+            if (other.Count > i && other[i] is INoInteraction)
+            {
+                queue.Enqueue(other[i].ToData(p1));
+            }
+        }
+        
+        //block
+        bool ownBlocks = false;
+        bool otherBlocks = false;
+        for (int i = 0; i < Mathf.Max(own.Count, other.Count); ++i)
+        {
+            if (own.Count > i && own[i] is IBlock)
+            {
+                ownBlocks = true;
+                queue.Enqueue(own[i].ToData(p1));
+                var a = GetAttack(other);
+                if (a != null) queue.Enqueue(a.ToData(p2));
+            }
+            if (other.Count > i && other[i] is IBlock)
+            {
+                otherBlocks = true;
+                queue.Enqueue(other[i].ToData(p2));
+                var a = GetAttack(own);
+                if (a != null) queue.Enqueue(a.ToData(p1));
             }
         }
 
-        var bo1= own.SortOnBlockable();
-        var bo2= other.SortOnBlockable();
-        var block1 = own.GetBlock();
-        var block2 = other.GetBlock();
-        for (int i = 0; i < Mathf.Max(bo1.Count, bo2.Count); i++)
+        if (!otherBlocks && GetAttack(own) != null)
         {
-            //Attack wordt uitgevoerd
-            if (i < bo1.Count)
-            {               
-                own.Remove(bo1[i]);
-                //Attack wordt geblockt
-                if (block2 != null)
-                {
-                    queue.Enqueue(block2.ToData(p2));
-                    var blockable = bo1[i] as IBlockable;
-                    if(blockable != null)
-                    {
-                        blockable.Block();
-                    }
-                }
-                queue.Enqueue(bo1[i].ToData(p1));
-            }
-
-            //Attack wordt uitgevoerd
-            if (i < bo2.Count)
-            {               
-                own.Remove(bo2[i]);
-                //Attack wordt geblockt
-                if (block1 != null)
-                {
-                    queue.Enqueue(block1.ToData(p1));
-                    var blockable = bo2[i] as IBlockable;
-                    if (blockable != null)
-                    {
-                        blockable.Block();
-                    }
-                }
-                queue.Enqueue(bo2[i].ToData(p2));
-            }
+            queue.Enqueue(GetAttack(own).ToData(p1));
         }
-
-        //Alleen animations, er wordt geen attack geblockt
-        if (bo1.Count == 0 && block2 != null)
+        if (!ownBlocks && GetAttack(other) != null)
         {
-            queue.Enqueue(block2.ToData(p2));
-            bo2.Remove(block2);
-        }
-
-        //Alleen animations, er wordt geen attack geblockt
-        if (bo2.Count == 0 && block1 != null)
-        {
-            queue.Enqueue(block1.ToData(p1));
-            bo1.Remove(block1);
-        }
-
-        queue.AsString();
+            queue.Enqueue(GetAttack(other).ToData(p2));
+        }        
         return queue;
     }
 
-    private static void AsString(this Queue<EffectData> queue)
+    private static Effect GetAttack(List<Effect> effects)
     {
-        for (int i = 0; i < queue.Count; ++i)
+        foreach (var at in effects)
         {
-            var a = queue.Dequeue();
-            Debug.Log(a.Effect.name);
-            Debug.Log(a.Caster);
-            Debug.Log("---");
+            if (at is IBlockable) return at;
         }
+        return null;
     }
 
-    private static Effect GetBlock(this List<Effect> list)
-    {
-        return list.Find(e => e is IBlock);
-    }
-
-    private static List<Effect> SortOnBlockable(this List<Effect> list)
-    {
-        return list.Where(e => e is IBlockable).ToList();
-    }
-
-    private static List<Effect> SortOnInteraction(this List<Effect> list)
-    {       
-        return list.Where(e => e is INoInteraction).ToList();
-    }
 }
