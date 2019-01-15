@@ -66,12 +66,14 @@ namespace DefaultNamespace
         /// <returns></returns>
         private IEnumerator ResolveAllPlayedCards()
         {
+            print("start resolve: " + Time.time );
             for (int i = 0; i < Mathf.Max(_own.Count, _other.Count); i++)
             {
                 var ownCard = i < _own.Count ? _own[i] : null;
                 var otherCard = i < _other.Count ? _other[i] : null;
                 yield return StartCoroutine(ResolveCurrentCards(GetEffectsForCurrentCards(ownCard, otherCard)));
             }
+            print("invoking onresolved: " + Time.time );
             OnResolved.Invoke("get status", CheckForWinner());
         }
 
