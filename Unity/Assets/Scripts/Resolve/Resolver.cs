@@ -37,6 +37,7 @@ namespace DefaultNamespace
         private bool _startResolve;
         private void SetResolveStatus(List<Card> cards)
         {
+            Debug.Log("Resolve status has been set. Own: " + _own.Count + ", other: " + cards.Count);
             _other = cards;
             _startResolve = true;
         }
@@ -55,7 +56,7 @@ namespace DefaultNamespace
             if (_startResolve)
             {
                 _startResolve = false;
-                StartCoroutine(ResolveInQueue());
+                StartCoroutine(ResolveAllPlayedCards());
             }
         }
 
@@ -63,25 +64,25 @@ namespace DefaultNamespace
         /// NOTE: The Cards are NOT sorted yet. This happens per card, not per list of cards.
         /// </summary>
         /// <returns></returns>
-        private IEnumerator ResolveInQueue()
+        private IEnumerator ResolveAllPlayedCards()
         {
             for (int i = 0; i < Mathf.Max(_own.Count, _other.Count); i++)
             {
                 var ownCard = i < _own.Count ? _own[i] : null;
                 var otherCard = i < _other.Count ? _other[i] : null;
-                yield return StartCoroutine(AnotherResolve(GetEffects(ownCard, otherCard)));
+                yield return StartCoroutine(ResolveCurrentCards(GetEffectsForCurrentCards(ownCard, otherCard)));
             }
             OnResolved.Invoke("get status", CheckForWinner());
         }
 
-        private Queue<EffectData> GetEffects(Card ownCard, Card otherCard)
+        private Queue<EffectData> GetEffectsForCurrentCards(Card ownCard, Card otherCard)
         {
             List<Effect> ownCardEffects = ownCard == null ? new List<Effect>() : ownCard.effects.ToList();
             List<Effect> otherCardEffects = otherCard == null ? new List<Effect>() : otherCard.effects.ToList();                       
            return ownCardEffects.ToSortedQueue(otherCardEffects, OwnKnight, OtherKnight);
         }
 
-        private IEnumerator AnotherResolve(Queue<EffectData> effects)
+        private IEnumerator ResolveCurrentCards(Queue<EffectData> effects)
         {
             for (int i = 0; i < effects.Count; ++i)
             {
