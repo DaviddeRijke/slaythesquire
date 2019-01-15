@@ -19,8 +19,38 @@ public class EndOfMatch : MonoBehaviour {
 
 	public ValueChanged goldChanged;
 	public ValueChanged ratingChanged;
+    private GameCommunicator gameCommunicator;
 
-	public void EndMatch()
+    private void Start()
+    {
+        gameCommunicator = DDOLAccesser.GetObject().GetComponent<GameCommunicator>();
+
+        if (gameCommunicator)
+        {
+            gameCommunicator.OnWinner.AddListener(OnWinner);
+            gameCommunicator.OnMatchVoid.AddListener(OnMatchVoid);
+        }
+
+    }
+
+    private void OnMatchVoid()
+    {
+        ToggleUI(false);
+    }
+
+    private void OnWinner(int winnerId)
+    {
+        if (gameCommunicator.OwnPlayerId == winnerId)
+        {
+            ToggleUI(true);
+        }
+        else
+        {
+            ToggleUI(false);
+        }
+    }
+
+    public void EndMatch()
     {
         bool win = System.Convert.ToBoolean(Random.Range(0, 2)); 
 	    RestController.Instance.Post("/match/add", new MatchResult(player.players[0], null));
