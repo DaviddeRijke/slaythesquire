@@ -53,19 +53,7 @@ public static class Extensions
             }
             if (other.Count > i && other[i] is INoInteraction)
             {
-                queue.Enqueue(other[i].ToData(p1));
-            }
-        }
-        
-        for (int i = 0; i < Mathf.Max(own.Count, other.Count); ++i)
-        {
-            if (own.Count > i && own[i] is INoInteraction)
-            {
-                queue.Enqueue(own[i].ToData(p1));
-            }
-            if (other.Count > i && other[i] is INoInteraction)
-            {
-                queue.Enqueue(other[i].ToData(p1));
+                queue.Enqueue(other[i].ToData(p2));
             }
         }
         
