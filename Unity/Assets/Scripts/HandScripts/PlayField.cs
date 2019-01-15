@@ -35,6 +35,7 @@ namespace DefaultNamespace.Hand
         private void SendCards()
         {
             GameCommunicator.SendCardsPlayed(CardsInField);
+	        print("Own cards to be sent: " + CardsInField.Count);
 	        Resolver.SetOwnCards(CardsInField);
 	        CardsInField.Clear();
         }
