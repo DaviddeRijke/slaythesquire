@@ -12,7 +12,7 @@ namespace DefaultNamespace.Hand
     [RequireComponent(typeof(DropZone))]
     public class Stash : MonoBehaviour
     {
-        private List<DropZone> _dropZones;
+        private DropZone _dropZone;
         
         //The list of card instances (not the View3D's, as they are currently removed)
         private List<Card> _cardsInStash;
@@ -23,11 +23,8 @@ namespace DefaultNamespace.Hand
         private void Awake()
         {
             _cardsInStash = new List<Card>();
-            _dropZones = GetComponentsInChildren<DropZone>().ToList();
-            foreach (var dz in _dropZones)
-            {
-                dz.OnDrop.AddListener(AddCard);
-            }
+            _dropZone = GetComponent<DropZone>();
+            _dropZone.OnDrop.AddListener(AddCard);
         }
 
         /// <summary>
