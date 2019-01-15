@@ -53,27 +53,24 @@ namespace DefaultNamespace
             Debug.Log("Resolver got OpponentPlayedCard");
         }
 
+        private void Update()
+        {
+            if (true)
+            {
+                StartCoroutine(ResolveInQueue(_own, _own));
+            }
+            if (false)
+            {
+                OnResolved.Invoke("", 0);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="other"></param>
         public void Resolve(List<Card> other)
         {
-            /*
-            string debugMessage = "resolving..." + System.Environment.NewLine;
-            debugMessage += "own cards:" + System.Environment.NewLine;
-
-            foreach (Card c in _own)
-            {
-                debugMessage += "card id: " + c.id + System.Environment.NewLine;
-            }
-
-            debugMessage += "opponent's cards:" + System.Environment.NewLine;
-
-            foreach (Card c in other)
-            {
-                debugMessage += "card id: " + c.id + System.Environment.NewLine;
-            }
-
-            Debug.Log(debugMessage);
-            */
-
             for (int i = 0; i < Mathf.Max(_own.Count, other.Count); i++)
             {
                 var ownCard = i < _own.Count ? _own[i] : null;
@@ -85,6 +82,11 @@ namespace DefaultNamespace
             OnResolved.Invoke("get status", 0);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ownCard"></param>
+        /// <param name="otherCard"></param>
         private void ResolveCards(Card ownCard, Card otherCard)
         {
             List<Effect> ownCardEffects = ownCard == null ? new List<Effect>() : ownCard.effects.ToList();
@@ -92,19 +94,6 @@ namespace DefaultNamespace
             
             
             var forAnimator = ownCardEffects.ToSortedQueue(otherCardEffects, OwnKnight, OtherKnight);
-
-            /*
-            string debugMessage = "forAnimator..." + System.Environment.NewLine;
-            debugMessage += "effects:" + System.Environment.NewLine;
-
-            foreach (var item in forAnimator)
-            {
-                debugMessage += "caster: " + item.Caster.name + " Effect: " + item.Effect.name + System.Environment.NewLine;
-            }
-
-
-            Debug.Log(debugMessage);
-            */
 
             if (forAnimator == null)
             {
@@ -134,9 +123,6 @@ namespace DefaultNamespace
                 }
                 else if (e1.Effect is IBlock)
                 {
-
-                    //Debug.Log("forAnimator Block");
-
                     if (!isLast && e2.Effect is IBlockable && !e2.Caster.Equals(e1.Caster)) //Within cob 2 with block
                     {
                         StartCoroutine(PlayEffectAfterTime(e1, 1.5f));
@@ -168,6 +154,19 @@ namespace DefaultNamespace
                 //Debug.Log("Looping forAnimator done");
             }
         }
+
+        private IEnumerator ResolveInQueue(List<Card> own, List<Card> other)
+        {
+            for (int i = 0; i < Mathf.Max(_own.Count, other.Count); i++)
+            {
+                var ownCard = i < _own.Count ? _own[i] : null;
+                var otherCard = i < other.Count ? other[i] : null;
+                ResolveCards(ownCard, otherCard);
+            }
+            
+            yield return new WaitForSeconds(1f);
+        }
+
 
         private Knight GetOtherKnight(Knight question)
         {
