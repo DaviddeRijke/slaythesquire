@@ -81,6 +81,7 @@ public class GameCommunicator : MonoBehaviour {
 
     private void EndTurn(Packet packet)
     {
+        print("ENDING TURN");
         OnEndTurn.Invoke();
     }
 
