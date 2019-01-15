@@ -7983,7 +7983,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Resolver: {fileID: 1446281298}
   self: {fileID: 1962762458}
-  opponent: {fileID: 148022294}
 --- !u!4 &608042519 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 7ac2de8fbdb842e419727d09c0416ea6,
@@ -10236,7 +10235,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Draw 1 Card
+  m_Text: Draw Card
 --- !u!222 &797117052
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -20479,7 +20478,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1295544709
 RectTransform:
   m_ObjectHideFlags: 0
@@ -32280,7 +32279,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -206, y: 189.2}
+  m_AnchoredPosition: {x: -210, y: 99.783}
   m_SizeDelta: {x: 400, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1863886043
