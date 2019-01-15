@@ -10,6 +10,7 @@ namespace Game
     public class GameManager : MonoBehaviour
     {
         private GameCommunicator gameCommunicator;
+        private MatchmakingCommunicator matchmakingCommunicator;
 
         private int round;
         public Player player;
@@ -28,6 +29,10 @@ namespace Game
             gameCommunicator = DDOLAccesser.GetObject().GetComponent<GameCommunicator>();
             gameCommunicator.OnPlayPhase.AddListener(OnPlayPhase);
             gameCommunicator.OnResolvePhase.AddListener(OnResolvePhase);
+
+
+            matchmakingCommunicator = DDOLAccesser.GetObject().GetComponent<MatchmakingCommunicator>();
+            matchmakingCommunicator.ConfirmMatch();
         }
 
         public void SetPhaseText(string phaseText)

@@ -38,7 +38,6 @@ public class MatchMaker : MonoBehaviour
         gameCommunicator.OwnPlayerId = this.playerId;
         gameCommunicator.OpponentPlayerId = playerId;
         //TODO: Keep track of matched playerId
-        matchmakingCommunicator.ConfirmMatch();
         sceneManager.SwitchScene(2);
     }
 }
