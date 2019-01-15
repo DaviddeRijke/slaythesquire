@@ -37,4 +37,9 @@ public class EffectDamage : Effect, IBlockable {
 	{
         this.amount = 0;
 	}
+	
+	public override float Duration()
+	{
+		return 6;
+	}
 }

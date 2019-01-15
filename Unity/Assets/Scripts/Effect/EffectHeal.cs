@@ -13,4 +13,9 @@ public class EffectHeal : Effect, INoInteraction {
         self.gameObject.GetComponent<KnightMovement>().PlayHealAnimation(amount);
         self.AddHealth(amount);
 	}
+	
+	public override float Duration()
+	{
+		return 1.5f;
+	}
 }

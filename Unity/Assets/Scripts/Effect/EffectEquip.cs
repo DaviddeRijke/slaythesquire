@@ -12,4 +12,9 @@ public class EffectEquip : Effect, INoInteraction {
 	{
 		self.Equip(equipment);
 	}
+	
+	public override float Duration()
+	{
+		return 1.5f;
+	}
 }

@@ -10,4 +10,9 @@ public class EffectBlock : Effect, IBlock
     {
         self.gameObject.GetComponent<KnightMovement>().PlayDuckAnimation();
     }
+
+    public override float Duration()
+    {
+        return 6;
+    }
 }

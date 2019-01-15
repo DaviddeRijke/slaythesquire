@@ -9,6 +9,8 @@ public abstract class Effect : ScriptableObject
 
     public int Id;
 
+    public abstract float Duration();
+
     // Called on phases
     public virtual void BeforeTurn() { }
     public virtual void OnStartTurn() { }

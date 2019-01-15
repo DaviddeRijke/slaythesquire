@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
+using System.Runtime.Remoting;
+using UnityEditor;
 using UnityEngine;
 using Utils;
 
@@ -14,6 +16,7 @@ namespace DefaultNamespace
         private StatusEvent OnResolved = new StatusEvent();
 
         private List<Card> _own;
+        private List<Card> _other;
         private List<Effect> _effects;
         
         public Knight OwnKnight;
@@ -23,27 +26,21 @@ namespace DefaultNamespace
         {
             gameCommunicator = DDOLAccesser.GetObject().GetComponent<GameCommunicator>();
             gameCommunicator.OnOpponentCardPlayed.AddListener(OpponentPlayedCard);
-            gameCommunicator.OnResolvePhase.AddListener(Resolve);
+            gameCommunicator.OnResolvePhase.AddListener(SetResolveStatus);
             OnResolved.AddListener(gameCommunicator.SendStatus);
         }
 
         public void SetOwnCards(List<Card> cards)
         {
             _own = cards;
-            /*
-            string debugMessage = "setting own cards..." + System.Environment.NewLine;
-            debugMessage += "own cards:" + System.Environment.NewLine;
-
-            foreach (Card c in _own)
-            {
-                debugMessage += "card id: " + c.id + System.Environment.NewLine;
-            }
-
-
-            Debug.Log(debugMessage);
-            */
         }
 
+        private bool _startResolve;
+        private void SetResolveStatus(List<Card> cards)
+        {
+            _other = cards;
+            _startResolve = true;
+        }
 
         /// <summary>
         /// This method will be refactored as it does not belong here. It is put here for the sake of debugging
@@ -53,71 +50,54 @@ namespace DefaultNamespace
             Debug.Log("Resolver got OpponentPlayedCard");
         }
 
+        
         private void Update()
         {
-            if (true)
+            if (_startResolve)
             {
-                StartCoroutine(ResolveInQueue(_own, _own));
-            }
-            if (false)
-            {
-                OnResolved.Invoke("", 0);
+                _startResolve = false;
+                StartCoroutine(ResolveInQueue());
             }
         }
 
         /// <summary>
-        /// 
+        /// NOTE: The Cards are NOT sorted yet. This happens per card, not per list of cards.
         /// </summary>
-        /// <param name="other"></param>
-        public void Resolve(List<Card> other)
+        /// <returns></returns>
+        private IEnumerator ResolveInQueue()
         {
-            for (int i = 0; i < Mathf.Max(_own.Count, other.Count); i++)
+            for (int i = 0; i < Mathf.Max(_own.Count, _other.Count); i++)
             {
                 var ownCard = i < _own.Count ? _own[i] : null;
-                var otherCard = i < other.Count ? other[i] : null;
-                ResolveCards(ownCard, otherCard);
+                var otherCard = i < _other.Count ? _other[i] : null;
+                yield return StartCoroutine(AnotherResolve(GetEffects(ownCard, otherCard)));
             }
-            //Send status (preferably through event)
-            //Animator should send status too!
             OnResolved.Invoke("get status", 0);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="ownCard"></param>
-        /// <param name="otherCard"></param>
-        private void ResolveCards(Card ownCard, Card otherCard)
+        private Queue<EffectData> GetEffects(Card ownCard, Card otherCard)
         {
             List<Effect> ownCardEffects = ownCard == null ? new List<Effect>() : ownCard.effects.ToList();
-            List<Effect> otherCardEffects = otherCard == null ? new List<Effect>() : otherCard.effects.ToList();
-            
-            
-            var forAnimator = ownCardEffects.ToSortedQueue(otherCardEffects, OwnKnight, OtherKnight);
+            List<Effect> otherCardEffects = otherCard == null ? new List<Effect>() : otherCard.effects.ToList();                       
+           return ownCardEffects.ToSortedQueue(otherCardEffects, OwnKnight, OtherKnight);
+        }
 
-            if (forAnimator == null)
-            {
-                //Debug.Log("forAnimator is null");
-                return;
-            }
-            // ----(((((( cob = code execution block ))))))----
-            for (int i = 0; i < forAnimator.Count; i++)
+        private IEnumerator AnotherResolve(Queue<EffectData> effects)
+        {                    
+            for (int i = 0; i < effects.Count; i++)
             {
                 //Debug.Log("Looping forAnimator...");
                 //Grab first effect and look at the second
-                EffectData e1 = forAnimator.Dequeue();
-                bool isLast = forAnimator.Count <= 0;
-                EffectData e2 = isLast ? new EffectData() : forAnimator.Peek();
+                EffectData e1 = effects.Dequeue();
+                bool isLast = effects.Count <= 0;
+                EffectData e2 = isLast ? new EffectData() : effects.Peek();
 
                 if (e1.Effect is INoInteraction) //Within cob 1
                 {
-                    //Debug.Log("forAnimator No Interaction");
-
-                    e1.Effect.Activate(e1.Caster, GetOtherKnight(e1.Caster));
+                    yield return StartCoroutine(Activate(e1));
                     if (!isLast && e2.Effect is INoInteraction && !e2.Caster.Equals(e1.Caster)) //Two can play at once
                     {
-                        e2 = forAnimator.Dequeue();
-                        e2.Effect.Activate(e2.Caster, GetOtherKnight(e2.Caster));
+                        yield return StartCoroutine(Activate(effects.Dequeue()));
                         i++;
                     }
                 }
@@ -125,46 +105,32 @@ namespace DefaultNamespace
                 {
                     if (!isLast && e2.Effect is IBlockable && !e2.Caster.Equals(e1.Caster)) //Within cob 2 with block
                     {
-                        StartCoroutine(PlayEffectAfterTime(e1, 1.5f));
-                        e2 = forAnimator.Dequeue();
-                        e2.Effect.Activate(e2.Caster, GetOtherKnight(e2.Caster));
+                        yield return StartCoroutine(Activate(e1));
+                        yield return StartCoroutine(Activate(effects.Dequeue()));
                         i++;
                     }
                     else if (!isLast && e2.Effect is IBlock && !e2.Caster.Equals(e1.Caster)) //Within cob 3 (Play two)
                     {
-                        e1.Effect.Activate(e1.Caster, GetOtherKnight(e1.Caster));
-                        e2 = forAnimator.Dequeue();
-                        e2.Effect.Activate(e2.Caster, GetOtherKnight(e2.Caster));
+                        yield return StartCoroutine(Activate(e1));
+                        yield return StartCoroutine(Activate(effects.Dequeue()));
                         i++;
                     }
                     else //Within cob 3 (Play one, because the next is from the same knight)
                     {
-                        e1.Effect.Activate(e1.Caster, GetOtherKnight(e1.Caster));
+                        yield return StartCoroutine(Activate(e1));
                     }
                 }
                 else if (e1.Effect is IBlockable) //Within cob 2 without block
                 {
-
-                    //Debug.Log("forAnimator Blockable");
-
-                    e1.Effect.Activate(e1.Caster, GetOtherKnight(e1.Caster));
+                    yield return StartCoroutine(Activate(e1));
                 }
-
-
-                //Debug.Log("Looping forAnimator done");
             }
         }
 
-        private IEnumerator ResolveInQueue(List<Card> own, List<Card> other)
+        private IEnumerator Activate(EffectData e)
         {
-            for (int i = 0; i < Mathf.Max(_own.Count, other.Count); i++)
-            {
-                var ownCard = i < _own.Count ? _own[i] : null;
-                var otherCard = i < other.Count ? other[i] : null;
-                ResolveCards(ownCard, otherCard);
-            }
-            
-            yield return new WaitForSeconds(1f);
+            e.Effect.Activate(e.Caster, GetOtherKnight(e.Caster));
+            yield return new WaitForSeconds(e.Effect.Duration());
         }
 
 
@@ -174,30 +140,11 @@ namespace DefaultNamespace
             {
                 return OtherKnight;
             }
-            else if (question.Equals(OtherKnight))
+            if (question.Equals(OtherKnight))
             {
                 return OwnKnight;
             }
-            else
-            {
-                return null;
-            }
+            return null;
         }
-
-        private IEnumerator PlayEffectAfterTime(EffectData e, float delay)
-        {
-            yield return new WaitForSeconds(delay);
-            e.Effect.Activate(e.Caster, GetOtherKnight(e.Caster));
-        }
-
-        //Hand.OnPlay invokes SocketService.PlayCard
-        //xxxx listens to (void)SocketService.OpponentPlaysCard
-        //EndTurn invokes SocketService.EndTurn(list<Card>)
-        //EndTurn adds list<card> to Resolver
-        
-        //Resolver listens to (List<Card>)SocketService.EndTurn
-        //Resolver resolves cards
-        //Resolver invokes SocketService.SendStatus(status)
-
     }
 }
