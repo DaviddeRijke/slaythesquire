@@ -42,6 +42,21 @@ public static class Extensions
         return ed;
     }
 
+    public static Queue<EffectData> ToSortedQueue(this List<Effect> own, List<Effect> other, Knight p1, Knight p2,
+        bool overriding)
+    {
+        var queue = new Queue<EffectData>();
+        foreach (var ef in own)
+        {
+            if (ef is INoInteraction)
+            {
+                queue.Enqueue(ef.ToData(p1));
+            }
+        }
+        return queue;
+    }
+
+
     public static Queue<EffectData> ToSortedQueue(this List<Effect> own, List<Effect> other, Knight p1, Knight p2)
     {   //REMOVED ALL ACTIVATES FROM THIS METHOD TO MOVE THEM TOWARDS RESOLVER!
         var queue = new Queue<EffectData>();

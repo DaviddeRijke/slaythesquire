@@ -55,6 +55,7 @@ namespace DefaultNamespace
         {
             if (_startResolve)
             {
+                print("found method in update");
                 _startResolve = false;
                 StartCoroutine(ResolveAllPlayedCards());
             }
@@ -84,7 +85,7 @@ namespace DefaultNamespace
         {
             List<Effect> ownCardEffects = ownCard == null ? new List<Effect>() : ownCard.effects.ToList();
             List<Effect> otherCardEffects = otherCard == null ? new List<Effect>() : otherCard.effects.ToList();        
-           return ownCardEffects.ToSortedQueue(otherCardEffects, OwnKnight, OtherKnight);
+           return ownCardEffects.ToSortedQueue(otherCardEffects, OwnKnight, OtherKnight, true);
         }
 
         private IEnumerator ResolveCurrentCards(Queue<EffectData> effects)
