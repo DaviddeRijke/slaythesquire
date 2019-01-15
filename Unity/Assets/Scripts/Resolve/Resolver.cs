@@ -105,7 +105,6 @@ namespace DefaultNamespace
                     //If e2 is also a no interaction
                     if (!isLast && e2.Effect is INoInteraction && !e2.Caster == e1.Caster)
                     {
-                        ++i;
                         yield return StartCoroutine(Activate(e1, effects.Dequeue()));
                     }
                     else
@@ -122,12 +121,10 @@ namespace DefaultNamespace
                     {
                         if (e2.Effect is IBlockable)
                         {
-                            ++i;
                             yield return StartCoroutine(ActivateBlockedAttack(e1, effects.Dequeue()));
                         }
                         else if (e2.Effect is IBlock)
                         {
-                            ++i;
                             yield return StartCoroutine(Activate(e1, effects.Dequeue()));
                         }
                         else yield return StartCoroutine(Activate(e1));
