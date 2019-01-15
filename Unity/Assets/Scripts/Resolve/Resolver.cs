@@ -67,11 +67,14 @@ namespace DefaultNamespace
         private IEnumerator ResolveAllPlayedCards()
         {
             print("start resolve: " + Time.time );
-            for (int i = 0; i < Mathf.Max(_own.Count, _other.Count); i++)
+            for (int i = 0; i < Mathf.Max(_own.Count, _other.Count); ++i)
             {
                 var ownCard = i < _own.Count ? _own[i] : null;
                 var otherCard = i < _other.Count ? _other[i] : null;
-                yield return StartCoroutine(ResolveCurrentCards(GetEffectsForCurrentCards(ownCard, otherCard)));
+                if(ownCard != null && otherCard != null) print(ownCard.effects.Length + " + " + otherCard.effects.Length + " effects that must be sorted");
+                var currentEffects = GetEffectsForCurrentCards(ownCard, otherCard);
+                print(currentEffects.Count + " effects will be resolved");
+                yield return StartCoroutine(ResolveCurrentCards(currentEffects));
             }
             print("invoking onresolved: " + Time.time );
             OnResolved.Invoke("get status", CheckForWinner());
@@ -80,7 +83,7 @@ namespace DefaultNamespace
         private Queue<EffectData> GetEffectsForCurrentCards(Card ownCard, Card otherCard)
         {
             List<Effect> ownCardEffects = ownCard == null ? new List<Effect>() : ownCard.effects.ToList();
-            List<Effect> otherCardEffects = otherCard == null ? new List<Effect>() : otherCard.effects.ToList();                       
+            List<Effect> otherCardEffects = otherCard == null ? new List<Effect>() : otherCard.effects.ToList();        
            return ownCardEffects.ToSortedQueue(otherCardEffects, OwnKnight, OtherKnight);
         }
 
@@ -144,6 +147,7 @@ namespace DefaultNamespace
 
         private IEnumerator ActivateBlockedAttack(EffectData defender, EffectData attacker)
         {
+            print("Activate called for: defender:" + defender.Effect.name + ", attacker: " + attacker.Effect.name);
             attacker.Effect.Activate(attacker.Caster, GetOtherKnight(attacker.Caster));
             yield return new WaitForSeconds(attacker.Effect.Duration() - defender.Effect.Duration());
             defender.Effect.Activate(defender.Caster, GetOtherKnight(defender.Caster));
@@ -152,12 +156,14 @@ namespace DefaultNamespace
 
         private IEnumerator Activate(EffectData e)
         {
+            print("Activate called for: " + e.Effect.name);
             e.Effect.Activate(e.Caster, GetOtherKnight(e.Caster));
             yield return new WaitForSeconds(e.Effect.Duration());
         }
 
         private IEnumerator Activate(EffectData e1, EffectData e2)
         {
+            print("Activate called for: " + e1.Effect.name + ", " + e2.Effect.name);
             e1.Effect.Activate(e1.Caster, GetOtherKnight(e1.Caster));
             e2.Effect.Activate(e2.Caster, GetOtherKnight(e2.Caster));
             yield return new WaitForSeconds(Mathf.Max(e1.Effect.Duration(), e2.Effect.Duration()));
