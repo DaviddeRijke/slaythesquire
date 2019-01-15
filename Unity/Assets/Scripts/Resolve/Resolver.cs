@@ -90,45 +90,54 @@ namespace DefaultNamespace
 
         private IEnumerator ResolveCurrentCards(Queue<EffectData> effects)
         {
+            EffectData previousNotUsedUp = new EffectData();
             for (int i = 0; i < effects.Count; ++i)
             {
                 //Dequeue the next effect
-                EffectData e1 = effects.Dequeue();
+                EffectData e1;
+                if (!previousNotUsedUp.Equals(new EffectData()))
+                {
+                    e1 = previousNotUsedUp;
+                    previousNotUsedUp = new EffectData();
+                }
+                else
+                {
+                    e1 = effects.Dequeue();
+                }
+
                 //Check if there are more effects
                 bool isLast = effects.Count <= 0;              
                 //If there are more effects, look what kind of effect
-                EffectData e2 = isLast ? new EffectData() : effects.Peek();
                 
-                
+                EffectData e2 = isLast ? new EffectData(): effects.Dequeue();
+
+
                 //if e2 is enemy NoInteraction, perform both. Otherwise, only self.
                 if (e1.Effect is INoInteraction)
                 {   
                     //If e2 is also a no interaction
                     if (!isLast && e2.Effect is INoInteraction && !e2.Caster == e1.Caster)
                     {
-                        yield return StartCoroutine(Activate(e1, effects.Dequeue()));
+                        yield return StartCoroutine(Activate(e1, e2));
                     }
                     else
                     {
                         yield return StartCoroutine(Activate(e1));
                     }
                  }
-                
-                isLast = effects.Count <= 0;  
-
                 //if e2 is enemy blockable, block the attack. If e2 is enemy block, both block
-                if (e1.Effect is IBlock)
+                else if (e1.Effect is IBlock)
                 {
                     //if e2 is bl
                     if (!isLast && !e2.Caster.Equals(e1.Caster)) //Within cob 2 with block
                     {
                         if (e2.Effect is IBlockable)
                         {
-                            yield return StartCoroutine(ActivateBlockedAttack(e1, effects.Dequeue()));
+                            yield return StartCoroutine(ActivateBlockedAttack(e1, e2));
                         }
                         else if (e2.Effect is IBlock)
                         {
-                            yield return StartCoroutine(Activate(e1, effects.Dequeue()));
+                            yield return StartCoroutine(Activate(e1, e2));
                         }
                         else yield return StartCoroutine(Activate(e1));
                     }
@@ -138,9 +147,10 @@ namespace DefaultNamespace
                     }
                 }
                 //all blocks should be handled, so this attack can't be blocked. Therefore it can be executed without taking e2 into account
-                if (e1.Effect is IBlockable)
+                else if (e1.Effect is IBlockable)
                 {
                     yield return StartCoroutine(Activate(e1));
+                    previousNotUsedUp = e2;
                 }
 
             }
