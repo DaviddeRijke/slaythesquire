@@ -12,19 +12,22 @@ namespace DefaultNamespace.Hand
     [RequireComponent(typeof(DropZone))]
     public class Stash : MonoBehaviour
     {
-        private DropZone _dropZone;
+        private List<DropZone> _dropZones;
         
         //The list of card instances (not the View3D's, as they are currently removed)
-        private List<Card> CardsInStash;
+        private List<Card> _cardsInStash;
         
         //This event will be listened to by the hand
         public CardEvent OnCardReceived = new CardEvent();
 
         private void Awake()
         {
-            CardsInStash = new List<Card>();
-            _dropZone = GetComponent<DropZone>();
-            _dropZone.OnDrop.AddListener(AddCard);
+            _cardsInStash = new List<Card>();
+            _dropZones = GetComponentsInChildren<DropZone>().ToList();
+            foreach (var dz in _dropZones)
+            {
+                dz.OnDrop.AddListener(AddCard);
+            }
         }
 
         /// <summary>
@@ -34,10 +37,9 @@ namespace DefaultNamespace.Hand
         /// <returns></returns>
         public List<Card> Reset()
         {
-            Card[] ret = new Card[CardsInStash.Count];
-            CardsInStash.CopyTo(ret);
-            //Debug.Log(CardsInStash.Count);
-            CardsInStash.Clear();
+            Card[] ret = new Card[_cardsInStash.Count];
+            _cardsInStash.CopyTo(ret);
+            _cardsInStash.Clear();
             return ret.ToList();
         }
 
@@ -49,8 +51,7 @@ namespace DefaultNamespace.Hand
         {
             if (IsValidOperation(c))
             {
-                CardsInStash.Add(c);
-                Debug.Log("Added to stash (" + CardsInStash.Count);
+                _cardsInStash.Add(c);
                 OnCardReceived.Invoke(c);
             }
         }

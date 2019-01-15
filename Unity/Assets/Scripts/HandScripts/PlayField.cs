@@ -15,7 +15,6 @@ namespace DefaultNamespace.Hand
         private List<Card> CardsInField;
 
 		public Knight self;
-		public Knight opponent;
 
         public CardEvent OnCardReceived = new CardEvent();
 
