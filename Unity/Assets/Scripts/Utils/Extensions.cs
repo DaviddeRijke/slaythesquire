@@ -118,11 +118,11 @@ public static class Extensions
             bo1.Remove(block1);
         }
 
-        queue.AsString();
+        Debug.Log(queue.AsString());
         return queue;
     }
 
-    private static void AsString(this Queue<EffectData> queue)
+    private static string AsString(this Queue<EffectData> queue)
     {
         for (int i = 0; i < queue.Count; ++i)
         {
