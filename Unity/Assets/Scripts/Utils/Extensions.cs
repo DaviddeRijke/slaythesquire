@@ -45,34 +45,42 @@ public static class Extensions
     public static Queue<EffectData> ToSortedQueue(this List<Effect> own, List<Effect> other, Knight p1, Knight p2)
     {
         var queue = new Queue<EffectData>();
-        for (int i = 0; i < Mathf.Max(own.Count, other.Count); ++i)
+        for (int i = 0; i < Mathf.Max(own.Count); ++i)
         {
             if (own.Count > i && own[i] is INoInteraction)
             {
                 queue.Enqueue(own[i].ToData(p1));
             }
+        }
+        for (int i = 0; i < Mathf.Max(other.Count); ++i)
+        {
             if (other.Count > i && other[i] is INoInteraction)
             {
                 queue.Enqueue(other[i].ToData(p2));
             }
         }
+
         
         //block
         bool ownBlocks = false;
         bool otherBlocks = false;
-        for (int i = 0; i < Mathf.Max(own.Count, other.Count); ++i)
+        for (int i = 0; i < Mathf.Max(own.Count); ++i)
         {
-            if (own.Count > i && own[i] is IBlock)
+            if (other.Count > i && other[i] is IBlock)
             {
-                ownBlocks = true;
-                queue.Enqueue(own[i].ToData(p1));
-                var a = GetAttack(other);
+                otherBlocks = true;
+                queue.Enqueue(other[i].ToData(p2));
+                var a = GetAttack(own);
                 if (a != null)
                 {
                     a.Block();
-                    queue.Enqueue((a as Effect).ToData(p2));
+                    queue.Enqueue((a as Effect).ToData(p1));
                 }
             }
+        }
+        
+        for (int i = 0; i < Mathf.Max(other.Count); ++i)
+        {
             if (other.Count > i && other[i] is IBlock)
             {
                 otherBlocks = true;
