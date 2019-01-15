@@ -91,6 +91,7 @@ namespace HandScripts
         private void Play(Card card)
         {
             CardsInHand.Remove(card);
+            Stash.AddCardThatIsPlayed(card);
             OnPlay.Invoke(card);
         }
 

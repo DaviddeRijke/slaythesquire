@@ -55,6 +55,18 @@ namespace DefaultNamespace.Hand
                 OnCardReceived.Invoke(c);
             }
         }
+        
+        /// <summary>
+        /// Adds a card to the Stash. This card is not automatically passed
+        /// </summary>
+        /// <param name="c">The card to be added to the discard pile</param>
+        public void AddCardThatIsPlayed(Card c)
+        {
+            if (IsValidOperation(c))
+            {
+                _cardsInStash.Add(c);
+            }
+        }
 
         /// <summary>
         /// Checks if card can be discarded

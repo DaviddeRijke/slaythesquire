@@ -10,7 +10,7 @@ namespace DefaultNamespace.Hand
         private GameCommunicator GameCommunicator;
 
         public Resolver Resolver;
-        
+        	   
         private DropZone _dropZone;
         private List<Card> CardsInField;
 
@@ -34,8 +34,8 @@ namespace DefaultNamespace.Hand
 
         private void SendCards()
         {
-            Resolver.SetOwnCards(CardsInField);
             GameCommunicator.SendCardsPlayed(CardsInField);
+	        Resolver.SetOwnCards(CardsInField);
 	        CardsInField.Clear();
         }
 
