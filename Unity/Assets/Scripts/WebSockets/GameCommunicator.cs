@@ -16,6 +16,9 @@ public class GameCommunicator : MonoBehaviour {
 
     public CardContainer CardContainer;
 
+    public int OwnPlayerId;
+    public int OpponentPlayerId;
+
     void Awake()
     {
         socketService = GetComponent<SocketService>();

@@ -10,12 +10,14 @@ public class MatchMaker : MonoBehaviour
     private SceneManager sceneManager;
 
     private MatchmakingCommunicator matchmakingCommunicator;
+    private GameCommunicator gameCommunicator;
 
     void Start()
     {
         matchMakerScreen = GetComponent<MatchMakerScreen>();
         sceneManager = GetComponent<SceneManager>();
         matchmakingCommunicator = DDOLAccesser.GetObject().GetComponent<MatchmakingCommunicator>();
+        gameCommunicator = DDOLAccesser.GetObject().GetComponent<GameCommunicator>();
     }
 
     public void ConnectToServer()
@@ -33,6 +35,8 @@ public class MatchMaker : MonoBehaviour
 
     private void ConfirmMatch(int playerId)
     {
+        gameCommunicator.OwnPlayerId = this.playerId;
+        gameCommunicator.OpponentPlayerId = playerId;
         //TODO: Keep track of matched playerId
         matchmakingCommunicator.ConfirmMatch();
         sceneManager.SwitchScene(2);

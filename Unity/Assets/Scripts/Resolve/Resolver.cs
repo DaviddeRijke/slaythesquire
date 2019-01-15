@@ -146,5 +146,35 @@ namespace DefaultNamespace
             }
             return null;
         }
+
+        private IEnumerator PlayEffectAfterTime(EffectData e, float delay)
+        {
+            yield return new WaitForSeconds(delay);
+            e.Effect.Activate(e.Caster, GetOtherKnight(e.Caster));
+        }
+
+        //Hand.OnPlay invokes SocketService.PlayCard
+        //xxxx listens to (void)SocketService.OpponentPlaysCard
+        //EndTurn invokes SocketService.EndTurn(list<Card>)
+        //EndTurn adds list<card> to Resolver
+        
+        //Resolver listens to (List<Card>)SocketService.EndTurn
+        //Resolver resolves cards
+        //Resolver invokes SocketService.SendStatus(status)
+
+        private int CheckForWinner()
+        {
+            if (OwnKnight.health <= 0)
+            {
+                return gameCommunicator.OpponentPlayerId;
+            }
+            if (OtherKnight.health <= 0)
+            {
+                return gameCommunicator.OwnPlayerId;
+            }
+
+            return 0;
+        }
+
     }
 }
