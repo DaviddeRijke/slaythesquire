@@ -99,6 +99,7 @@ namespace DefaultNamespace
                 //If there are more effects, look what kind of effect
                 EffectData e2 = isLast ? new EffectData() : effects.Peek();
                 
+                
                 //if e2 is enemy NoInteraction, perform both. Otherwise, only self.
                 if (e1.Effect is INoInteraction)
                 {   
@@ -112,9 +113,11 @@ namespace DefaultNamespace
                         yield return StartCoroutine(Activate(e1));
                     }
                  }
+                
+                isLast = effects.Count <= 0;  
 
                 //if e2 is enemy blockable, block the attack. If e2 is enemy block, both block
-                else if (e1.Effect is IBlock)
+                if (e1.Effect is IBlock)
                 {
                     //if e2 is bl
                     if (!isLast && !e2.Caster.Equals(e1.Caster)) //Within cob 2 with block
@@ -135,7 +138,7 @@ namespace DefaultNamespace
                     }
                 }
                 //all blocks should be handled, so this attack can't be blocked. Therefore it can be executed without taking e2 into account
-                else if (e1.Effect is IBlockable)
+                if (e1.Effect is IBlockable)
                 {
                     yield return StartCoroutine(Activate(e1));
                 }

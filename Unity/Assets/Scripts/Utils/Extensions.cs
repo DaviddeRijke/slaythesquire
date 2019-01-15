@@ -67,33 +67,42 @@ public static class Extensions
                 ownBlocks = true;
                 queue.Enqueue(own[i].ToData(p1));
                 var a = GetAttack(other);
-                if (a != null) queue.Enqueue(a.ToData(p2));
+                if (a != null)
+                {
+                    a.Block();
+                    queue.Enqueue((a as Effect).ToData(p2));
+                }
             }
             if (other.Count > i && other[i] is IBlock)
             {
                 otherBlocks = true;
                 queue.Enqueue(other[i].ToData(p2));
                 var a = GetAttack(own);
-                if (a != null) queue.Enqueue(a.ToData(p1));
+                if (a != null)
+                {
+                    a.Block();
+                    queue.Enqueue((a as Effect).ToData(p1));
+                }
             }
         }
 
         if (!otherBlocks && GetAttack(own) != null)
         {
-            queue.Enqueue(GetAttack(own).ToData(p1));
+            queue.Enqueue((GetAttack(own) as Effect).ToData(p1));
         }
         if (!ownBlocks && GetAttack(other) != null)
         {
-            queue.Enqueue(GetAttack(other).ToData(p2));
+            queue.Enqueue((GetAttack(other) as Effect).ToData(p2));
         }        
         return queue;
     }
 
-    private static Effect GetAttack(List<Effect> effects)
+    private static IBlockable GetAttack(List<Effect> effects)
     {
         foreach (var at in effects)
         {
-            if (at is IBlockable) return at;
+            var blockable = at as IBlockable;
+            if (blockable != null) return blockable;
         }
         return null;
     }
